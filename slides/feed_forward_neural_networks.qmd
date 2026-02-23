@@ -1,0 +1,394 @@
+---
+title: "Feed-Forward Neural Networks in Finance"
+subtitle: "Perceptrons, MLPs, SGD and Financial Applications"
+author: "Miguel Fonseca"
+format:
+  revealjs:
+    toc: true
+---
+
+# Motivation & intuition
+
+## Why Neural Networks?
+
+- Universal function approximators  
+- Flexible, data-driven models  
+- Strong performance in:
+  - Vision
+  - NLP
+  - Finance
+  - Biomedicine
+
+# Single Perceptron
+
+## The Perceptron: Core Idea
+
+- Linear classifier
+- Inspired by biological neurons
+- Computes a **weighted sum** + bias
+
+$$
+\widehat{y} = \mathbb{1}(w^T x + b > 0)
+$$
+
+## Perceptron Learning Rule
+
+- Update weights on mistakes
+
+$$
+w \leftarrow w + \eta (y - \widehat{y}) x
+$$
+
+- Online algorithm  
+- Converges if data is linearly separable
+
+## Universal Approximation Theorem {.scrollable}
+
+> A feed-forward network with one hidden layer can approximate any continuous function on a compact domain.
+
+Expressiveness grows with:
+
+- Number of neurons
+- Depth
+- Choice of activation
+
+---
+
+# Feed-Forward Neural Networks
+
+## Limitation of a Single Perceptron
+
+- Can only learn **linear decision boundaries**
+- Cannot solve XOR
+
+![](/images/xor.png){width=70%}
+
+---
+
+## Feed-Forward Neural Networks
+
+- Stack perceptrons into **layers**
+- Information flows left → right
+
+$$
+x \rightarrow h^{(1)} \rightarrow h^{(2)} \rightarrow \widehat{y}
+$$
+
+---
+
+![](/images/hidden_layer_definition.png)
+
+---
+
+## Multilayer Perceptron (MLP)
+
+- Input layer
+- One or more **hidden layers**
+- Output layer
+
+Each neuron:
+$$
+h_j = \sigma(w_j^T x + b_j)
+$$
+
+---
+
+## Why Hidden Layers Matter
+
+- Enable non-linear representations
+- Compose simple functions → complex ones
+- Depth vs width trade-off
+
+![](https://upload.wikimedia.org/wikipedia/commons/1/10/Deep_neural_network.svg)
+
+---
+
+# Activation Functions
+
+## Why Activations Matter
+
+::: {.columns}
+:::: {.column width="50%"}
+
+### Without activations
+
+- Network collapses to a linear model
+
+::::
+
+:::: {.column width="50%"}
+
+### With activations
+
+- Introduce non-linearity
+- Control gradient flow
+
+::::
+:::
+
+---
+
+## Activation Functions
+
+Purpose:
+
+- Introduce **non-linearity**
+- Control gradient flow
+
+Common choices:
+
+- Sigmoid
+- Tanh
+- ReLU
+- Softmax
+
+---
+
+## Sigmoid & Tanh
+
+Sigmoid:
+$$
+\sigma(x) = \frac{1}{1 + e^{-x}}
+$$
+
+Tanh:
+$$
+\tanh(x)
+$$
+
+- Smooth
+- Saturation → vanishing gradients
+
+---
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/88/Logistic-curve.svg)
+
+---
+
+## ReLU Family
+
+ReLU:
+$$
+\operatorname{ReLU}(x) = \max(0, x)
+$$
+
+Variants:
+
+- Leaky ReLU
+- ELU
+
+Pros:
+
+- Sparse activations
+- Faster training
+
+---
+
+![](https://upload.wikimedia.org/wikipedia/commons/f/fe/Activation_rectified_linear.svg)
+
+---
+
+## Output Activations
+
+- Regression: **Identity**
+- Binary classification: **Sigmoid**
+- Multiclass: **Softmax**
+
+$$
+\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
+$$
+
+# Backpropagation
+
+## Training a Neural Network
+
+Goal:
+$$
+\min_\theta \; \mathscr{L}(y, \hat{y})
+$$
+
+Steps:
+
+1. Forward pass
+2. Compute loss
+3. Backpropagate gradients
+4. Update parameters
+
+---
+
+## Backpropagation: Intuition
+
+- Efficient application of the **chain rule**
+- Propagates error backward
+- Computes gradients for all weights
+
+---
+
+## Backpropagation: What Problem Are We Solving?
+
+We want to compute efficiently:
+
+$$
+\frac{\partial \mathscr{L}}{\partial W^{(l)}} \quad \text{for all layers } l
+$$
+
+Naively:
+
+- Many parameters
+- Repeated computations
+
+::: {.callout-important title="Key idea"}
+- **Reuse intermediate derivatives**
+- Apply the **chain rule systematically**
+:::
+
+---
+
+## Backpropagation: Chain Rule View
+
+Forward pass:
+$$
+x \rightarrow z^{(1)} \rightarrow h^{(1)} \rightarrow z^{(2)} \rightarrow \widehat{y}
+$$
+
+Where:
+$$
+z^{(l)} = W^{(l)} h^{(l-1)} + b^{(l)}
+$$
+$$
+h^{(l)} = \sigma(z^{(l)})
+$$
+
+Backward pass:
+$$
+\frac{\partial \mathscr{L}}{\partial z^{(l)}} =
+\frac{\partial \mathscr{L}}{\partial z^{(l+1)}}
+\frac{\partial z^{(l+1)}}{\partial z^{(l)}}
+$$
+
+::: {.callout-note}
+Errors flow **backwards**, data flows **forwards**
+:::
+
+---
+
+## Backpropagation: Error Terms
+
+Define the **error signal** at layer $l$:
+
+$$
+\delta^{(l)} = \frac{\partial \mathscr{L}}{\partial z^{(l)}}
+$$
+
+Output layer:
+$$
+\delta^{(L)} =
+\nabla_{\widehat{y}} \mathscr{L} \odot \sigma'(z^{(L)})
+$$
+
+Hidden layers:
+$$
+\delta^{(l)} =
+(W^{(l+1)})^T \delta^{(l+1)} \odot \sigma'(z^{(l)})
+$$
+
+Gradients:
+$$
+\frac{\partial \mathscr{L}}{\partial W^{(l)}} =
+\delta^{(l)} (h^{(l-1)})^T
+$$
+
+---
+
+## Toy Example: One Hidden Neuron
+
+Model:
+
+- Input: $x = 1$
+- Hidden: $h = \sigma(w_1 x)$
+- Output: $\widehat{y} = w_2 h$
+- Loss: $\mathscr{L} = \frac{1}{2}(y - \widehat{y})^2$
+
+Forward:
+$$
+h = \sigma(w_1)
+$$
+
+$$
+\widehat{y} = w_2 h
+$$
+
+Backward:
+
+$$
+\frac{\partial \mathscr{L}}{\partial w_2}
+= (\widehat{y} - y) h
+$$
+
+$$
+\frac{\partial \mathscr{L}}{\partial w_1}
+= (\widehat{y} - y) w_2 \sigma'(w_1)
+$$
+
+:::{.callout-note}
+Error at output **propagates backward** to earlier weights
+:::
+
+---
+
+## Stochastic Gradient Descent (SGD)
+
+- Uses **mini-batches**
+- Noisy but efficient
+
+Variants:
+
+- Momentum
+- RMSProp
+- Adam
+
+---
+
+![](/images/sgd.png)
+
+---
+
+## Example: Regression
+
+- Predict house prices
+- Inputs: size, location, age
+- Output: price
+
+MLP with:
+
+- ReLU hidden layers
+- MSE loss
+
+# Examples & applications
+
+## Example: Classification
+
+- Spam detection
+- Inputs: word frequencies
+- Output: spam / not spam
+
+MLP with:
+
+- Sigmoid output
+- Cross-entropy loss
+
+---
+
+## Example: Finance
+
+**Applications:**
+
+- Credit scoring
+- Default probability
+- Asset return prediction
+
+**Caveats:**
+
+- Overfitting
+- Interpretability
+- Data leakage

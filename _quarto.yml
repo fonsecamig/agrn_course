@@ -1,0 +1,43 @@
+project:
+  type: website
+  render:
+    - "*.qmd"
+  # output-dir: docs
+
+format:
+  revealjs:
+    theme: sky
+    scrollable: true
+    slide-number: true
+    code-copy: true
+    chalkboard: true
+    toc: false
+    toc-depth: 1
+    transition: slide
+    embed-resources: false
+    footer: |
+      <a href="/"> Start </a>
+  html:
+    theme: cosmo
+    toc: true
+
+execute:
+  freeze: auto
+  echo: true
+  warning: false
+  message: false
+
+website:
+  title: "AGRN"
+  navbar:
+    left:
+      - text: "Start"
+        href: index.qmd
+      - text: "Slides"
+        menu:
+          - text: "Introduction to Machine Learning"
+            href: slides/intro_ml.qmd
+          - text: "Feed Forward Neural Networks"
+            href: slides/feed_forward_neural_networks.qmd
+          # - text: "Introduction to TensorFlow 2"
+          #   href: slides/intro_tensorflow2.qmd
