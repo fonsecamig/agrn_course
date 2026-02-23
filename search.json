@@ -1,0 +1,611 @@
+[
+  {
+    "objectID": "slides/regularization.html#why-regularisation",
+    "href": "slides/regularization.html#why-regularisation",
+    "title": "Regularisation for Neural Networks",
+    "section": "Why Regularisation?",
+    "text": "Why Regularisation?\n\nNeural networks are high-capacity models\nOverfitting is common\nTraining loss ↓ does not imply test loss ↓\n\nGoal:\n\nImprove generalisation by controlling effective model complexity"
+  },
+  {
+    "objectID": "slides/regularization.html#overfitting-in-neural-networks",
+    "href": "slides/regularization.html#overfitting-in-neural-networks",
+    "title": "Regularisation for Neural Networks",
+    "section": "Overfitting in Neural Networks",
+    "text": "Overfitting in Neural Networks\n\nMany parameters\nFlexible decision boundaries\nCan memorise training data\n\nTypical symptoms:\n\nTraining error → 0\nValidation error ↑"
+  },
+  {
+    "objectID": "slides/regularization.html#what-is-regularisation",
+    "href": "slides/regularization.html#what-is-regularisation",
+    "title": "Regularisation for Neural Networks",
+    "section": "What Is Regularisation?",
+    "text": "What Is Regularisation?\nDefinition\nAny technique that constrains learning to improve out-of-sample performance.\nThree perspectives\n\nPenalise complexity\n\nInject noise\n\nStop training early"
+  },
+  {
+    "objectID": "slides/regularization.html#explicit-regularisation-l2-weight-decay",
+    "href": "slides/regularization.html#explicit-regularisation-l2-weight-decay",
+    "title": "Regularisation for Neural Networks",
+    "section": "Explicit Regularisation: L2 (Weight Decay)",
+    "text": "Explicit Regularisation: L2 (Weight Decay)\n\\[\n\\mathscr{L}(\\theta) = \\mathscr{L}_{data}(\\theta) + \\lambda \\sum_i w_i^2\n\\]\nEffects\n\nPenalises large weights\nEncourages smooth functions\nImproves conditioning"
+  },
+  {
+    "objectID": "slides/regularization.html#geometric-interpretation-of-l2",
+    "href": "slides/regularization.html#geometric-interpretation-of-l2",
+    "title": "Regularisation for Neural Networks",
+    "section": "Geometric Interpretation of L2",
+    "text": "Geometric Interpretation of L2\n\nPenalises distance from origin\nShrinks parameters continuously\nEquivalent to Gaussian prior on weights"
+  },
+  {
+    "objectID": "slides/regularization.html#l1-regularisation",
+    "href": "slides/regularization.html#l1-regularisation",
+    "title": "Regularisation for Neural Networks",
+    "section": "L1 Regularisation",
+    "text": "L1 Regularisation\n\\[\n\\mathscr{L}(\\theta) = \\mathscr{L}_{data}(\\theta) + \\lambda \\sum_i |w_i|\n\\]\nKey properties\n\nProduces sparse solutions\nPerforms implicit feature selection\nLess common in deep networks"
+  },
+  {
+    "objectID": "slides/regularization.html#l1-vs-l2",
+    "href": "slides/regularization.html#l1-vs-l2",
+    "title": "Regularisation for Neural Networks",
+    "section": "L1 vs L2",
+    "text": "L1 vs L2\n\n\n\nAspect\nL1\nL2\n\n\n\n\nSparsity\nYes\nNo\n\n\nWeight shrinkage\nHard\nSmooth\n\n\nInterpretability\nHigher\nLower"
+  },
+  {
+    "objectID": "slides/regularization.html#stochastic-regularisation-1",
+    "href": "slides/regularization.html#stochastic-regularisation-1",
+    "title": "Regularisation for Neural Networks",
+    "section": "Stochastic Regularisation",
+    "text": "Stochastic Regularisation\n\nInject randomness during training\nForces robustness\nPrevents co-adaptation\n\nExamples:\n\nDropout\nNoise injection\nBatchNorm (indirectly)"
+  },
+  {
+    "objectID": "slides/regularization.html#dropout",
+    "href": "slides/regularization.html#dropout",
+    "title": "Regularisation for Neural Networks",
+    "section": "Dropout",
+    "text": "Dropout\nIdea\n\nRandomly drop neurons during training\n\n\\[\n\\widetilde{h} = h \\cdot \\text{Bernoulli}(p)\n\\]\nInterpretation\n\nApproximate ensemble learning\nStrong regularisation effect"
+  },
+  {
+    "objectID": "slides/regularization.html#dropout-practical-notes",
+    "href": "slides/regularization.html#dropout-practical-notes",
+    "title": "Regularisation for Neural Networks",
+    "section": "Dropout: Practical Notes",
+    "text": "Dropout: Practical Notes\n\nMost effective in fully-connected layers\nTypical rates: 0.1–0.5\nOften unnecessary with BatchNorm"
+  },
+  {
+    "objectID": "slides/regularization.html#normalisation-layers-1",
+    "href": "slides/regularization.html#normalisation-layers-1",
+    "title": "Regularisation for Neural Networks",
+    "section": "Normalisation Layers",
+    "text": "Normalisation Layers\nPrimary purpose:\n\nStabilise optimisation\n\nSecondary effect:\n\nRegularisation through noise or smoothing"
+  },
+  {
+    "objectID": "slides/regularization.html#batch-normalization",
+    "href": "slides/regularization.html#batch-normalization",
+    "title": "Regularisation for Neural Networks",
+    "section": "Batch Normalization",
+    "text": "Batch Normalization\nFor mini-batch \\(B\\):\n\\[\n\\widehat{x} = \\frac{x - \\mu_B}{\\sqrt{\\sigma_B^2 + \\epsilon}}, \\quad\ny = \\gamma \\widehat{x} + \\beta\n\\]"
+  },
+  {
+    "objectID": "slides/regularization.html#why-batchnorm-works",
+    "href": "slides/regularization.html#why-batchnorm-works",
+    "title": "Regularisation for Neural Networks",
+    "section": "Why BatchNorm Works",
+    "text": "Why BatchNorm Works\n\nReduces sensitivity to parameter scale\nAllows higher learning rates\nImproves gradient flow"
+  },
+  {
+    "objectID": "slides/regularization.html#batchnorm-as-regularisation",
+    "href": "slides/regularization.html#batchnorm-as-regularisation",
+    "title": "Regularisation for Neural Networks",
+    "section": "BatchNorm as Regularisation",
+    "text": "BatchNorm as Regularisation\n\nUses batch statistics\nIntroduces stochastic noise\nNoise depends on batch composition\n\nResult\n\nReduced overfitting\nOften replaces dropout"
+  },
+  {
+    "objectID": "slides/regularization.html#limitations-of-batchnorm",
+    "href": "slides/regularization.html#limitations-of-batchnorm",
+    "title": "Regularisation for Neural Networks",
+    "section": "Limitations of BatchNorm",
+    "text": "Limitations of BatchNorm\n\nDepends on batch size\nPoor with small batches\nNot ideal for:\n\nRNNs\nOnline learning\nTransformers"
+  },
+  {
+    "objectID": "slides/regularization.html#layer-normalization",
+    "href": "slides/regularization.html#layer-normalization",
+    "title": "Regularisation for Neural Networks",
+    "section": "Layer Normalization",
+    "text": "Layer Normalization\nNormalises within a single sample:\n\\[\n\\widehat{x} = \\frac{x - \\mu_{features}}{\\sqrt{\\sigma_{features}^2 + \\epsilon}}\n\\]"
+  },
+  {
+    "objectID": "slides/regularization.html#why-layernorm",
+    "href": "slides/regularization.html#why-layernorm",
+    "title": "Regularisation for Neural Networks",
+    "section": "Why LayerNorm?",
+    "text": "Why LayerNorm?\n\nIndependent of batch size\nStable for sequential models\nStandard in Transformers\n\nRegularisation effect\n\nSmoother optimisation landscape\nLess noise than BatchNorm"
+  },
+  {
+    "objectID": "slides/regularization.html#batchnorm-vs-layernorm",
+    "href": "slides/regularization.html#batchnorm-vs-layernorm",
+    "title": "Regularisation for Neural Networks",
+    "section": "BatchNorm vs LayerNorm",
+    "text": "BatchNorm vs LayerNorm\n\n\n\nAspect\nBatchNorm\nLayerNorm\n\n\n\n\nNormalisation axis\nBatch\nFeatures\n\n\nBatch-size dependent\nYes\nNo\n\n\nNoise level\nHigh\nLow\n\n\nTypical use\nCNNs\nTransformers"
+  },
+  {
+    "objectID": "slides/regularization.html#implicit-regularisation-1",
+    "href": "slides/regularization.html#implicit-regularisation-1",
+    "title": "Regularisation for Neural Networks",
+    "section": "Implicit Regularisation",
+    "text": "Implicit Regularisation\nNot explicitly added to the loss.\nExamples:\n\nEarly stopping\nSGD noise\nFinite training time"
+  },
+  {
+    "objectID": "slides/regularization.html#early-stopping",
+    "href": "slides/regularization.html#early-stopping",
+    "title": "Regularisation for Neural Networks",
+    "section": "Early Stopping",
+    "text": "Early Stopping\n\nStop training when validation loss increases\nPrevents late-stage memorisation\n\nTheory\n\nEquivalent to L2 in linear models"
+  },
+  {
+    "objectID": "slides/regularization.html#regularisation-strategy",
+    "href": "slides/regularization.html#regularisation-strategy",
+    "title": "Regularisation for Neural Networks",
+    "section": "Regularisation Strategy",
+    "text": "Regularisation Strategy\n\nStart with:\n\nWeight decay\nEarly stopping\n\nAdd:\n\nBatchNorm or LayerNorm\n\nUse Dropout:\n\nIf BatchNorm is absent\nOr in final dense layers"
+  },
+  {
+    "objectID": "slides/regularization.html#common-anti-patterns",
+    "href": "slides/regularization.html#common-anti-patterns",
+    "title": "Regularisation for Neural Networks",
+    "section": "Common Anti-Patterns",
+    "text": "Common Anti-Patterns\n\nDropout + BatchNorm everywhere\nOver-regularising small datasets\nIgnoring optimiser interactions"
+  },
+  {
+    "objectID": "slides/regularization.html#key-takeaways",
+    "href": "slides/regularization.html#key-takeaways",
+    "title": "Regularisation for Neural Networks",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\nRegularisation controls effective capacity\nNormalisation layers regularise implicitly\nMethods are complementary\nValidation performance is the final arbiter\n\n\nGeneralisation is engineered, not accidental."
+  },
+  {
+    "objectID": "slides/intro_ml.html#what-is-machine-learning",
+    "href": "slides/intro_ml.html#what-is-machine-learning",
+    "title": "Introduction to Machine Learning",
+    "section": "What is Machine Learning?",
+    "text": "What is Machine Learning?\n\n\n\n\n\n\nMachine Learning (ML)\n\n\nAlgorithms that learn patterns from data and make predictions or decisions without being explicitly programmed.\n\n\n\n\nExamples:\n\nEmail spam detection\nCredit risk assessment\nImage and speech recognition\nRecommendation systems"
+  },
+  {
+    "objectID": "slides/intro_ml.html#machine-learning-vs.-statistics",
+    "href": "slides/intro_ml.html#machine-learning-vs.-statistics",
+    "title": "Introduction to Machine Learning",
+    "section": "Machine Learning vs. Statistics",
+    "text": "Machine Learning vs. Statistics\n\n\n\n\n\n\n\n\nAspect\nStatistics\nMachine Learning\n\n\n\n\nPrimary goal\nInference, explanation, uncertainty quantification\nPrediction, pattern discovery, automation\n\n\nTypical questions\nWhy does this happen?Is the effect significant?\nWhat will happen next?Can we predict accurately?\n\n\nModel assumptions\nStrong (distributional forms, linearity, independence)\nOften weak or implicit\n\n\nData size\nSmall to moderate datasets\nLarge, high-dimensional datasets\n\n\n\n\nEvaluation | Hypothesis tests, confidence intervals | Train/validation/test split, predictive metrics |\n\nPhilosophy | Model the data-generating process | Optimize performance on unseen data |"
+  },
+  {
+    "objectID": "slides/intro_ml.html#main-categories-of-machine-learning",
+    "href": "slides/intro_ml.html#main-categories-of-machine-learning",
+    "title": "Introduction to Machine Learning",
+    "section": "Main Categories of Machine Learning",
+    "text": "Main Categories of Machine Learning\n1. Supervised Learning\n\nData with labels\nLearn input → output mapping\n\n2. Unsupervised Learning\n\nData without labels\nDiscover hidden structure\n\n(We will focus mainly on supervised learning.)"
+  },
+  {
+    "objectID": "slides/intro_ml.html#supervised-learning-1",
+    "href": "slides/intro_ml.html#supervised-learning-1",
+    "title": "Introduction to Machine Learning",
+    "section": "Supervised Learning",
+    "text": "Supervised Learning\nEach observation consists of:\n\nFeatures \\(X\\)\nTarget \\(y\\)\n\nGoal: \\[\nf(X) \\approx y\n\\]\nTypical applications:\n\nPredict prices\nClassify emails\nDiagnose diseases"
+  },
+  {
+    "objectID": "slides/intro_ml.html#supervised-learning-tasks",
+    "href": "slides/intro_ml.html#supervised-learning-tasks",
+    "title": "Introduction to Machine Learning",
+    "section": "Supervised Learning Tasks",
+    "text": "Supervised Learning Tasks\nTwo main task types:\n\n\n\nTask\nOutput\n\n\n\n\nRegression\nContinuous value\n\n\nClassification\nDiscrete class"
+  },
+  {
+    "objectID": "slides/intro_ml.html#regression",
+    "href": "slides/intro_ml.html#regression",
+    "title": "Introduction to Machine Learning",
+    "section": "Regression",
+    "text": "Regression\nRegression predicts a numerical value.\nExamples:\n\nHouse price prediction\nStock return forecasting\nTemperature prediction\n\nTypical models:\n\nLinear Regression\nRidge / Lasso\nRandom Forest Regressor"
+  },
+  {
+    "objectID": "slides/intro_ml.html#classification",
+    "href": "slides/intro_ml.html#classification",
+    "title": "Introduction to Machine Learning",
+    "section": "Classification",
+    "text": "Classification\nClassification predicts a category or label.\nExamples:\n\nSpam vs non-spam\nFraud vs non-fraud\nDisease vs healthy\n\nTypical models:\n\nLogistic Regression\nk-Nearest Neighbors\nDecision Trees\nSupport Vector Machines"
+  },
+  {
+    "objectID": "slides/intro_ml.html#unsupervised-learning-2",
+    "href": "slides/intro_ml.html#unsupervised-learning-2",
+    "title": "Introduction to Machine Learning",
+    "section": "Unsupervised Learning",
+    "text": "Unsupervised Learning\nNo labeled output variable.\nGoals:\n\nDiscover structure\nGroup similar observations\nReduce dimensionality\n\nExamples:\n\nCustomer segmentation\nTopic modeling\nData visualization"
+  },
+  {
+    "objectID": "slides/intro_ml.html#unsupervised-learning-tasks",
+    "href": "slides/intro_ml.html#unsupervised-learning-tasks",
+    "title": "Introduction to Machine Learning",
+    "section": "Unsupervised Learning Tasks",
+    "text": "Unsupervised Learning Tasks\nCommon tasks:\n\nClustering (e.g. k-means)\nDimensionality reduction (e.g. PCA)\n\nTypical use cases:\n\nExploratory data analysis\nPreprocessing\nFeature engineering"
+  },
+  {
+    "objectID": "slides/intro_ml.html#the-machine-learning-workflow",
+    "href": "slides/intro_ml.html#the-machine-learning-workflow",
+    "title": "Introduction to Machine Learning",
+    "section": "The Machine Learning Workflow",
+    "text": "The Machine Learning Workflow\n\nCollect data\n\nClean and preprocess\n\nSplit data\n\nTrain model\n\nEvaluate model\n\nImprove / deploy"
+  },
+  {
+    "objectID": "slides/intro_ml.html#data-splitting",
+    "href": "slides/intro_ml.html#data-splitting",
+    "title": "Introduction to Machine Learning",
+    "section": "Data Splitting",
+    "text": "Data Splitting\nWe typically split data into:\n\nTraining set – used to fit the model\n\nValidation set – used for model selection / tuning\n\nTest set – used for final evaluation"
+  },
+  {
+    "objectID": "slides/intro_ml.html#why-not-train-on-all-data",
+    "href": "slides/intro_ml.html#why-not-train-on-all-data",
+    "title": "Introduction to Machine Learning",
+    "section": "Why Not Train on all Data?",
+    "text": "Why Not Train on all Data?\nIf we train and evaluate on the same data:\n\nModel may memorize the data\nPerformance estimate becomes optimistic\n\nThis is called overfitting."
+  },
+  {
+    "objectID": "slides/intro_ml.html#train-validation-test-split",
+    "href": "slides/intro_ml.html#train-validation-test-split",
+    "title": "Introduction to Machine Learning",
+    "section": "Train / Validation / Test Split",
+    "text": "Train / Validation / Test Split\nTypical split ratios:\n\n60% train / 20% validation / 20% test\nor 70% / 15% / 15%\n\n\n\n\n\nKey principle:\n\n\nThe test set must remain untouched until the very end."
+  },
+  {
+    "objectID": "slides/intro_ml.html#example-data-splitting-in-python",
+    "href": "slides/intro_ml.html#example-data-splitting-in-python",
+    "title": "Introduction to Machine Learning",
+    "section": "Example: Data Splitting in Python",
+    "text": "Example: Data Splitting in Python\n\nfrom sklearn.model_selection import train_test_split\nimport numpy as np\n\n# Dummy data\nX = np.random.rand(100, 2)\ny = np.random.rand(100)\n\n# Train + test split\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\n# Train + validation split\nX_train, X_val, y_train, y_val = train_test_split(\n    X_train, y_train, test_size=0.25, random_state=42\n)\n\nX_train.shape, X_val.shape, X_test.shape\n\n((60, 2), (20, 2), (20, 2))"
+  },
+  {
+    "objectID": "slides/intro_ml.html#motivation",
+    "href": "slides/intro_ml.html#motivation",
+    "title": "Introduction to Machine Learning",
+    "section": "Motivation",
+    "text": "Motivation\nWhy Do We Need Cross-Validation?\n\nGoal: estimate generalization performance\nTraining error is optimistically biased\nSingle train/test split:\n\nHigh variance\nSensitive to random split\n\n\nCross-validation reduces uncertainty in model evaluation"
+  },
+  {
+    "objectID": "slides/intro_ml.html#the-core-idea",
+    "href": "slides/intro_ml.html#the-core-idea",
+    "title": "Introduction to Machine Learning",
+    "section": "The Core Idea",
+    "text": "The Core Idea\nWhat Is k-Fold Cross-Validation?\n\nSplit data into k approximately equal folds\nFor each fold:\n\nTrain on k−1 folds\nTest on the remaining fold\n\nAggregate performance metrics\n\n\\[\n\\text{CV score} = \\frac{1}{k} \\sum_{i=1}^{k} \\text{Score}_i\n\\]"
+  },
+  {
+    "objectID": "slides/intro_ml.html#choosing-k",
+    "href": "slides/intro_ml.html#choosing-k",
+    "title": "Introduction to Machine Learning",
+    "section": "Choosing k",
+    "text": "Choosing k\nBias–Variance Trade-off\n\n\n\nk\nCharacteristics\n\n\n\n\n2–5\nHigher bias, lower variance\n\n\n5–10\nCommon practical choice\n\n\nn (LOOCV)\nMinimal bias, high variance & cost\n\n\n\n\n\n\n\nRule of thumb\n\n\n\nk = 5 or 10 for most problems"
+  },
+  {
+    "objectID": "slides/intro_ml.html#formal-perspective",
+    "href": "slides/intro_ml.html#formal-perspective",
+    "title": "Introduction to Machine Learning",
+    "section": "Formal Perspective",
+    "text": "Formal Perspective\nExpected Error Estimation\nk-fold CV estimates:\n\\[\n\\mathbb{E}_{(X,Y)}[L(f_{\\mathscr{D}}, (X,Y))]\n\\]\nwith:\n\nDifferent training sets \\(\\mathscr{D}\\)\nSame learning algorithm\nSame data distribution"
+  },
+  {
+    "objectID": "slides/intro_ml.html#regression-vs-classification",
+    "href": "slides/intro_ml.html#regression-vs-classification",
+    "title": "Introduction to Machine Learning",
+    "section": "Regression vs Classification",
+    "text": "Regression vs Classification\nKey Differences\n\n\n\nAspect\nRegression\nClassification\n\n\n\n\nMetrics\nMSE, MAE, R²\nAccuracy, F1, AUC\n\n\nSplits\nRandom OK\nMust preserve class balance\n\n\nCV variant\nKFold\nStratified k-Fold"
+  },
+  {
+    "objectID": "slides/intro_ml.html#regression-k-fold-cv",
+    "href": "slides/intro_ml.html#regression-k-fold-cv",
+    "title": "Introduction to Machine Learning",
+    "section": "Regression: k-Fold CV",
+    "text": "Regression: k-Fold CV\nTypical Metrics\n\nMean Squared Error (MSE)\nMean Absolute Error (MAE)\n\\(R^2\\)\n\n\n\n\n\n\n\nNote\n\n\nScores may be negative in scikit-learn (loss convention)"
+  },
+  {
+    "objectID": "slides/intro_ml.html#regression-example-scikit-learn",
+    "href": "slides/intro_ml.html#regression-example-scikit-learn",
+    "title": "Introduction to Machine Learning",
+    "section": "Regression Example (scikit-learn)",
+    "text": "Regression Example (scikit-learn)\n\nimport numpy as np\nfrom sklearn.datasets import make_regression\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import KFold, cross_val_score\n\nX, y = make_regression(n_samples=100, n_features=5, noise=10, random_state=42)\n\nmodel = LinearRegression()\ncv = KFold(n_splits=5, shuffle=True, random_state=42)\n\nscores = cross_val_score(\n    model, X, y,\n    cv=cv,\n    scoring=\"neg_mean_squared_error\"\n)\n\nmse_scores = -scores\nprint(\"MSE per fold:\", mse_scores)\nprint(\"Mean MSE:\", mse_scores.mean())\n\nMSE per fold: [113.44800318  81.16181775  88.22981966  85.52522476 102.8583864 ]\nMean MSE: 94.2446503511611"
+  },
+  {
+    "objectID": "slides/intro_ml.html#classification-stratified-k-fold-cv",
+    "href": "slides/intro_ml.html#classification-stratified-k-fold-cv",
+    "title": "Introduction to Machine Learning",
+    "section": "Classification: Stratified k-Fold CV",
+    "text": "Classification: Stratified k-Fold CV\nWhy Stratified k-Fold?\nIn classification:\n\nPreserves class proportions in each fold\nEspecially important for imbalanced datasets\n\nUse:\n\nKFold → regression\nStratifiedKFold → classification"
+  },
+  {
+    "objectID": "slides/intro_ml.html#classification-example",
+    "href": "slides/intro_ml.html#classification-example",
+    "title": "Introduction to Machine Learning",
+    "section": "Classification Example",
+    "text": "Classification Example\n\nfrom sklearn.datasets import make_classification\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import StratifiedKFold, cross_val_score\n\nX, y = make_classification(\n    n_samples=500,\n    n_features=5,\n    n_classes=2,\n    random_state=42\n)\n\nmodel = LogisticRegression(max_iter=1000)\n\nskf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)\n\nscores = cross_val_score(\n    model, X, y,\n    cv=skf,\n    scoring=\"accuracy\"\n)\n\nscores\n\narray([0.92, 0.89, 0.87, 0.85, 0.9 ])"
+  },
+  {
+    "objectID": "slides/intro_ml.html#best-practices-in-cv",
+    "href": "slides/intro_ml.html#best-practices-in-cv",
+    "title": "Introduction to Machine Learning",
+    "section": "Best Practices in CV",
+    "text": "Best Practices in CV\nCross-validation is often used to:\n\nCompare models\nTune hyperparameters\n\n\n\n\n\n\n\nWarning\n\n\nCross-Validation \\(\\neq\\) Test Set\n\n\n\n\n\n\n\n\n\n\nImportant Rule\n\n\nNever touch the test set until the very end\n\n\n\n\n\nCV is for model selection\nTest set is for final evaluation"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Genetic Algorithms and Neural Networks",
+    "section": "",
+    "text": "Slides\n\n\n\n\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\n\nChapter 5: Resampling Methods\n\n\n\n\n\n\nExercise 1\nExercise 2"
+  },
+  {
+    "objectID": "index.html#introduction-to-machine-learning",
+    "href": "index.html#introduction-to-machine-learning",
+    "title": "Genetic Algorithms and Neural Networks",
+    "section": "",
+    "text": "Slides\n\n\n\n\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\n\nChapter 5: Resampling Methods\n\n\n\n\n\n\nExercise 1\nExercise 2"
+  },
+  {
+    "objectID": "index.html#references",
+    "href": "index.html#references",
+    "title": "Genetic Algorithms and Neural Networks",
+    "section": "References",
+    "text": "References\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#why-neural-networks",
+    "href": "slides/feed_forward_neural_networks.html#why-neural-networks",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Why Neural Networks?",
+    "text": "Why Neural Networks?\n\nUniversal function approximators\n\nFlexible, data-driven models\n\nStrong performance in:\n\nVision\nNLP\nFinance\nBiomedicine"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#the-perceptron-core-idea",
+    "href": "slides/feed_forward_neural_networks.html#the-perceptron-core-idea",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "The Perceptron: Core Idea",
+    "text": "The Perceptron: Core Idea\n\nLinear classifier\nInspired by biological neurons\nComputes a weighted sum + bias\n\n\\[\n\\widehat{y} = \\mathbb{1}(w^T x + b &gt; 0)\n\\]"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#perceptron-learning-rule",
+    "href": "slides/feed_forward_neural_networks.html#perceptron-learning-rule",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Perceptron Learning Rule",
+    "text": "Perceptron Learning Rule\n\nUpdate weights on mistakes\n\n\\[\nw \\leftarrow w + \\eta (y - \\widehat{y}) x\n\\]\n\nOnline algorithm\n\nConverges if data is linearly separable"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#universal-approximation-theorem",
+    "href": "slides/feed_forward_neural_networks.html#universal-approximation-theorem",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Universal Approximation Theorem",
+    "text": "Universal Approximation Theorem\n\nA feed-forward network with one hidden layer can approximate any continuous function on a compact domain.\n\nExpressiveness grows with:\n\nNumber of neurons\nDepth\nChoice of activation"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#limitation-of-a-single-perceptron",
+    "href": "slides/feed_forward_neural_networks.html#limitation-of-a-single-perceptron",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Limitation of a Single Perceptron",
+    "text": "Limitation of a Single Perceptron\n\nCan only learn linear decision boundaries\nCannot solve XOR"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#feed-forward-neural-networks-1",
+    "href": "slides/feed_forward_neural_networks.html#feed-forward-neural-networks-1",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Feed-Forward Neural Networks",
+    "text": "Feed-Forward Neural Networks\n\nStack perceptrons into layers\nInformation flows left → right\n\n\\[\nx \\rightarrow h^{(1)} \\rightarrow h^{(2)} \\rightarrow \\widehat{y}\n\\]"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#multilayer-perceptron-mlp",
+    "href": "slides/feed_forward_neural_networks.html#multilayer-perceptron-mlp",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Multilayer Perceptron (MLP)",
+    "text": "Multilayer Perceptron (MLP)\n\nInput layer\nOne or more hidden layers\nOutput layer\n\nEach neuron: \\[\nh_j = \\sigma(w_j^T x + b_j)\n\\]"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#why-hidden-layers-matter",
+    "href": "slides/feed_forward_neural_networks.html#why-hidden-layers-matter",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Why Hidden Layers Matter",
+    "text": "Why Hidden Layers Matter\n\nEnable non-linear representations\nCompose simple functions → complex ones\nDepth vs width trade-off"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#why-activations-matter",
+    "href": "slides/feed_forward_neural_networks.html#why-activations-matter",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Why Activations Matter",
+    "text": "Why Activations Matter\n\n\nWithout activations\n\nNetwork collapses to a linear model\n\n\nWith activations\n\nIntroduce non-linearity\nControl gradient flow"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#activation-functions-1",
+    "href": "slides/feed_forward_neural_networks.html#activation-functions-1",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Activation Functions",
+    "text": "Activation Functions\nPurpose:\n\nIntroduce non-linearity\nControl gradient flow\n\nCommon choices:\n\nSigmoid\nTanh\nReLU\nSoftmax"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#sigmoid-tanh",
+    "href": "slides/feed_forward_neural_networks.html#sigmoid-tanh",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Sigmoid & Tanh",
+    "text": "Sigmoid & Tanh\nSigmoid: \\[\n\\sigma(x) = \\frac{1}{1 + e^{-x}}\n\\]\nTanh: \\[\n\\tanh(x)\n\\]\n\nSmooth\nSaturation → vanishing gradients"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#relu-family",
+    "href": "slides/feed_forward_neural_networks.html#relu-family",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "ReLU Family",
+    "text": "ReLU Family\nReLU: \\[\n\\operatorname{ReLU}(x) = \\max(0, x)\n\\]\nVariants:\n\nLeaky ReLU\nELU\n\nPros:\n\nSparse activations\nFaster training"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#output-activations",
+    "href": "slides/feed_forward_neural_networks.html#output-activations",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Output Activations",
+    "text": "Output Activations\n\nRegression: Identity\nBinary classification: Sigmoid\nMulticlass: Softmax\n\n\\[\n\\text{softmax}(z_i) = \\frac{e^{z_i}}{\\sum_j e^{z_j}}\n\\]"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#training-a-neural-network",
+    "href": "slides/feed_forward_neural_networks.html#training-a-neural-network",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Training a Neural Network",
+    "text": "Training a Neural Network\nGoal: \\[\n\\min_\\theta \\; \\mathscr{L}(y, \\hat{y})\n\\]\nSteps:\n\nForward pass\nCompute loss\nBackpropagate gradients\nUpdate parameters"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#backpropagation-intuition",
+    "href": "slides/feed_forward_neural_networks.html#backpropagation-intuition",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Backpropagation: Intuition",
+    "text": "Backpropagation: Intuition\n\nEfficient application of the chain rule\nPropagates error backward\nComputes gradients for all weights"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#backpropagation-what-problem-are-we-solving",
+    "href": "slides/feed_forward_neural_networks.html#backpropagation-what-problem-are-we-solving",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Backpropagation: What Problem Are We Solving?",
+    "text": "Backpropagation: What Problem Are We Solving?\nWe want to compute efficiently:\n\\[\n\\frac{\\partial \\mathscr{L}}{\\partial W^{(l)}} \\quad \\text{for all layers } l\n\\]\nNaively:\n\nMany parameters\nRepeated computations\n\n\n\n\n\n\n\n\nKey idea\n\n\n\nReuse intermediate derivatives\nApply the chain rule systematically"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#backpropagation-chain-rule-view",
+    "href": "slides/feed_forward_neural_networks.html#backpropagation-chain-rule-view",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Backpropagation: Chain Rule View",
+    "text": "Backpropagation: Chain Rule View\nForward pass: \\[\nx \\rightarrow z^{(1)} \\rightarrow h^{(1)} \\rightarrow z^{(2)} \\rightarrow \\widehat{y}\n\\]\nWhere: \\[\nz^{(l)} = W^{(l)} h^{(l-1)} + b^{(l)}\n\\] \\[\nh^{(l)} = \\sigma(z^{(l)})\n\\]\nBackward pass: \\[\n\\frac{\\partial \\mathscr{L}}{\\partial z^{(l)}} =\n\\frac{\\partial \\mathscr{L}}{\\partial z^{(l+1)}}\n\\frac{\\partial z^{(l+1)}}{\\partial z^{(l)}}\n\\]\n\n\n\n\n\n\nNote\n\n\nErrors flow backwards, data flows forwards"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#backpropagation-error-terms",
+    "href": "slides/feed_forward_neural_networks.html#backpropagation-error-terms",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Backpropagation: Error Terms",
+    "text": "Backpropagation: Error Terms\nDefine the error signal at layer \\(l\\):\n\\[\n\\delta^{(l)} = \\frac{\\partial \\mathscr{L}}{\\partial z^{(l)}}\n\\]\nOutput layer: \\[\n\\delta^{(L)} =\n\\nabla_{\\widehat{y}} \\mathscr{L} \\odot \\sigma'(z^{(L)})\n\\]\nHidden layers: \\[\n\\delta^{(l)} =\n(W^{(l+1)})^T \\delta^{(l+1)} \\odot \\sigma'(z^{(l)})\n\\]\nGradients: \\[\n\\frac{\\partial \\mathscr{L}}{\\partial W^{(l)}} =\n\\delta^{(l)} (h^{(l-1)})^T\n\\]"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#toy-example-one-hidden-neuron",
+    "href": "slides/feed_forward_neural_networks.html#toy-example-one-hidden-neuron",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Toy Example: One Hidden Neuron",
+    "text": "Toy Example: One Hidden Neuron\nModel:\n\nInput: \\(x = 1\\)\nHidden: \\(h = \\sigma(w_1 x)\\)\nOutput: \\(\\widehat{y} = w_2 h\\)\nLoss: \\(\\mathscr{L} = \\frac{1}{2}(y - \\widehat{y})^2\\)\n\nForward: \\[\nh = \\sigma(w_1)\n\\]\n\\[\n\\widehat{y} = w_2 h\n\\]\nBackward:\n\\[\n\\frac{\\partial \\mathscr{L}}{\\partial w_2}\n= (\\widehat{y} - y) h\n\\]\n\\[\n\\frac{\\partial \\mathscr{L}}{\\partial w_1}\n= (\\widehat{y} - y) w_2 \\sigma'(w_1)\n\\]\n\n\n\n\n\n\nNote\n\n\nError at output propagates backward to earlier weights"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#stochastic-gradient-descent-sgd",
+    "href": "slides/feed_forward_neural_networks.html#stochastic-gradient-descent-sgd",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Stochastic Gradient Descent (SGD)",
+    "text": "Stochastic Gradient Descent (SGD)\n\nUses mini-batches\nNoisy but efficient\n\nVariants:\n\nMomentum\nRMSProp\nAdam"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#example-regression",
+    "href": "slides/feed_forward_neural_networks.html#example-regression",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Example: Regression",
+    "text": "Example: Regression\n\nPredict house prices\nInputs: size, location, age\nOutput: price\n\nMLP with:\n\nReLU hidden layers\nMSE loss"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#example-classification",
+    "href": "slides/feed_forward_neural_networks.html#example-classification",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Example: Classification",
+    "text": "Example: Classification\n\nSpam detection\nInputs: word frequencies\nOutput: spam / not spam\n\nMLP with:\n\nSigmoid output\nCross-entropy loss"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#example-finance",
+    "href": "slides/feed_forward_neural_networks.html#example-finance",
+    "title": "Feed-Forward Neural Networks in Finance",
+    "section": "Example: Finance",
+    "text": "Example: Finance\nApplications:\n\nCredit scoring\nDefault probability\nAsset return prediction\n\nCaveats:\n\nOverfitting\nInterpretability\nData leakage"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#what-is-tensorflow",
+    "href": "slides/intro_tensorflow2.html#what-is-tensorflow",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "What is TensorFlow?",
+    "text": "What is TensorFlow?\n\nOpen-source machine learning framework\nDeveloped by Google\nDesigned for:\n\nResearch\nProduction\nScalability (CPU / GPU / TPU)"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#tensorflow-vs-others",
+    "href": "slides/intro_tensorflow2.html#tensorflow-vs-others",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "TensorFlow vs Others",
+    "text": "TensorFlow vs Others\n\n\n\nFramework\nFocus\nStrength\n\n\n\n\nscikit-learn\nClassical ML\nSimplicity\n\n\nPyTorch\nResearch\nFlexibility\n\n\nTensorFlow 2\nResearch + Prod\nEnd-to-end pipelines"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#what-is-a-tensor",
+    "href": "slides/intro_tensorflow2.html#what-is-a-tensor",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "What is a tensor?",
+    "text": "What is a tensor?\n\nGeneralization of:\n\nScalar (rank 0)\nVector (rank 1)\nMatrix (rank 2)\nHigher dimensions (rank ≥ 3)"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#creating-tensors",
+    "href": "slides/intro_tensorflow2.html#creating-tensors",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "Creating Tensors",
+    "text": "Creating Tensors\n\nimport numpy as np\nimport tensorflow as tf\n\na = tf.constant(3)\nb = tf.constant([1, 2, 3])\nc = tf.constant([[1., 2.], [3., 4.]])"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#tensor-properties",
+    "href": "slides/intro_tensorflow2.html#tensor-properties",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "Tensor Properties",
+    "text": "Tensor Properties\n\nc.shape\nc.dtype\ntf.rank(c)\n\n&lt;tf.Tensor: shape=(), dtype=int32, numpy=2&gt;\n\n\n\n\n\n\n\n\n\nKey Idea\n\n\nTensors have shape, dtype, and rank"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#tensor-operations",
+    "href": "slides/intro_tensorflow2.html#tensor-operations",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "Tensor Operations",
+    "text": "Tensor Operations\nTensorFlow feels like NumPy:\n\nx = tf.random.normal((3, 2))\ny = tf.ones((3, 2))\n\nx + y\nx * y\n\n&lt;tf.Tensor: shape=(3, 2), dtype=float32, numpy=\narray([[ 0.20480898, -0.6486147 ],\n       [-0.41150782,  1.2976605 ],\n       [ 0.33538422,  1.2478243 ]], dtype=float32)&gt;\n\n\nMatrix multiplication:\n\ntf.matmul(x, tf.transpose(y))\n\n&lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=\narray([[-0.44380572, -0.44380572, -0.44380572],\n       [ 0.8861526 ,  0.8861526 ,  0.8861526 ],\n       [ 1.5832086 ,  1.5832086 ,  1.5832086 ]], dtype=float32)&gt;"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#important-tensor-rules",
+    "href": "slides/intro_tensorflow2.html#important-tensor-rules",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "Important Tensor Rules",
+    "text": "Important Tensor Rules\n\nTensors are immutable\nOperations are GPU-aware\nBroadcasting rules apply (like NumPy)"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#why-keras",
+    "href": "slides/intro_tensorflow2.html#why-keras",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "Why Keras?",
+    "text": "Why Keras?\n\nReduces boilerplate\nEnforces best practices\nIntegrated into TensorFlow 2"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#building-a-model-sequential",
+    "href": "slides/intro_tensorflow2.html#building-a-model-sequential",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "Building a Model (Sequential)",
+    "text": "Building a Model (Sequential)\n\nmodel = tf.keras.Sequential([\n    tf.keras.layers.Dense(32, activation=\"relu\"),\n    tf.keras.layers.Dense(1)\n])\n\nModel Summary\n\nmodel.summary()\n\nModel: \"sequential\"\n\n\n\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓\n┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃\n┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩\n│ dense (Dense)                   │ ?                      │   0 (unbuilt) │\n├─────────────────────────────────┼────────────────────────┼───────────────┤\n│ dense_1 (Dense)                 │ ?                      │   0 (unbuilt) │\n└─────────────────────────────────┴────────────────────────┴───────────────┘\n\n\n\n Total params: 0 (0.00 B)\n\n\n\n Trainable params: 0 (0.00 B)\n\n\n\n Non-trainable params: 0 (0.00 B)\n\n\n\nConcepts: - Layers - Parameters - Trainable weights"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#functional-api",
+    "href": "slides/intro_tensorflow2.html#functional-api",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "Functional API",
+    "text": "Functional API\n\ninputs = tf.keras.Input(shape=(10,))\nx = tf.keras.layers.Dense(32, activation=\"relu\")(inputs)\noutputs = tf.keras.layers.Dense(1)(x)\n\nmodel = tf.keras.Model(inputs, outputs)\n\nUse when:\n\nMultiple inputs / outputs\nComplex architectures"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#the-3-step-pattern",
+    "href": "slides/intro_tensorflow2.html#the-3-step-pattern",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "The 3-Step Pattern",
+    "text": "The 3-Step Pattern\n\ncompile\nfit\nevaluate / predict\n\n\nThis pattern appears everywhere in TF2."
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#compile-step",
+    "href": "slides/intro_tensorflow2.html#compile-step",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "Compile Step",
+    "text": "Compile Step\n\nmodel.compile(\n    optimizer=\"adam\",\n    loss=\"mse\",\n    metrics=[\"mae\"]\n)\n\n\nOptimizer → how parameters change\nLoss → what we minimize\nMetrics → what we monitor"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#fit-the-model",
+    "href": "slides/intro_tensorflow2.html#fit-the-model",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "Fit the Model",
+    "text": "Fit the Model\n\nX_train, y_train = np.random.rand(100, 10), np.random.rand(100, 1)  # Training data\nhistory = model.fit(\n    X_train,\n    y_train,\n    epochs=5,\n    batch_size=32,\n    validation_split=0.2\n)\n\n\nEpoch 1/5\n\n\n1/3 ━━━━━━━━━━━━━━━━━━━━ 0s 234ms/step - loss: 0.4074 - mae: 0.5628\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n3/3 ━━━━━━━━━━━━━━━━━━━━ 0s 29ms/step - loss: 0.3589 - mae: 0.5328 - val_loss: 0.4059 - val_mae: 0.5464\n\nEpoch 2/5\n\n\n1/3 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 0.3154 - mae: 0.4944\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n3/3 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - loss: 0.3067 - mae: 0.4868 - val_loss: 0.3484 - val_mae: 0.4929\n\nEpoch 3/5\n\n\n1/3 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 0.3055 - mae: 0.4759\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n3/3 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - loss: 0.2627 - mae: 0.4439 - val_loss: 0.2990 - val_mae: 0.4467\n\nEpoch 4/5\n\n\n1/3 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 0.1916 - mae: 0.3544\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n3/3 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - loss: 0.2211 - mae: 0.4020 - val_loss: 0.2567 - val_mae: 0.4061\n\nEpoch 5/5\n\n\n1/3 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 0.2384 - mae: 0.4199\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n3/3 ━━━━━━━━━━━━━━━━━━━━ 0s 7ms/step - loss: 0.1894 - mae: 0.3672 - val_loss: 0.2202 - val_mae: 0.3698\n\n\n\n\nTraining concepts:\n\nEpoch\nBatch\nValidation set"
+  },
+  {
+    "objectID": "slides/intro_tensorflow2.html#evaluate-and-predict",
+    "href": "slides/intro_tensorflow2.html#evaluate-and-predict",
+    "title": "TensorFlow 2 — The Basics",
+    "section": "Evaluate and Predict",
+    "text": "Evaluate and Predict\n\nX_test, y_test = np.random.rand(20, 10), np.random.rand(20, 1)  # Test data\nmodel.evaluate(X_test, y_test)\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 0.2132 - mae: 0.3940\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - loss: 0.2132 - mae: 0.3940\n\n\n\n\n[0.21316957473754883, 0.3939549922943115]\n\n\n\nX_new = np.random.rand(5, 10)  # New data for prediction\nmodel.predict(X_new)\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 16ms/step\n\n\n\n\narray([[0.16179678],\n       [0.3285205 ],\n       [0.2912809 ],\n       [0.37353733],\n       [0.18985964]], dtype=float32)"
+  }
+]
