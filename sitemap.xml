@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/regularization.html</loc>
+    <lastmod>2026-02-26T14:41:20.208Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/intro_ml.html</loc>
+    <lastmod>2026-02-25T16:34:29.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fonsecamig.github.io/agrn_course/index.html</loc>
+    <lastmod>2026-02-26T19:51:18.867Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/feed_forward_neural_networks.html</loc>
+    <lastmod>2026-02-26T18:27:52.792Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/intro_tensorflow2.html</loc>
+    <lastmod>2026-02-23T17:45:06.276Z</lastmod>
+  </url>
+</urlset>

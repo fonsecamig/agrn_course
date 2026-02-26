@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.7.32">
 
   <meta name="author" content="Miguel Fonseca">
-  <title>AGRN – Feed-Forward Neural Networks in Finance</title>
+  <title>AGRN – Feed-Forward Neural Networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -130,8 +130,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Feed-Forward Neural Networks in Finance</h1>
-  <p class="subtitle">Perceptrons, MLPs, SGD and Financial Applications</p>
+  <h1 class="title">Feed-Forward Neural Networks</h1>
+  <p class="subtitle">Perceptrons, MLPs and SGD</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -149,6 +149,7 @@ Miguel Fonseca
 <li><a href="#/single-perceptron" id="/toc-single-perceptron">Single Perceptron</a></li>
 <li><a href="#/feed-forward-neural-networks" id="/toc-feed-forward-neural-networks">Feed-Forward Neural Networks</a></li>
 <li><a href="#/activation-functions" id="/toc-activation-functions">Activation Functions</a></li>
+<li><a href="#/loss-functions" id="/toc-loss-functions">Loss Functions</a></li>
 <li><a href="#/backpropagation" id="/toc-backpropagation">Backpropagation</a></li>
 <li><a href="#/examples-applications" id="/toc-examples-applications">Examples &amp; applications</a></li>
 </ul>
@@ -204,21 +205,6 @@ w \leftarrow w + \eta (y - \widehat{y}) x
 </li>
 <li>Converges if data is linearly separable</li>
 </ul>
-</section>
-<section id="universal-approximation-theorem" class="slide level2 scrollable">
-<h2>Universal Approximation Theorem</h2>
-<blockquote>
-<p>A feed-forward network with one hidden layer can approximate any continuous function on a compact domain.</p>
-</blockquote>
-<p>Expressiveness grows with:</p>
-<ul>
-<li>Number of neurons</li>
-<li>Depth</li>
-<li>Choice of activation</li>
-</ul>
-</section>
-<section class="slide level2">
-
 </section></section>
 <section>
 <section id="feed-forward-neural-networks" class="title-slide slide level1 center">
@@ -233,6 +219,18 @@ w \leftarrow w + \eta (y - \widehat{y}) x
 </ul>
 
 <img data-src="../images/xor.png" style="width:70.0%" class="r-stretch"></section>
+<section id="universal-approximation-theorem" class="slide level2 scrollable">
+<h2>Universal Approximation Theorem</h2>
+<blockquote>
+<p>A feed-forward network with one hidden layer can approximate any continuous function on a compact domain.</p>
+</blockquote>
+<p>Expressiveness grows with:</p>
+<ul>
+<li>Number of neurons</li>
+<li>Depth</li>
+<li>Choice of activation</li>
+</ul>
+</section>
 <section id="feed-forward-neural-networks-1" class="slide level2">
 <h2>Feed-Forward Neural Networks</h2>
 <ul>
@@ -266,10 +264,7 @@ h_j = \sigma(w_j^T x + b_j)
 <li>Depth vs width trade-off</li>
 </ul>
 
-<img data-src="https://upload.wikimedia.org/wikipedia/commons/1/10/Deep_neural_network.svg" class="r-stretch"></section>
-<section class="slide level2">
-
-</section></section>
+<img data-src="https://upload.wikimedia.org/wikipedia/commons/1/10/Deep_neural_network.svg" class="r-stretch"></section></section>
 <section>
 <section id="activation-functions" class="title-slide slide level1 center">
 <h1>Activation Functions</h1>
@@ -312,7 +307,7 @@ h_j = \sigma(w_j^T x + b_j)
 \sigma(x) = \frac{1}{1 + e^{-x}}
 \]</span></p>
 <p>Tanh: <span class="math display">\[
-\tanh(x)
+\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
 \]</span></p>
 <ul>
 <li>Smooth</li>
@@ -322,7 +317,7 @@ h_j = \sigma(w_j^T x + b_j)
 <section class="slide level2">
 
 
-<img data-src="https://upload.wikimedia.org/wikipedia/commons/8/88/Logistic-curve.svg" class="r-stretch"></section>
+<img data-src="../images/sigmoid_tanh_activation_functions.png" class="r-stretch quarto-figure-center"><p class="caption">Sigmoid &amp; tanh Activation Functions</p></section>
 <section id="relu-family" class="slide level2">
 <h2>ReLU Family</h2>
 <p>ReLU: <span class="math display">\[
@@ -355,6 +350,136 @@ h_j = \sigma(w_j^T x + b_j)
 \]</span></p>
 </section></section>
 <section>
+<section id="loss-functions" class="title-slide slide level1 center">
+<h1>Loss Functions</h1>
+
+</section>
+<section id="loss-functions-why-do-we-need-them" class="slide level2">
+<h2>Loss Functions: Why Do We Need Them?</h2>
+<p>A neural network produces predictions:</p>
+<p><span class="math display">\[
+\hat{y} = f_\theta(x)
+\]</span></p>
+<p>But how do we measure <em>how wrong</em> it is?</p>
+<p>We define a <strong>loss function</strong>:</p>
+<p><span class="math display">\[
+\mathscr{L}(y, \widehat{y})
+\]</span></p>
+<p>Training objective:</p>
+<p><span class="math display">\[
+\min_\theta \; \mathscr{L}(y, \widehat{y})
+\]</span></p>
+<p>The loss defines: - The optimization problem - The gradient signal - The statistical interpretation</p>
+</section>
+<section id="regression-loss-mean-squared-error-mse" class="slide level2">
+<h2>Regression Loss: Mean Squared Error (MSE)</h2>
+<p>Used for: - Regression - Continuous targets</p>
+<p>Definition:</p>
+<p><span class="math display">\[
+\mathscr{L}_{MSE}
+=
+\frac{1}{n} \sum_{i=1}^n (y_i - \widehat{y}_i)^2
+\]</span></p>
+<p>Properties: - Penalizes large errors heavily - Smooth and differentiable - Corresponds to Gaussian noise assumption</p>
+</section>
+<section id="mse-gradient-intuition" class="slide level2">
+<h2>MSE: Gradient Intuition</h2>
+<p>For a single example:</p>
+<p><span class="math display">\[
+\mathscr{L} = \frac{1}{2}(y - \widehat{y})^2
+\]</span></p>
+<p>Derivative:</p>
+<p><span class="math display">\[
+\frac{\partial \mathscr{L}}{\partial \widehat{y}}
+=
+\widehat{y} - y
+\]</span></p>
+<p>Interpretation: - If prediction too large → positive gradient - If prediction too small → negative gradient</p>
+<p>This becomes the <strong>error signal</strong> in backpropagation</p>
+</section>
+<section id="binary-classification-binary-cross-entropy" class="slide level2">
+<h2>Binary Classification: Binary Cross-Entropy</h2>
+<p>Used for: - Spam detection - Credit default - Medical diagnosis</p>
+<p>Output: probability</p>
+<p><span class="math display">\[
+\hat{y} = \sigma(z)
+\]</span></p>
+<p>Loss:</p>
+<p><span class="math display">\[
+\mathscr{L}_{BCE}
+=
+- \left[
+y \log(\widehat{y})
++
+(1-y)\log(1-\widehat{y})
+\right]
+\]</span></p>
+</section>
+<section id="why-not-use-mse-for-classification" class="slide level2">
+<h2>Why Not Use MSE for Classification?</h2>
+<p>Problem:</p>
+<ul>
+<li>Sigmoid saturates</li>
+<li>Gradients become very small</li>
+</ul>
+<p>Binary cross-entropy:</p>
+<ul>
+<li>Strong gradients when wrong</li>
+<li>Better probabilistic interpretation</li>
+</ul>
+<p>Key result:</p>
+<p>With sigmoid + BCE:</p>
+<p><span class="math display">\[
+\frac{\partial \mathscr{L}}{\partial z}
+=
+\widehat{y} - y
+\]</span></p>
+<p>Clean gradient → stable training</p>
+</section>
+<section id="multiclass-classification-cross-entropy" class="slide level2">
+<h2>Multiclass Classification: Cross-Entropy</h2>
+<p>Used for:</p>
+<ul>
+<li>Digit recognition</li>
+<li>Image classification</li>
+<li>NLP tagging</li>
+</ul>
+<p>Output: Softmax</p>
+<p><span class="math display">\[
+\hat{y}_i =
+\frac{e^{z_i}}{\sum_j e^{z_j}}
+\]</span></p>
+<p>Loss:</p>
+<p><span class="math display">\[
+\mathscr{L}_{CE}
+=
+- \sum_{i=1}^K y_i \log(\widehat{y}_i)
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(y_i\)</span> is one-hot encoded</li>
+</ul>
+</section>
+<section id="gradient-insight-softmax-cross-entropy" class="slide level2">
+<h2>Gradient Insight: Softmax + Cross-Entropy</h2>
+<p>Beautiful result:</p>
+<p><span class="math display">\[
+\frac{\partial \mathscr{L}}{\partial z_i}
+=
+\widehat{y}_i - y_i
+\]</span></p>
+<p>Same structure as:</p>
+<ul>
+<li>MSE gradient</li>
+<li>Binary cross-entropy gradient</li>
+</ul>
+<p>Pattern:</p>
+<blockquote>
+<p>Error = Prediction − Target</p>
+</blockquote>
+<p>This is what backpropagation propagates backward.</p>
+</section></section>
+<section>
 <section id="backpropagation" class="title-slide slide level1 center">
 <h1>Backpropagation</h1>
 
@@ -362,7 +487,7 @@ h_j = \sigma(w_j^T x + b_j)
 <section id="training-a-neural-network" class="slide level2 scrollable">
 <h2>Training a Neural Network</h2>
 <p>Goal: <span class="math display">\[
-\min_\theta \; \mathscr{L}(y, \hat{y})
+\min_\theta \; \mathscr{L}(y, \widehat{y})
 \]</span></p>
 <p>Steps:</p>
 <ol type="1">
@@ -512,7 +637,12 @@ h = \sigma(w_1)
 <section class="slide level2">
 
 
-<img data-src="../images/sgd.png" class="r-stretch"></section>
+<img data-src="../images/sgd.png" class="r-stretch"></section></section>
+<section>
+<section id="examples-applications" class="title-slide slide level1 center">
+<h1>Examples &amp; applications</h1>
+
+</section>
 <section id="example-regression" class="slide level2">
 <h2>Example: Regression</h2>
 <ul>
@@ -525,11 +655,6 @@ h = \sigma(w_1)
 <li>ReLU hidden layers</li>
 <li>MSE loss</li>
 </ul>
-</section></section>
-<section>
-<section id="examples-applications" class="title-slide slide level1 center">
-<h1>Examples &amp; applications</h1>
-
 </section>
 <section id="example-classification" class="slide level2">
 <h2>Example: Classification</h2>
@@ -847,7 +972,7 @@ h = \sigma(w_1)
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
+            var filterRegex = new RegExp("https:\/\/fonsecamig\.github\.io\/agrn_course\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

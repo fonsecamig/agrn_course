@@ -128,6 +128,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading">Reading</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul></li>
+  <li><a href="#feed-forward-neural-networks" id="toc-feed-forward-neural-networks" class="nav-link" data-scroll-target="#feed-forward-neural-networks">Feed-Forward Neural Networks</a>
+  <ul class="collapse">
+  <li><a href="#reading-1" id="toc-reading-1" class="nav-link" data-scroll-target="#reading-1">Reading</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -173,6 +177,38 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><a href="notebooks/exerc_kfold_cv.ipynb">Exercise 1</a></li>
 <li><a href="notebooks/exerc_strat_kfold_cv.ipynb">Exercise 2</a></li>
+</ul>
+</section>
+</section>
+<section id="feed-forward-neural-networks" class="level2">
+<h2 class="anchored" data-anchor-id="feed-forward-neural-networks">Feed-Forward Neural Networks</h2>
+<ul>
+<li><a href="./slides/feed_forward_neural_networks.html">Slides</a></li>
+</ul>
+<section id="reading-1" class="level3">
+<h3 class="anchored" data-anchor-id="reading-1">Reading</h3>
+<ul>
+<li>Bishop, C. M., &amp; Bishop, H. (2024). <em>Deep learning: Foundations and concepts.</em> Springer. <a href="https://www.bishopbook.com">https://www.bishopbook.com</a>
+<ul>
+<li>Chapter 6: Deep Neural Networks</li>
+<li>Chapter 7: Gradient Descent</li>
+<li>Chapter 8: Backpropagation</li>
+</ul></li>
+<li>Chollet, F. (2021). <em>Deep learning with Python (2nd ed.).</em> Manning Publications.
+<ul>
+<li>Chapter 2: The mathematical building blocksof neural networks</li>
+<li>Chapter 4: Getting started with neural networks: Classification and regression</li>
+</ul></li>
+<li>James, G., Witten, D., Hastie, T., Tibshirani, R., &amp; Taylor, J. (2023). <em>An introduction to statistical learning: With applications in Python.</em> Springer. <a href="https://www.statlearning.com">https://www.statlearning.com</a>
+<ul>
+<li>Chapter 10: Deep Learning</li>
+</ul></li>
+<li>Zhang, A., Lipton, Z. C., Li, M., &amp; Smola, A. J. (2023). <em>Dive into deep learning.</em> Cambridge University Press. <a href="https://d2l.ai">https://d2l.ai</a>
+<ul>
+<li>Chapter 3: Linear Neural Networks for Regression</li>
+<li>Chapter 4: Linear Neural Networks for Classification</li>
+<li>Chapter 5: Multilayer Perceptrons</li>
+</ul></li>
 </ul>
 </section>
 </section>
@@ -261,7 +297,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/fonsecamig\.github\.io\/agrn_course\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
