@@ -1,6 +1,6 @@
 ---
-title: "Feed-Forward Neural Networks in Finance"
-subtitle: "Perceptrons, MLPs, SGD and Financial Applications"
+title: "Feed-Forward Neural Networks"
+subtitle: "Perceptrons, MLPs and SGD"
 author: "Miguel Fonseca"
 format:
   revealjs:
@@ -42,17 +42,7 @@ $$
 - Online algorithm  
 - Converges if data is linearly separable
 
-## Universal Approximation Theorem {.scrollable}
 
-> A feed-forward network with one hidden layer can approximate any continuous function on a compact domain.
-
-Expressiveness grows with:
-
-- Number of neurons
-- Depth
-- Choice of activation
-
----
 
 # Feed-Forward Neural Networks
 
@@ -62,6 +52,18 @@ Expressiveness grows with:
 - Cannot solve XOR
 
 ![](/images/xor.png){width=70%}
+
+---
+
+## Universal Approximation Theorem {.scrollable}
+
+> A feed-forward network with one hidden layer can approximate any continuous function on a compact domain.
+
+Expressiveness grows with:
+
+- Number of neurons
+- Depth
+- Choice of activation
 
 ---
 
@@ -100,8 +102,6 @@ $$
 - Depth vs width trade-off
 
 ![](https://upload.wikimedia.org/wikipedia/commons/1/10/Deep_neural_network.svg)
-
----
 
 # Activation Functions
 
@@ -153,7 +153,7 @@ $$
 
 Tanh:
 $$
-\tanh(x)
+\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
 $$
 
 - Smooth
@@ -161,7 +161,8 @@ $$
 
 ---
 
-![](https://upload.wikimedia.org/wikipedia/commons/8/88/Logistic-curve.svg)
+
+![Sigmoid & tanh Activation Functions](/images/sigmoid_tanh_activation_functions.png)
 
 ---
 
@@ -198,13 +199,192 @@ $$
 \text{softmax}(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
 $$
 
+# Loss Functions
+
+## Loss Functions: Why Do We Need Them?
+
+A neural network produces predictions:
+
+$$
+\hat{y} = f_\theta(x)
+$$
+
+But how do we measure *how wrong* it is?
+
+We define a **loss function**:
+
+$$
+\mathscr{L}(y, \widehat{y})
+$$
+
+Training objective:
+
+$$
+\min_\theta \; \mathscr{L}(y, \widehat{y})
+$$
+
+The loss defines:
+- The optimization problem
+- The gradient signal
+- The statistical interpretation
+
+---
+
+## Regression Loss: Mean Squared Error (MSE)
+
+Used for:
+- Regression
+- Continuous targets
+
+Definition:
+
+$$
+\mathscr{L}_{MSE}
+=
+\frac{1}{n} \sum_{i=1}^n (y_i - \widehat{y}_i)^2
+$$
+
+Properties:
+- Penalizes large errors heavily
+- Smooth and differentiable
+- Corresponds to Gaussian noise assumption
+
+---
+
+## MSE: Gradient Intuition
+
+For a single example:
+
+$$
+\mathscr{L} = \frac{1}{2}(y - \widehat{y})^2
+$$
+
+Derivative:
+
+$$
+\frac{\partial \mathscr{L}}{\partial \widehat{y}}
+=
+\widehat{y} - y
+$$
+
+Interpretation:
+- If prediction too large → positive gradient
+- If prediction too small → negative gradient
+
+This becomes the **error signal** in backpropagation
+
+---
+
+## Binary Classification: Binary Cross-Entropy
+
+Used for:
+- Spam detection
+- Credit default
+- Medical diagnosis
+
+Output: probability
+
+$$
+\hat{y} = \sigma(z)
+$$
+
+Loss:
+
+$$
+\mathscr{L}_{BCE}
+=
+- \left[
+y \log(\widehat{y})
++
+(1-y)\log(1-\widehat{y})
+\right]
+$$
+
+---
+
+## Why Not Use MSE for Classification?
+
+Problem:
+
+- Sigmoid saturates
+- Gradients become very small
+
+Binary cross-entropy:
+
+- Strong gradients when wrong
+- Better probabilistic interpretation
+
+Key result:
+
+With sigmoid + BCE:
+
+$$
+\frac{\partial \mathscr{L}}{\partial z}
+=
+\widehat{y} - y
+$$
+
+Clean gradient → stable training
+
+---
+
+## Multiclass Classification: Cross-Entropy
+
+Used for:
+
+- Digit recognition
+- Image classification
+- NLP tagging
+
+Output: Softmax
+
+$$
+\hat{y}_i =
+\frac{e^{z_i}}{\sum_j e^{z_j}}
+$$
+
+Loss:
+
+$$
+\mathscr{L}_{CE}
+=
+- \sum_{i=1}^K y_i \log(\widehat{y}_i)
+$$
+
+Where:
+
+- $y_i$ is one-hot encoded
+
+---
+
+## Gradient Insight: Softmax + Cross-Entropy
+
+Beautiful result:
+
+$$
+\frac{\partial \mathscr{L}}{\partial z_i}
+=
+\widehat{y}_i - y_i
+$$
+
+Same structure as:
+
+- MSE gradient
+- Binary cross-entropy gradient
+
+Pattern:
+
+> Error = Prediction − Target
+
+This is what backpropagation propagates backward.
+
 # Backpropagation
 
 ## Training a Neural Network
 
 Goal:
 $$
-\min_\theta \; \mathscr{L}(y, \hat{y})
+\min_\theta \; \mathscr{L}(y, \widehat{y})
 $$
 
 Steps:
@@ -351,7 +531,7 @@ Variants:
 
 ![](/images/sgd.png)
 
----
+# Examples & applications
 
 ## Example: Regression
 
@@ -364,7 +544,7 @@ MLP with:
 - ReLU hidden layers
 - MSE loss
 
-# Examples & applications
+---
 
 ## Example: Classification
 
