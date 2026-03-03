@@ -28,7 +28,7 @@ format:
 - Computes a **weighted sum** + bias
 
 $$
-\widehat{y} = \mathbb{1}(w^T x + b > 0)
+\widehat{y} = \mathbb{1}(\mathbf w^\top \mathbf x + b > 0)
 $$
 
 ## Perceptron Learning Rule
@@ -36,13 +36,11 @@ $$
 - Update weights on mistakes
 
 $$
-w \leftarrow w + \eta (y - \widehat{y}) x
+\mathbf{w} \leftarrow \mathbf{w} + \eta (y - \widehat{y}) \mathbf{x}
 $$
 
 - Online algorithm  
 - Converges if data is linearly separable
-
-
 
 # Feed-Forward Neural Networks
 
@@ -73,7 +71,7 @@ Expressiveness grows with:
 - Information flows left → right
 
 $$
-x \rightarrow h^{(1)} \rightarrow h^{(2)} \rightarrow \widehat{y}
+\mathbf x \rightarrow \mathbf h^{(1)} \rightarrow \mathbf h^{(2)} \rightarrow \mathbf h^{(3)} \rightarrow \widehat{\mathbf y}
 $$
 
 ---
@@ -90,18 +88,35 @@ $$
 
 Each neuron:
 $$
-h_j = \sigma(w_j^T x + b_j)
+h_j = \sigma(\mathbf{w}_j^\top \mathbf{x} + b_j)
 $$
 
 ---
 
-## Why Hidden Layers Matter
+## Shallow vs Deep Networks
 
-- Enable non-linear representations
-- Compose simple functions → complex ones
-- Depth vs width trade-off
+### Architectural Differences
 
-![](https://upload.wikimedia.org/wikipedia/commons/1/10/Deep_neural_network.svg)
+| Property | Shallow Network | Deep Network |
+|----------|-----------------|--------------|
+| Hidden Layers | 1 (or none) | ≥ 2 (often many) |
+| Depth | Low | High |
+| Parameter Distribution | Wide layers | Stacked hierarchical layers |
+| Feature Learning | Limited abstraction | Hierarchical abstraction |
+
+### Representation Power
+
+Shallow:
+
+- Universal approximator (theoretically)
+- May require exponentially many neurons
+- Learns mostly flat features
+
+Deep:
+
+- Compositional representations
+- Parameter-efficient for structured problems
+- Learns low → mid → high-level features
 
 # Activation Functions
 
@@ -161,8 +176,7 @@ $$
 
 ---
 
-
-![Sigmoid & tanh Activation Functions](/images/sigmoid_tanh_activation_functions.png)
+![Sigmoid & tanh Activation Functions](/images/sigmoid_tanh_activation_function.png)
 
 ---
 
@@ -185,7 +199,7 @@ Pros:
 
 ---
 
-![](https://upload.wikimedia.org/wikipedia/commons/f/fe/Activation_rectified_linear.svg)
+![](/images/relu_activation_function.png)
 
 ---
 
@@ -196,7 +210,7 @@ Pros:
 - Multiclass: **Softmax**
 
 $$
-\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
+\text{softmax}(\mathbf z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
 $$
 
 # Loss Functions
@@ -206,7 +220,7 @@ $$
 A neural network produces predictions:
 
 $$
-\hat{y} = f_\theta(x)
+\widehat{\mathbf y} = \mathbf f_\boldsymbol\theta(\mathbf x)
 $$
 
 But how do we measure *how wrong* it is?
@@ -214,16 +228,17 @@ But how do we measure *how wrong* it is?
 We define a **loss function**:
 
 $$
-\mathscr{L}(y, \widehat{y})
+\mathscr{L}(\mathbf y, \widehat{\mathbf y})
 $$
 
 Training objective:
 
 $$
-\min_\theta \; \mathscr{L}(y, \widehat{y})
+\min_{\boldsymbol \theta} \; \mathscr{L}(\mathbf y, \widehat{\mathbf y})
 $$
 
 The loss defines:
+
 - The optimization problem
 - The gradient signal
 - The statistical interpretation
@@ -241,10 +256,11 @@ Definition:
 $$
 \mathscr{L}_{MSE}
 =
-\frac{1}{n} \sum_{i=1}^n (y_i - \widehat{y}_i)^2
+\frac{1}{n} \sum_{i=1}^n (\mathbf y_i - \widehat{\mathbf y}_i)^\top (\mathbf y_i - \widehat{\mathbf y}_i)
 $$
 
 Properties:
+
 - Penalizes large errors heavily
 - Smooth and differentiable
 - Corresponds to Gaussian noise assumption
@@ -268,6 +284,7 @@ $$
 $$
 
 Interpretation:
+
 - If prediction too large → positive gradient
 - If prediction too small → negative gradient
 
@@ -278,6 +295,7 @@ This becomes the **error signal** in backpropagation
 ## Binary Classification: Binary Cross-Entropy
 
 Used for:
+
 - Spam detection
 - Credit default
 - Medical diagnosis
@@ -285,7 +303,7 @@ Used for:
 Output: probability
 
 $$
-\hat{y} = \sigma(z)
+\widehat{y} = \sigma(z)
 $$
 
 Loss:
@@ -314,14 +332,9 @@ Binary cross-entropy:
 - Strong gradients when wrong
 - Better probabilistic interpretation
 
-Key result:
-
 With sigmoid + BCE:
-
 $$
-\frac{\partial \mathscr{L}}{\partial z}
-=
-\widehat{y} - y
+\frac{\partial \mathscr{L}}{\partial z} = \widehat{y} - y
 $$
 
 Clean gradient → stable training
@@ -339,7 +352,7 @@ Used for:
 Output: Softmax
 
 $$
-\hat{y}_i =
+\widehat{y}_i =
 \frac{e^{z_i}}{\sum_j e^{z_j}}
 $$
 
@@ -359,7 +372,7 @@ Where:
 
 ## Gradient Insight: Softmax + Cross-Entropy
 
-Beautiful result:
+With softmax + cross-entropy, the gradient simplifies to:
 
 $$
 \frac{\partial \mathscr{L}}{\partial z_i}
@@ -372,11 +385,9 @@ Same structure as:
 - MSE gradient
 - Binary cross-entropy gradient
 
-Pattern:
-
-> Error = Prediction − Target
-
-This is what backpropagation propagates backward.
+::: {.callout-note title="Pattern"}
+Error = Prediction − Target
+:::
 
 # Backpropagation
 
@@ -384,7 +395,7 @@ This is what backpropagation propagates backward.
 
 Goal:
 $$
-\min_\theta \; \mathscr{L}(y, \widehat{y})
+\min_{\boldsymbol \theta} \; \mathscr{L}(\mathbf y, \widehat{\mathbf y})
 $$
 
 Steps:
@@ -409,7 +420,7 @@ Steps:
 We want to compute efficiently:
 
 $$
-\frac{\partial \mathscr{L}}{\partial W^{(l)}} \quad \text{for all layers } l
+\frac{\partial \mathscr{L}}{\partial w^{(l)}_{jk}} \quad \text{for all layers } l
 $$
 
 Naively:
@@ -428,22 +439,22 @@ Naively:
 
 Forward pass:
 $$
-x \rightarrow z^{(1)} \rightarrow h^{(1)} \rightarrow z^{(2)} \rightarrow \widehat{y}
+\mathbf x \rightarrow \mathbf z^{(1)} \rightarrow \mathbf h^{(1)} \rightarrow \mathbf z^{(2)} \rightarrow \widehat{\mathbf y}
 $$
 
 Where:
 $$
-z^{(l)} = W^{(l)} h^{(l-1)} + b^{(l)}
+\mathbf z^{(l)} = \mathbf W^{(l)} \mathbf h^{(l-1)} + \mathbf b^{(l)}
 $$
 $$
-h^{(l)} = \sigma(z^{(l)})
+\mathbf h^{(l)} = \sigma(\mathbf z^{(l)}) =[\sigma(z_1^{(l)}), \ldots, \sigma(z_{n_l}^{(l)})]^\top
 $$
 
 Backward pass:
 $$
-\frac{\partial \mathscr{L}}{\partial z^{(l)}} =
-\frac{\partial \mathscr{L}}{\partial z^{(l+1)}}
-\frac{\partial z^{(l+1)}}{\partial z^{(l)}}
+\frac{\partial \mathscr{L}}{\partial \mathbf z^{(l)}} =
+\frac{\partial \mathscr{L}}{\partial \mathbf z^{(l+1)}}
+\frac{\partial \mathbf z^{(l+1)}}{\partial \mathbf z^{(l)}}
 $$
 
 ::: {.callout-note}
@@ -457,26 +468,36 @@ Errors flow **backwards**, data flows **forwards**
 Define the **error signal** at layer $l$:
 
 $$
-\delta^{(l)} = \frac{\partial \mathscr{L}}{\partial z^{(l)}}
+\boldsymbol \delta^{(l)} = \frac{\partial \mathscr{L}}{\partial \mathbf z^{(l)}}
 $$
 
-Output layer:
+**Output layer:**
 $$
-\delta^{(L)} =
-\nabla_{\widehat{y}} \mathscr{L} \odot \sigma'(z^{(L)})
-$$
-
-Hidden layers:
-$$
-\delta^{(l)} =
-(W^{(l+1)})^T \delta^{(l+1)} \odot \sigma'(z^{(l)})
+\boldsymbol \delta^{(L + 1)} =
+\nabla_{\widehat{\mathbf y}} \mathscr{L} \odot \sigma'(\mathbf z^{(L + 1)})
 $$
 
-Gradients:
+**Hidden layers:**
+\begin{align*}
+\boldsymbol \delta^{(l)}  &= \frac{\partial \mathscr{L}}{\partial \mathbf z^{(l)}} \\
+& = \frac{\partial \mathscr{L}}{\partial \mathbf z^{(l + 1)}} \frac{\partial \mathbf z^{(l + 1)}}{\partial \mathbf h^{(l)}} \frac{\partial \mathbf h^{(l)}}{\partial \mathbf z^{(l)}} \\
+& = \boldsymbol \delta^{(l+1)} \left(\mathbf W^{(l+1)}\right)^\top \odot \sigma'(\mathbf z^{(l)})
+\end{align*}
+
+---
+
+## Gradients at Each Layer
+
 $$
-\frac{\partial \mathscr{L}}{\partial W^{(l)}} =
-\delta^{(l)} (h^{(l-1)})^T
+\frac{\partial \mathscr L}{\partial w^{(l)}_{jk}} = \frac{\partial \mathscr L}{\partial \mathbf z^{(l)}} \frac{\partial \mathbf z^{(l)}}{\partial w^{(l)}_{jk}} = \boldsymbol \delta^{(l)} \begin{bmatrix}0 \\ \vdots \\ \underbrace{h^{(l-1)}_k}_{k^{\text{th}}\text{ position}} \\ \vdots \\ 0\end{bmatrix} =\delta^{(l)}_j h^{(l-1)}_k
 $$
+
+::: {.fragment}
+$$
+\frac{\partial \mathscr L}{\partial \mathbf W^{(l)}} = \boldsymbol \delta^{(l)} \left(\mathbf h^{(l-1)}\right)^\top
+$$
+:::
+
 
 ---
 
@@ -516,20 +537,244 @@ Error at output **propagates backward** to earlier weights
 
 ---
 
-## Stochastic Gradient Descent (SGD)
+## Gradient Descent
 
-- Uses **mini-batches**
-- Noisy but efficient
+Goal:
 
-Variants:
+$$
+\min_{\boldsymbol \theta} \; \mathscr{L}(\boldsymbol \theta)
+$$
 
-- Momentum
-- RMSProp
-- Adam
+Update rule:
+
+$$
+\boldsymbol \theta \leftarrow
+\boldsymbol \theta - \eta \nabla_{\boldsymbol \theta} \mathscr{L}(\boldsymbol \theta)
+$$
+
+Where:
+
+- $\eta$ = learning rate
+- $\nabla_{\boldsymbol \theta} \mathscr{L}$ = gradient
+- $\boldsymbol \theta$ = all weights and biases
+
+Interpretation:
+
+> Move parameters in the direction of steepest decrease.
+
+---
+
+## Stochastic & Mini-Batch Gradient Descent
+
+Full gradient (expensive):
+
+$$
+\nabla_{\boldsymbol \theta} \mathscr{L}
+=
+\frac{1}{N}
+\sum_{i=1}^{N}
+\nabla_{\boldsymbol \theta} \mathscr{L}_i
+$$
+
+Mini-batch gradient:
+
+$$
+\nabla_{\boldsymbol \theta} \mathscr{L}_B
+=
+\frac{1}{|B|}
+\sum_{i \in B}
+\nabla_{\boldsymbol \theta} \mathscr{L}_i
+$$
+
+Weight update:
+
+$$
+\boldsymbol \theta \leftarrow
+\boldsymbol \theta - \eta \nabla_{\boldsymbol \theta} \mathscr{L}_B
+$$
+
+Why batching works:
+
+- The mini-batch gradient is an **unbiased estimator** of the true gradient:
+$$
+\mathbb{E}[\nabla_{\boldsymbol \theta} \mathscr{L}_B]
+=
+\nabla_{\boldsymbol \theta} \mathscr{L}
+$$
+
+- Much cheaper computationally
+- Adds useful noise → helps escape shallow minima
+
+---
+
+## Batches and Epochs
+
+Definitions:
+
+- **Batch size** = number of samples used per update
+- **Iteration** = one parameter update
+- **Epoch** = one full pass through the dataset
+
+If:
+
+- Dataset size = $N$
+- Batch size = $B$
+
+Then:
+
+- Iterations per epoch = $\frac{N}{B}$
+
+:::{.callout title="Example"}
+$N$ = 10000
+
+Batch size = 100
+→ 100 updates per epoch
+:::
+
+
+Why multiple epochs?
+
+- One pass is rarely enough
+- We refine weights gradually
+- Convergence requires repeated updates
 
 ---
 
 ![](/images/sgd.png)
+
+---
+
+## Momentum: Accelerating Gradient Descent
+
+Problem with vanilla SGD:
+
+- Oscillates in narrow valleys
+- Slow convergence
+- Sensitive to noisy gradients
+
+:::{.callout-note title="Idea"}
+Accumulate a velocity vector in the direction of consistent descent.
+:::
+
+Velocity update:
+
+$$
+\mathbf v_t = \beta \mathbf v_{t-1} + \nabla_\theta \mathscr{L}_B
+$$
+
+Weight update:
+
+$$
+\boldsymbol \theta_t =
+\boldsymbol \theta_{t-1} - \eta \mathbf v_t
+$$
+
+Where:
+
+- $\beta \in [0,1)$ = momentum coefficient (e.g. 0.9)
+- $\mathbf v_t$ = exponentially weighted moving average of gradients
+
+Intuition:
+
+- Smooths noisy updates  
+- Speeds up motion along shallow directions  
+- Reduces zig-zag behaviour  
+
+---
+
+## RMSProp: Adaptive Learning Rates
+
+Problem with SGD + Momentum:
+
+- Same learning rate for all parameters
+- Some directions require smaller steps
+- Exploding updates in steep dimensions
+
+Idea:
+
+> Scale the learning rate using a running average of squared gradients.
+
+Compute running average:
+
+$$
+\mathbf s_t = \rho \mathbf s_{t-1} + (1-\rho)(\nabla_{\boldsymbol \theta} \mathscr{L}_B)^2
+$$
+
+Update rule:
+
+$$
+\boldsymbol \theta_t =
+\boldsymbol \theta_{t-1}
+-
+\frac{\eta}{\sqrt{\mathbf s_t} + \epsilon}
+\nabla_{\boldsymbol \theta} \mathscr{L}_B
+$$
+
+Where:
+
+- $\rho \approx 0.9$
+- $\epsilon \approx 10^{-8}$
+
+Intuition:
+
+- Large gradients → smaller effective step  
+- Small gradients → larger effective step  
+- Each parameter gets its own adaptive learning rate
+
+## Adam: Momentum + RMSProp
+
+Adam = **Adaptive Moment Estimation**
+
+Combines:
+
+- Momentum (1st moment)
+- RMSProp (2nd moment)
+
+### Step 1: First moment (mean of gradients)
+
+$$
+\mathbf m_t = \beta_1 \mathbf m_{t-1} + (1-\boldsymbol\beta_1) \nabla_\theta \mathscr{L}_B
+$$
+
+### Step 2: Second moment (mean of squared gradients)
+
+$$
+\mathbf v_t = \beta_2 \mathbf v_{t-1} + (1-\beta_2) (\nabla_\theta \mathscr{L}_B)^2
+$$
+
+### Step 3: Bias correction
+
+$$
+\widehat{\mathbf m}_t = \frac{\mathbf m_t}{1-\beta_1^t}
+\quad
+\widehat{\mathbf v}_t = \frac{\mathbf v_t}{1-\beta_2^t}
+$$
+
+### Step 4: Parameter update
+
+$$
+\mathbf \theta_t =
+\mathbf \theta_{t-1}
+-
+\frac{\eta}{\sqrt{\widehat{\mathbf v}_t} + \epsilon}
+\widehat{\mathbf m}_t
+$$
+
+Typical defaults:
+
+- $\beta_1 = 0.9$
+- $\beta_2 = 0.999$
+- $\epsilon = 10^{-8}$
+
+---
+
+### Intuition
+
+- Momentum → smooth direction  
+- RMSProp → adaptive step size  
+- Bias correction → stabilizes early training  
+
+Adam works well "out of the box" in most deep learning problems.
 
 # Examples & applications
 
