@@ -189,7 +189,7 @@ Miguel Fonseca
 <li>Computes a <strong>weighted sum</strong> + bias</li>
 </ul>
 <p><span class="math display">\[
-\widehat{y} = \mathbb{1}(w^T x + b &gt; 0)
+\widehat{y} = \mathbb{1}(\mathbf w^\top \mathbf x + b &gt; 0)
 \]</span></p>
 </section>
 <section id="perceptron-learning-rule" class="slide level2">
@@ -198,7 +198,7 @@ Miguel Fonseca
 <li>Update weights on mistakes</li>
 </ul>
 <p><span class="math display">\[
-w \leftarrow w + \eta (y - \widehat{y}) x
+\mathbf{w} \leftarrow \mathbf{w} + \eta (y - \widehat{y}) \mathbf{x}
 \]</span></p>
 <ul>
 <li>Online algorithm<br>
@@ -238,7 +238,7 @@ w \leftarrow w + \eta (y - \widehat{y}) x
 <li>Information flows left → right</li>
 </ul>
 <p><span class="math display">\[
-x \rightarrow h^{(1)} \rightarrow h^{(2)} \rightarrow \widehat{y}
+\mathbf x \rightarrow \mathbf h^{(1)} \rightarrow \mathbf h^{(2)} \rightarrow \mathbf h^{(3)} \rightarrow \widehat{\mathbf y}
 \]</span></p>
 </section>
 <section class="slide level2">
@@ -253,18 +253,57 @@ x \rightarrow h^{(1)} \rightarrow h^{(2)} \rightarrow \widehat{y}
 <li>Output layer</li>
 </ul>
 <p>Each neuron: <span class="math display">\[
-h_j = \sigma(w_j^T x + b_j)
+h_j = \sigma(\mathbf{w}_j^\top \mathbf{x} + b_j)
 \]</span></p>
 </section>
-<section id="why-hidden-layers-matter" class="slide level2">
-<h2>Why Hidden Layers Matter</h2>
+<section id="shallow-vs-deep-networks" class="slide level2">
+<h2>Shallow vs Deep Networks</h2>
+<h3 id="architectural-differences">Architectural Differences</h3>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Shallow Network</th>
+<th>Deep Network</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hidden Layers</td>
+<td>1 (or none)</td>
+<td>≥ 2 (often many)</td>
+</tr>
+<tr class="even">
+<td>Depth</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<td>Parameter Distribution</td>
+<td>Wide layers</td>
+<td>Stacked hierarchical layers</td>
+</tr>
+<tr class="even">
+<td>Feature Learning</td>
+<td>Limited abstraction</td>
+<td>Hierarchical abstraction</td>
+</tr>
+</tbody>
+</table>
+<h3 id="representation-power">Representation Power</h3>
+<p>Shallow:</p>
 <ul>
-<li>Enable non-linear representations</li>
-<li>Compose simple functions → complex ones</li>
-<li>Depth vs width trade-off</li>
+<li>Universal approximator (theoretically)</li>
+<li>May require exponentially many neurons</li>
+<li>Learns mostly flat features</li>
 </ul>
-
-<img data-src="https://upload.wikimedia.org/wikipedia/commons/1/10/Deep_neural_network.svg" class="r-stretch"></section></section>
+<p>Deep:</p>
+<ul>
+<li>Compositional representations</li>
+<li>Parameter-efficient for structured problems</li>
+<li>Learns low → mid → high-level features</li>
+</ul>
+</section></section>
 <section>
 <section id="activation-functions" class="title-slide slide level1 center">
 <h1>Activation Functions</h1>
@@ -317,7 +356,7 @@ h_j = \sigma(w_j^T x + b_j)
 <section class="slide level2">
 
 
-<img data-src="../images/sigmoid_tanh_activation_functions.png" class="r-stretch quarto-figure-center"><p class="caption">Sigmoid &amp; tanh Activation Functions</p></section>
+<img data-src="../images/sigmoid_tanh_activation_function.png" class="r-stretch quarto-figure-center"><p class="caption">Sigmoid &amp; tanh Activation Functions</p></section>
 <section id="relu-family" class="slide level2">
 <h2>ReLU Family</h2>
 <p>ReLU: <span class="math display">\[
@@ -337,7 +376,7 @@ h_j = \sigma(w_j^T x + b_j)
 <section class="slide level2">
 
 
-<img data-src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Activation_rectified_linear.svg" class="r-stretch"></section>
+<img data-src="../images/relu_activation_function.png" class="r-stretch"></section>
 <section id="output-activations" class="slide level2">
 <h2>Output Activations</h2>
 <ul>
@@ -346,7 +385,7 @@ h_j = \sigma(w_j^T x + b_j)
 <li>Multiclass: <strong>Softmax</strong></li>
 </ul>
 <p><span class="math display">\[
-\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
+\text{softmax}(\mathbf z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
 \]</span></p>
 </section></section>
 <section>
@@ -358,18 +397,23 @@ h_j = \sigma(w_j^T x + b_j)
 <h2>Loss Functions: Why Do We Need Them?</h2>
 <p>A neural network produces predictions:</p>
 <p><span class="math display">\[
-\hat{y} = f_\theta(x)
+\widehat{\mathbf y} = \mathbf f_\boldsymbol\theta(\mathbf x)
 \]</span></p>
 <p>But how do we measure <em>how wrong</em> it is?</p>
 <p>We define a <strong>loss function</strong>:</p>
 <p><span class="math display">\[
-\mathscr{L}(y, \widehat{y})
+\mathscr{L}(\mathbf y, \widehat{\mathbf y})
 \]</span></p>
 <p>Training objective:</p>
 <p><span class="math display">\[
-\min_\theta \; \mathscr{L}(y, \widehat{y})
+\min_{\boldsymbol \theta} \; \mathscr{L}(\mathbf y, \widehat{\mathbf y})
 \]</span></p>
-<p>The loss defines: - The optimization problem - The gradient signal - The statistical interpretation</p>
+<p>The loss defines:</p>
+<ul>
+<li>The optimization problem</li>
+<li>The gradient signal</li>
+<li>The statistical interpretation</li>
+</ul>
 </section>
 <section id="regression-loss-mean-squared-error-mse" class="slide level2">
 <h2>Regression Loss: Mean Squared Error (MSE)</h2>
@@ -378,9 +422,14 @@ h_j = \sigma(w_j^T x + b_j)
 <p><span class="math display">\[
 \mathscr{L}_{MSE}
 =
-\frac{1}{n} \sum_{i=1}^n (y_i - \widehat{y}_i)^2
+\frac{1}{n} \sum_{i=1}^n (\mathbf y_i - \widehat{\mathbf y}_i)^\top (\mathbf y_i - \widehat{\mathbf y}_i)
 \]</span></p>
-<p>Properties: - Penalizes large errors heavily - Smooth and differentiable - Corresponds to Gaussian noise assumption</p>
+<p>Properties:</p>
+<ul>
+<li>Penalizes large errors heavily</li>
+<li>Smooth and differentiable</li>
+<li>Corresponds to Gaussian noise assumption</li>
+</ul>
 </section>
 <section id="mse-gradient-intuition" class="slide level2">
 <h2>MSE: Gradient Intuition</h2>
@@ -394,15 +443,24 @@ h_j = \sigma(w_j^T x + b_j)
 =
 \widehat{y} - y
 \]</span></p>
-<p>Interpretation: - If prediction too large → positive gradient - If prediction too small → negative gradient</p>
+<p>Interpretation:</p>
+<ul>
+<li>If prediction too large → positive gradient</li>
+<li>If prediction too small → negative gradient</li>
+</ul>
 <p>This becomes the <strong>error signal</strong> in backpropagation</p>
 </section>
 <section id="binary-classification-binary-cross-entropy" class="slide level2">
 <h2>Binary Classification: Binary Cross-Entropy</h2>
-<p>Used for: - Spam detection - Credit default - Medical diagnosis</p>
+<p>Used for:</p>
+<ul>
+<li>Spam detection</li>
+<li>Credit default</li>
+<li>Medical diagnosis</li>
+</ul>
 <p>Output: probability</p>
 <p><span class="math display">\[
-\hat{y} = \sigma(z)
+\widehat{y} = \sigma(z)
 \]</span></p>
 <p>Loss:</p>
 <p><span class="math display">\[
@@ -427,12 +485,8 @@ y \log(\widehat{y})
 <li>Strong gradients when wrong</li>
 <li>Better probabilistic interpretation</li>
 </ul>
-<p>Key result:</p>
-<p>With sigmoid + BCE:</p>
-<p><span class="math display">\[
-\frac{\partial \mathscr{L}}{\partial z}
-=
-\widehat{y} - y
+<p>With sigmoid + BCE: <span class="math display">\[
+\frac{\partial \mathscr{L}}{\partial z} = \widehat{y} - y
 \]</span></p>
 <p>Clean gradient → stable training</p>
 </section>
@@ -446,7 +500,7 @@ y \log(\widehat{y})
 </ul>
 <p>Output: Softmax</p>
 <p><span class="math display">\[
-\hat{y}_i =
+\widehat{y}_i =
 \frac{e^{z_i}}{\sum_j e^{z_j}}
 \]</span></p>
 <p>Loss:</p>
@@ -462,7 +516,7 @@ y \log(\widehat{y})
 </section>
 <section id="gradient-insight-softmax-cross-entropy" class="slide level2">
 <h2>Gradient Insight: Softmax + Cross-Entropy</h2>
-<p>Beautiful result:</p>
+<p>With softmax + cross-entropy, the gradient simplifies to:</p>
 <p><span class="math display">\[
 \frac{\partial \mathscr{L}}{\partial z_i}
 =
@@ -473,11 +527,21 @@ y \log(\widehat{y})
 <li>MSE gradient</li>
 <li>Binary cross-entropy gradient</li>
 </ul>
-<p>Pattern:</p>
-<blockquote>
+<div title="Pattern">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Pattern</strong></p>
+</div>
+<div class="callout-content">
 <p>Error = Prediction − Target</p>
-</blockquote>
-<p>This is what backpropagation propagates backward.</p>
+</div>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="backpropagation" class="title-slide slide level1 center">
@@ -487,7 +551,7 @@ y \log(\widehat{y})
 <section id="training-a-neural-network" class="slide level2 scrollable">
 <h2>Training a Neural Network</h2>
 <p>Goal: <span class="math display">\[
-\min_\theta \; \mathscr{L}(y, \widehat{y})
+\min_{\boldsymbol \theta} \; \mathscr{L}(\mathbf y, \widehat{\mathbf y})
 \]</span></p>
 <p>Steps:</p>
 <ol type="1">
@@ -509,7 +573,7 @@ y \log(\widehat{y})
 <h2>Backpropagation: What Problem Are We Solving?</h2>
 <p>We want to compute efficiently:</p>
 <p><span class="math display">\[
-\frac{\partial \mathscr{L}}{\partial W^{(l)}} \quad \text{for all layers } l
+\frac{\partial \mathscr{L}}{\partial w^{(l)}_{jk}} \quad \text{for all layers } l
 \]</span></p>
 <p>Naively:</p>
 <ul>
@@ -538,17 +602,17 @@ y \log(\widehat{y})
 <section id="backpropagation-chain-rule-view" class="slide level2">
 <h2>Backpropagation: Chain Rule View</h2>
 <p>Forward pass: <span class="math display">\[
-x \rightarrow z^{(1)} \rightarrow h^{(1)} \rightarrow z^{(2)} \rightarrow \widehat{y}
+\mathbf x \rightarrow \mathbf z^{(1)} \rightarrow \mathbf h^{(1)} \rightarrow \mathbf z^{(2)} \rightarrow \widehat{\mathbf y}
 \]</span></p>
 <p>Where: <span class="math display">\[
-z^{(l)} = W^{(l)} h^{(l-1)} + b^{(l)}
+\mathbf z^{(l)} = \mathbf W^{(l)} \mathbf h^{(l-1)} + \mathbf b^{(l)}
 \]</span> <span class="math display">\[
-h^{(l)} = \sigma(z^{(l)})
+\mathbf h^{(l)} = \sigma(\mathbf z^{(l)}) =[\sigma(z_1^{(l)}), \ldots, \sigma(z_{n_l}^{(l)})]^\top
 \]</span></p>
 <p>Backward pass: <span class="math display">\[
-\frac{\partial \mathscr{L}}{\partial z^{(l)}} =
-\frac{\partial \mathscr{L}}{\partial z^{(l+1)}}
-\frac{\partial z^{(l+1)}}{\partial z^{(l)}}
+\frac{\partial \mathscr{L}}{\partial \mathbf z^{(l)}} =
+\frac{\partial \mathscr{L}}{\partial \mathbf z^{(l+1)}}
+\frac{\partial \mathbf z^{(l+1)}}{\partial \mathbf z^{(l)}}
 \]</span></p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -568,20 +632,28 @@ h^{(l)} = \sigma(z^{(l)})
 <h2>Backpropagation: Error Terms</h2>
 <p>Define the <strong>error signal</strong> at layer <span class="math inline">\(l\)</span>:</p>
 <p><span class="math display">\[
-\delta^{(l)} = \frac{\partial \mathscr{L}}{\partial z^{(l)}}
+\boldsymbol \delta^{(l)} = \frac{\partial \mathscr{L}}{\partial \mathbf z^{(l)}}
 \]</span></p>
-<p>Output layer: <span class="math display">\[
-\delta^{(L)} =
-\nabla_{\widehat{y}} \mathscr{L} \odot \sigma'(z^{(L)})
+<p><strong>Output layer:</strong> <span class="math display">\[
+\boldsymbol \delta^{(L + 1)} =
+\nabla_{\widehat{\mathbf y}} \mathscr{L} \odot \sigma'(\mathbf z^{(L + 1)})
 \]</span></p>
-<p>Hidden layers: <span class="math display">\[
-\delta^{(l)} =
-(W^{(l+1)})^T \delta^{(l+1)} \odot \sigma'(z^{(l)})
+<p><strong>Hidden layers:</strong> <span class="math display">\[\begin{align*}
+\boldsymbol \delta^{(l)}  &amp;= \frac{\partial \mathscr{L}}{\partial \mathbf z^{(l)}} \\
+&amp; = \frac{\partial \mathscr{L}}{\partial \mathbf z^{(l + 1)}} \frac{\partial \mathbf z^{(l + 1)}}{\partial \mathbf h^{(l)}} \frac{\partial \mathbf h^{(l)}}{\partial \mathbf z^{(l)}} \\
+&amp; = \boldsymbol \delta^{(l+1)} \left(\mathbf W^{(l+1)}\right)^\top \odot \sigma'(\mathbf z^{(l)})
+\end{align*}\]</span></p>
+</section>
+<section id="gradients-at-each-layer" class="slide level2">
+<h2>Gradients at Each Layer</h2>
+<p><span class="math display">\[
+\frac{\partial \mathscr L}{\partial w^{(l)}_{jk}} = \frac{\partial \mathscr L}{\partial \mathbf z^{(l)}} \frac{\partial \mathbf z^{(l)}}{\partial w^{(l)}_{jk}} = \boldsymbol \delta^{(l)} \begin{bmatrix}0 \\ \vdots \\ \underbrace{h^{(l-1)}_k}_{k^{\text{th}}\text{ position}} \\ \vdots \\ 0\end{bmatrix} =\delta^{(l)}_j h^{(l-1)}_k
 \]</span></p>
-<p>Gradients: <span class="math display">\[
-\frac{\partial \mathscr{L}}{\partial W^{(l)}} =
-\delta^{(l)} (h^{(l-1)})^T
+<div class="fragment">
+<p><span class="math display">\[
+\frac{\partial \mathscr L}{\partial \mathbf W^{(l)}} = \boldsymbol \delta^{(l)} \left(\mathbf h^{(l-1)}\right)^\top
 \]</span></p>
+</div>
 </section>
 <section id="toy-example-one-hidden-neuron" class="slide level2">
 <h2>Toy Example: One Hidden Neuron</h2>
@@ -621,23 +693,236 @@ h = \sigma(w_1)
 </div>
 </div>
 </section>
-<section id="stochastic-gradient-descent-sgd" class="slide level2">
-<h2>Stochastic Gradient Descent (SGD)</h2>
+<section id="gradient-descent" class="slide level2">
+<h2>Gradient Descent</h2>
+<p>Goal:</p>
+<p><span class="math display">\[
+\min_{\boldsymbol \theta} \; \mathscr{L}(\boldsymbol \theta)
+\]</span></p>
+<p>Update rule:</p>
+<p><span class="math display">\[
+\boldsymbol \theta \leftarrow
+\boldsymbol \theta - \eta \nabla_{\boldsymbol \theta} \mathscr{L}(\boldsymbol \theta)
+\]</span></p>
+<p>Where:</p>
 <ul>
-<li>Uses <strong>mini-batches</strong></li>
-<li>Noisy but efficient</li>
+<li><span class="math inline">\(\eta\)</span> = learning rate</li>
+<li><span class="math inline">\(\nabla_{\boldsymbol \theta} \mathscr{L}\)</span> = gradient</li>
+<li><span class="math inline">\(\boldsymbol \theta\)</span> = all weights and biases</li>
 </ul>
-<p>Variants:</p>
+<p>Interpretation:</p>
+<blockquote>
+<p>Move parameters in the direction of steepest decrease.</p>
+</blockquote>
+</section>
+<section id="stochastic-mini-batch-gradient-descent" class="slide level2">
+<h2>Stochastic &amp; Mini-Batch Gradient Descent</h2>
+<p>Full gradient (expensive):</p>
+<p><span class="math display">\[
+\nabla_{\boldsymbol \theta} \mathscr{L}
+=
+\frac{1}{N}
+\sum_{i=1}^{N}
+\nabla_{\boldsymbol \theta} \mathscr{L}_i
+\]</span></p>
+<p>Mini-batch gradient:</p>
+<p><span class="math display">\[
+\nabla_{\boldsymbol \theta} \mathscr{L}_B
+=
+\frac{1}{|B|}
+\sum_{i \in B}
+\nabla_{\boldsymbol \theta} \mathscr{L}_i
+\]</span></p>
+<p>Weight update:</p>
+<p><span class="math display">\[
+\boldsymbol \theta \leftarrow
+\boldsymbol \theta - \eta \nabla_{\boldsymbol \theta} \mathscr{L}_B
+\]</span></p>
+<p>Why batching works:</p>
 <ul>
-<li>Momentum</li>
-<li>RMSProp</li>
-<li>Adam</li>
+<li><p>The mini-batch gradient is an <strong>unbiased estimator</strong> of the true gradient: <span class="math display">\[
+\mathbb{E}[\nabla_{\boldsymbol \theta} \mathscr{L}_B]
+=
+\nabla_{\boldsymbol \theta} \mathscr{L}
+\]</span></p></li>
+<li><p>Much cheaper computationally</p></li>
+<li><p>Adds useful noise → helps escape shallow minima</p></li>
+</ul>
+</section>
+<section id="batches-and-epochs" class="slide level2">
+<h2>Batches and Epochs</h2>
+<p>Definitions:</p>
+<ul>
+<li><strong>Batch size</strong> = number of samples used per update</li>
+<li><strong>Iteration</strong> = one parameter update</li>
+<li><strong>Epoch</strong> = one full pass through the dataset</li>
+</ul>
+<p>If:</p>
+<ul>
+<li>Dataset size = <span class="math inline">\(N\)</span></li>
+<li>Batch size = <span class="math inline">\(B\)</span></li>
+</ul>
+<p>Then:</p>
+<ul>
+<li>Iterations per epoch = <span class="math inline">\(\frac{N}{B}\)</span></li>
+</ul>
+<div title="Example">
+<div class="callout callout-none no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Example</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(N\)</span> = 10000</p>
+<p>Batch size = 100 → 100 updates per epoch</p>
+</div>
+</div>
+</div>
+</div>
+<p>Why multiple epochs?</p>
+<ul>
+<li>One pass is rarely enough</li>
+<li>We refine weights gradually</li>
+<li>Convergence requires repeated updates</li>
 </ul>
 </section>
 <section class="slide level2">
 
 
-<img data-src="../images/sgd.png" class="r-stretch"></section></section>
+<img data-src="../images/sgd.png" class="r-stretch"></section>
+<section id="momentum-accelerating-gradient-descent" class="slide level2">
+<h2>Momentum: Accelerating Gradient Descent</h2>
+<p>Problem with vanilla SGD:</p>
+<ul>
+<li>Oscillates in narrow valleys</li>
+<li>Slow convergence</li>
+<li>Sensitive to noisy gradients</li>
+</ul>
+<div title="Idea">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Idea</strong></p>
+</div>
+<div class="callout-content">
+<p>Accumulate a velocity vector in the direction of consistent descent.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Velocity update:</p>
+<p><span class="math display">\[
+\mathbf v_t = \beta \mathbf v_{t-1} + \nabla_\theta \mathscr{L}_B
+\]</span></p>
+<p>Weight update:</p>
+<p><span class="math display">\[
+\boldsymbol \theta_t =
+\boldsymbol \theta_{t-1} - \eta \mathbf v_t
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\beta \in [0,1)\)</span> = momentum coefficient (e.g.&nbsp;0.9)</li>
+<li><span class="math inline">\(\mathbf v_t\)</span> = exponentially weighted moving average of gradients</li>
+</ul>
+<p>Intuition:</p>
+<ul>
+<li>Smooths noisy updates<br>
+</li>
+<li>Speeds up motion along shallow directions<br>
+</li>
+<li>Reduces zig-zag behaviour</li>
+</ul>
+</section>
+<section id="rmsprop-adaptive-learning-rates" class="slide level2">
+<h2>RMSProp: Adaptive Learning Rates</h2>
+<p>Problem with SGD + Momentum:</p>
+<ul>
+<li>Same learning rate for all parameters</li>
+<li>Some directions require smaller steps</li>
+<li>Exploding updates in steep dimensions</li>
+</ul>
+<p>Idea:</p>
+<blockquote>
+<p>Scale the learning rate using a running average of squared gradients.</p>
+</blockquote>
+<p>Compute running average:</p>
+<p><span class="math display">\[
+\mathbf s_t = \rho \mathbf s_{t-1} + (1-\rho)(\nabla_{\boldsymbol \theta} \mathscr{L}_B)^2
+\]</span></p>
+<p>Update rule:</p>
+<p><span class="math display">\[
+\boldsymbol \theta_t =
+\boldsymbol \theta_{t-1}
+-
+\frac{\eta}{\sqrt{\mathbf s_t} + \epsilon}
+\nabla_{\boldsymbol \theta} \mathscr{L}_B
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\rho \approx 0.9\)</span></li>
+<li><span class="math inline">\(\epsilon \approx 10^{-8}\)</span></li>
+</ul>
+<p>Intuition:</p>
+<ul>
+<li>Large gradients → smaller effective step<br>
+</li>
+<li>Small gradients → larger effective step<br>
+</li>
+<li>Each parameter gets its own adaptive learning rate</li>
+</ul>
+</section>
+<section id="adam-momentum-rmsprop" class="slide level2">
+<h2>Adam: Momentum + RMSProp</h2>
+<p>Adam = <strong>Adaptive Moment Estimation</strong></p>
+<p>Combines:</p>
+<ul>
+<li>Momentum (1st moment)</li>
+<li>RMSProp (2nd moment)</li>
+</ul>
+<h3 id="step-1-first-moment-mean-of-gradients">Step 1: First moment (mean of gradients)</h3>
+<p><span class="math display">\[
+\mathbf m_t = \beta_1 \mathbf m_{t-1} + (1-\boldsymbol\beta_1) \nabla_\theta \mathscr{L}_B
+\]</span></p>
+<h3 id="step-2-second-moment-mean-of-squared-gradients">Step 2: Second moment (mean of squared gradients)</h3>
+<p><span class="math display">\[
+\mathbf v_t = \beta_2 \mathbf v_{t-1} + (1-\beta_2) (\nabla_\theta \mathscr{L}_B)^2
+\]</span></p>
+<h3 id="step-3-bias-correction">Step 3: Bias correction</h3>
+<p><span class="math display">\[
+\widehat{\mathbf m}_t = \frac{\mathbf m_t}{1-\beta_1^t}
+\quad
+\widehat{\mathbf v}_t = \frac{\mathbf v_t}{1-\beta_2^t}
+\]</span></p>
+<h3 id="step-4-parameter-update">Step 4: Parameter update</h3>
+<p><span class="math display">\[
+\mathbf \theta_t =
+\mathbf \theta_{t-1}
+-
+\frac{\eta}{\sqrt{\widehat{\mathbf v}_t} + \epsilon}
+\widehat{\mathbf m}_t
+\]</span></p>
+<p>Typical defaults:</p>
+<ul>
+<li><span class="math inline">\(\beta_1 = 0.9\)</span></li>
+<li><span class="math inline">\(\beta_2 = 0.999\)</span></li>
+<li><span class="math inline">\(\epsilon = 10^{-8}\)</span></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="intuition">Intuition</h3>
+<ul>
+<li>Momentum → smooth direction<br>
+</li>
+<li>RMSProp → adaptive step size<br>
+</li>
+<li>Bias correction → stabilizes early training</li>
+</ul>
+<p>Adam works well “out of the box” in most deep learning problems.</p>
+</section></section>
 <section>
 <section id="examples-applications" class="title-slide slide level1 center">
 <h1>Examples &amp; applications</h1>
