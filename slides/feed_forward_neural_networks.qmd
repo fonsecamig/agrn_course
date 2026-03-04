@@ -312,9 +312,9 @@ $$
 \mathscr{L}_{BCE}
 =
 - \left[
-y \log(\widehat{y})
+y \cdot \text{logit}(\widehat{y})
 +
-(1-y)\log(1-\widehat{y})
+(1-y) \cdot \text{logit}(1-\widehat{y})
 \right]
 $$
 
