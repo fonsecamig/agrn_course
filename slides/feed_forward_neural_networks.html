@@ -467,9 +467,9 @@ h_j = \sigma(\mathbf{w}_j^\top \mathbf{x} + b_j)
 \mathscr{L}_{BCE}
 =
 - \left[
-y \log(\widehat{y})
+y \cdot \text{logit}(\widehat{y})
 +
-(1-y)\log(1-\widehat{y})
+(1-y) \cdot \text{logit}(1-\widehat{y})
 \right]
 \]</span></p>
 </section>
