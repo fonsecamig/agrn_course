@@ -19,6 +19,7 @@ sidebar:
   - Chapter 5: Resampling Methods
 
 ### Exercises
+
 - [Exercise 1](notebooks/exerc_kfold_cv.ipynb)
 - [Exercise 2](notebooks/exerc_strat_kfold_cv.ipynb)
 
@@ -41,6 +42,11 @@ sidebar:
   - Chapter 3: Linear Neural Networks for Regression
   - Chapter 4: Linear Neural Networks for Classification
   - Chapter 5: Multilayer Perceptrons
+
+### Exercises
+
+- [Exercise 1](notebooks/exerc_tf2-intro.ipynb)
+- [Exercise 2](notebooks/exerc-mlp-mnist.ipynb)
 
 ## References
 
