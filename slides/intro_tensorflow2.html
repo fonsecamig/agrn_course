@@ -287,7 +287,7 @@ Miguel Fonseca
 </section>
 <section id="creating-tensors" class="slide level2 scrollable">
 <h2>Creating Tensors</h2>
-<div id="78a752ad" class="cell" data-execution_count="1">
+<div id="2b102a09" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
 <span id="cb1-3"><a></a></span>
@@ -298,7 +298,7 @@ Miguel Fonseca
 </section>
 <section id="tensor-properties" class="slide level2 scrollable">
 <h2>Tensor Properties</h2>
-<div id="27f81e73" class="cell" data-execution_count="2">
+<div id="398265b3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>c.shape</span>
 <span id="cb2-2"><a></a>c.dtype</span>
 <span id="cb2-3"><a></a>tf.rank(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -325,7 +325,7 @@ Miguel Fonseca
 <section id="tensor-operations" class="slide level2 scrollable">
 <h2>Tensor Operations</h2>
 <p>TensorFlow feels like NumPy:</p>
-<div id="bc01704c" class="cell" data-execution_count="3">
+<div id="fbb61d41" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>x <span class="op">=</span> tf.random.normal((<span class="dv">3</span>, <span class="dv">2</span>))</span>
 <span id="cb4-2"><a></a>y <span class="op">=</span> tf.ones((<span class="dv">3</span>, <span class="dv">2</span>))</span>
 <span id="cb4-3"><a></a></span>
@@ -333,19 +333,19 @@ Miguel Fonseca
 <span id="cb4-5"><a></a>x <span class="op">*</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>&lt;tf.Tensor: shape=(3, 2), dtype=float32, numpy=
-array([[ 0.28828186, -0.5616515 ],
-       [ 0.34646374, -0.32942194],
-       [ 0.9541317 ,  1.2041941 ]], dtype=float32)&gt;</code></pre>
+array([[-0.5426803 ,  0.91352046],
+       [-0.10325091,  0.15121485],
+       [-0.32478413,  0.64984626]], dtype=float32)&gt;</code></pre>
 </div>
 </div>
 <p>Matrix multiplication:</p>
-<div id="2b2c378b" class="cell" data-execution_count="4">
+<div id="b88ca182" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>tf.matmul(x, tf.transpose(y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>&lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
-array([[-0.27336967, -0.27336967, -0.27336967],
-       [ 0.0170418 ,  0.0170418 ,  0.0170418 ],
-       [ 2.1583257 ,  2.1583257 ,  2.1583257 ]], dtype=float32)&gt;</code></pre>
+array([[0.37084013, 0.37084013, 0.37084013],
+       [0.04796395, 0.04796395, 0.04796395],
+       [0.32506213, 0.32506213, 0.32506213]], dtype=float32)&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -372,14 +372,14 @@ array([[-0.27336967, -0.27336967, -0.27336967],
 </section>
 <section id="building-a-model-sequential" class="slide level2 scrollable">
 <h2>Building a Model (Sequential)</h2>
-<div id="6a20c3d0" class="cell" data-execution_count="5">
+<div id="473fa70f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>model <span class="op">=</span> tf.keras.Sequential([</span>
 <span id="cb8-2"><a></a>    tf.keras.layers.Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">"relu"</span>),</span>
 <span id="cb8-3"><a></a>    tf.keras.layers.Dense(<span class="dv">1</span>)</span>
 <span id="cb8-4"><a></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Model Summary</p>
-<div id="602f12ac" class="cell" data-execution_count="6">
+<div id="0d0bcbe7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential"</span>
@@ -417,7 +417,7 @@ array([[-0.27336967, -0.27336967, -0.27336967],
 </section>
 <section id="functional-api" class="slide level2 scrollable">
 <h2>Functional API</h2>
-<div id="1c4f27d0" class="cell" data-execution_count="7">
+<div id="012d13e0" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>inputs <span class="op">=</span> tf.keras.Input(shape<span class="op">=</span>(<span class="dv">10</span>,))</span>
 <span id="cb10-2"><a></a>x <span class="op">=</span> tf.keras.layers.Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">"relu"</span>)(inputs)</span>
 <span id="cb10-3"><a></a>outputs <span class="op">=</span> tf.keras.layers.Dense(<span class="dv">1</span>)(x)</span>
@@ -451,7 +451,7 @@ array([[-0.27336967, -0.27336967, -0.27336967],
 </section>
 <section id="compile-step" class="slide level2 scrollable">
 <h2>Compile Step</h2>
-<div id="55d6ec2b" class="cell" data-execution_count="8">
+<div id="0096a623" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>model.<span class="bu">compile</span>(</span>
 <span id="cb11-2"><a></a>    optimizer<span class="op">=</span><span class="st">"adam"</span>,</span>
 <span id="cb11-3"><a></a>    loss<span class="op">=</span><span class="st">"mse"</span>,</span>
@@ -466,7 +466,7 @@ array([[-0.27336967, -0.27336967, -0.27336967],
 </section>
 <section id="fit-the-model" class="slide level2 scrollable">
 <h2>Fit the Model</h2>
-<div id="1f39322d" class="cell" data-execution_count="9">
+<div id="f063decc" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>X_train, y_train <span class="op">=</span> np.random.rand(<span class="dv">100</span>, <span class="dv">10</span>), np.random.rand(<span class="dv">100</span>, <span class="dv">1</span>)  <span class="co"># Training data</span></span>
 <span id="cb12-2"><a></a>history <span class="op">=</span> model.fit(</span>
 <span id="cb12-3"><a></a>    X_train,</span>
@@ -480,37 +480,37 @@ array([[-0.27336967, -0.27336967, -0.27336967],
 <pre>Epoch 1/5
 
 
-<span class="ansi-bold">1/3</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 244ms/step - loss: 0.8690 - mae: 0.8820
+<span class="ansi-bold">1/3</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 253ms/step - loss: 0.1897 - mae: 0.3376
 
-<span class="ansi-bold">3/3</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 28ms/step - loss: 0.7889 - mae: 0.8179 - val_loss: 0.8208 - val_mae: 0.8239
+<span class="ansi-bold">3/3</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 31ms/step - loss: 0.1664 - mae: 0.3319 - val_loss: 0.0708 - val_mae: 0.2159
 
 Epoch 2/5
 
 
-<span class="ansi-bold">1/3</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 6ms/step - loss: 0.6562 - mae: 0.7492
+<span class="ansi-bold">1/3</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 6ms/step - loss: 0.1387 - mae: 0.2964
 
-<span class="ansi-bold">3/3</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 0.6781 - mae: 0.7491 - val_loss: 0.6977 - val_mae: 0.7491
+<span class="ansi-bold">3/3</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 0.1364 - mae: 0.3017 - val_loss: 0.0746 - val_mae: 0.2182
 
 Epoch 3/5
 
 
-<span class="ansi-bold">1/3</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 6ms/step - loss: 0.7552 - mae: 0.8035
+<span class="ansi-bold">1/3</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 7ms/step - loss: 0.1306 - mae: 0.2927
 
-<span class="ansi-bold">3/3</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 0.5825 - mae: 0.6835 - val_loss: 0.5888 - val_mae: 0.6803
+<span class="ansi-bold">3/3</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 0.1219 - mae: 0.2858 - val_loss: 0.0849 - val_mae: 0.2368
 
 Epoch 4/5
 
 
-<span class="ansi-bold">1/3</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 5ms/step - loss: 0.5121 - mae: 0.6403
+<span class="ansi-bold">1/3</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 6ms/step - loss: 0.1254 - mae: 0.2930
 
-<span class="ansi-bold">3/3</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 7ms/step - loss: 0.4932 - mae: 0.6178 - val_loss: 0.4943 - val_mae: 0.6169
+<span class="ansi-bold">3/3</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 9ms/step - loss: 0.1167 - mae: 0.2802 - val_loss: 0.0955 - val_mae: 0.2587
 
 Epoch 5/5
 
 
-<span class="ansi-bold">1/3</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 5ms/step - loss: 0.4731 - mae: 0.5847
+<span class="ansi-bold">1/3</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 6ms/step - loss: 0.1299 - mae: 0.2949
 
-<span class="ansi-bold">3/3</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 0.4177 - mae: 0.5583 - val_loss: 0.4126 - val_mae: 0.5557
+<span class="ansi-bold">3/3</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 0.1138 - mae: 0.2747 - val_loss: 0.1002 - val_mae: 0.2670
 </pre>
 </div>
 </div>
@@ -524,38 +524,38 @@ Epoch 5/5
 </section>
 <section id="evaluate-and-predict" class="slide level2 scrollable">
 <h2>Evaluate and Predict</h2>
-<div id="463a9350" class="cell" data-execution_count="10">
+<div id="4ac2ba3d" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>X_test, y_test <span class="op">=</span> np.random.rand(<span class="dv">20</span>, <span class="dv">10</span>), np.random.rand(<span class="dv">20</span>, <span class="dv">1</span>)  <span class="co"># Test data</span></span>
 <span id="cb13-2"><a></a>model.evaluate(X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
-<pre><span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 5ms/step - loss: 0.4023 - mae: 0.5728
+<pre><span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 6ms/step - loss: 0.1462 - mae: 0.3031
 
-<span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 10ms/step - loss: 0.4023 - mae: 0.5728
+<span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 11ms/step - loss: 0.1462 - mae: 0.3031
 </pre>
 </div>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>[0.4022769033908844, 0.5728076100349426]</code></pre>
+<pre><code>[0.14619231224060059, 0.3031131327152252]</code></pre>
 </div>
 </div>
-<div id="d41bdef6" class="cell" data-execution_count="11">
+<div id="19815bb8" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>X_new <span class="op">=</span> np.random.rand(<span class="dv">5</span>, <span class="dv">10</span>)  <span class="co"># New data for prediction</span></span>
 <span id="cb15-2"><a></a>model.predict(X_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
-<pre><span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 11ms/step
+<pre><span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 12ms/step
 
-<span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 16ms/step
+<span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 17ms/step
 </pre>
 </div>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>array([[ 0.08138318],
-       [ 0.02563924],
-       [ 0.00729221],
-       [ 0.00891832],
-       [-0.0676223 ]], dtype=float32)</code></pre>
+<pre><code>array([[0.43798116],
+       [0.3879716 ],
+       [0.67675155],
+       [0.74979055],
+       [0.7424842 ]], dtype=float32)</code></pre>
 </div>
 </div>
 
