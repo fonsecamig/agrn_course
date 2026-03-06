@@ -26,7 +26,7 @@ sidebar:
 ## Feed-Forward Neural Networks
 
 - [Slides 1](slides/feed_forward_neural_networks.qmd)
-- [Slides TF2](slides/intro_tensorflow2.quarto_ipynb)
+- [Slides TF2](slides/intro_tensorflow2.qmd)
 
 ### Reading
 
