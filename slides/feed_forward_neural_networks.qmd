@@ -398,7 +398,7 @@ $$
 \min_{\boldsymbol \theta} \; \mathscr{L}(\mathbf y, \widehat{\mathbf y})
 $$
 
-### Steps:
+### Steps
 
 1. Forward pass
 2. Compute loss
