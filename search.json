@@ -347,7 +347,14 @@
     "href": "index.html#feed-forward-neural-networks",
     "title": "Genetic Algorithms and Neural Networks",
     "section": "Feed-Forward Neural Networks",
-    "text": "Feed-Forward Neural Networks\n\nSlides 1\nSlides TF2\n\n\nReading\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\n\nChapter 6: Deep Neural Networks\nChapter 7: Gradient Descent\nChapter 8: Backpropagation\n\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\n\nChapter 2: The mathematical building blocksof neural networks\nChapter 4: Getting started with neural networks: Classification and regression\n\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\n\nChapter 10: Deep Learning\n\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai\n\nChapter 3: Linear Neural Networks for Regression\nChapter 4: Linear Neural Networks for Classification\nChapter 5: Multilayer Perceptrons\n\n\n\n\nExercises\n\nExercise 1\nExercise 2"
+    "text": "Feed-Forward Neural Networks\n\nSlides 1\n\n\nReading\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\n\nChapter 6: Deep Neural Networks\nChapter 7: Gradient Descent\nChapter 8: Backpropagation\n\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\n\nChapter 2: The mathematical building blocksof neural networks\nChapter 4: Getting started with neural networks: Classification and regression\n\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\n\nChapter 10: Deep Learning\n\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai\n\nChapter 3: Linear Neural Networks for Regression\nChapter 4: Linear Neural Networks for Classification\nChapter 5: Multilayer Perceptrons\n\n\n\n\nExercises\n\nExercise 1"
+  },
+  {
+    "objectID": "index.html#tensorflow-2",
+    "href": "index.html#tensorflow-2",
+    "title": "Genetic Algorithms and Neural Networks",
+    "section": "TensorFlow 2",
+    "text": "TensorFlow 2\n\nSlides\n\n\nExercises\n\nExercise 1\nExercise 2"
   },
   {
     "objectID": "index.html#references",
@@ -420,6 +427,20 @@
     "text": "Why Activations Matter\n\n\nWithout activations\n\nNetwork collapses to a linear model\n\n\nWith activations\n\nIntroduce non-linearity\nControl gradient flow"
   },
   {
+    "objectID": "slides/feed_forward_neural_networks.html#logistic-regression-vs-neural-networks",
+    "href": "slides/feed_forward_neural_networks.html#logistic-regression-vs-neural-networks",
+    "title": "Feed-Forward Neural Networks",
+    "section": "Logistic Regression vs Neural Networks",
+    "text": "Logistic Regression vs Neural Networks\n\n\nLogistic Regression\n\\[\nP(y=1 \\mid \\mathbf{x}) = \\sigma(\\mathbf{w}^\\top \\mathbf{x} + b)\n\\]\n\nLinear decision boundary\nConvex optimization\nInterpretable coefficients\nStrong statistical grounding\n\nTypical finance uses\n\nCredit scoring\nDefault probability\nRisk classification\n\n\nNeural Networks (MLP)\n\\[\nP(y=1 \\mid \\mathbf{x}) = \\sigma\\big(\\mathbf{W}^{(2)} \\phi(\\mathbf{W}^{(1)}\\mathbf{x} + \\mathbf{b}^{(1)}) + \\mathbf{b}^{(2)}\\big)\n\\]\n\nNon-linear decision boundary\nNon-convex optimization\nHigh expressive power\nRequires tuning & regularization\n\nTypical finance uses\n\nFraud detection\nComplex behavioral patterns\nHigh-dimensional signals"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#decision-boundary-intuition",
+    "href": "slides/feed_forward_neural_networks.html#decision-boundary-intuition",
+    "title": "Feed-Forward Neural Networks",
+    "section": "Decision Boundary Intuition",
+    "text": "Decision Boundary Intuition\n\nLogistic regression ⇒ straight line / hyperplane\nNeural networks ⇒ curved, flexible boundaries\n\n\nCurved NN boundary"
+  },
+  {
     "objectID": "slides/feed_forward_neural_networks.html#activation-functions-1",
     "href": "slides/feed_forward_neural_networks.html#activation-functions-1",
     "title": "Feed-Forward Neural Networks",
@@ -446,6 +467,13 @@
     "title": "Feed-Forward Neural Networks",
     "section": "Output Activations",
     "text": "Output Activations\n\nRegression: Identity\nBinary classification: Sigmoid\nMulticlass: Softmax\n\n\\[\n\\text{softmax}(\\mathbf z_i) = \\frac{e^{z_i}}{\\sum_j e^{z_j}}\n\\]"
+  },
+  {
+    "objectID": "slides/feed_forward_neural_networks.html#activation-functions-2",
+    "href": "slides/feed_forward_neural_networks.html#activation-functions-2",
+    "title": "Feed-Forward Neural Networks",
+    "section": "Activation Functions",
+    "text": "Activation Functions\n\n\n\nFunction\nFormula\nTypical Use\n\n\n\n\nSigmoid\n\\(\\frac{1}{1+e^{-z}}\\)\nProbabilities\n\n\nTanh\n\\(\\tanh(z)\\)\nCentered data\n\n\nReLU\n\\(\\max(0,z)\\)\nDefault hidden layers\n\n\nSoftmax\n\\(\\frac{e^z}{\\sum e^z}\\)\nMulticlass"
   },
   {
     "objectID": "slides/feed_forward_neural_networks.html#loss-functions-why-do-we-need-them",

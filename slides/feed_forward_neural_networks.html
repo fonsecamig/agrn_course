@@ -326,6 +326,53 @@ h_j = \sigma(\mathbf{w}_j^\top \mathbf{x} + b_j)
 </ul>
 </div></div>
 </section>
+<section id="logistic-regression-vs-neural-networks" class="slide level2 scrollable">
+<h2>Logistic Regression vs Neural Networks</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="logistic-regression">Logistic Regression</h3>
+<p><span class="math display">\[
+P(y=1 \mid \mathbf{x}) = \sigma(\mathbf{w}^\top \mathbf{x} + b)
+\]</span></p>
+<ul>
+<li>Linear decision boundary</li>
+<li>Convex optimization</li>
+<li>Interpretable coefficients</li>
+<li>Strong statistical grounding</li>
+</ul>
+<p><strong>Typical finance uses</strong></p>
+<ul>
+<li>Credit scoring</li>
+<li>Default probability</li>
+<li>Risk classification</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h3 id="neural-networks-mlp">Neural Networks (MLP)</h3>
+<p><span class="math display">\[
+P(y=1 \mid \mathbf{x}) = \sigma\big(\mathbf{W}^{(2)} \phi(\mathbf{W}^{(1)}\mathbf{x} + \mathbf{b}^{(1)}) + \mathbf{b}^{(2)}\big)
+\]</span></p>
+<ul>
+<li>Non-linear decision boundary</li>
+<li>Non-convex optimization</li>
+<li>High expressive power</li>
+<li>Requires tuning &amp; regularization</li>
+</ul>
+<p><strong>Typical finance uses</strong></p>
+<ul>
+<li>Fraud detection</li>
+<li>Complex behavioral patterns</li>
+<li>High-dimensional signals</li>
+</ul>
+</div></div>
+</section>
+<section id="decision-boundary-intuition" class="slide level2">
+<h2>Decision Boundary Intuition</h2>
+<ul>
+<li>Logistic regression ⇒ straight line / hyperplane</li>
+<li>Neural networks ⇒ curved, flexible boundaries</li>
+</ul>
+
+<img data-src="../images/logistic_regression_and_decision_boundary.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">Curved NN boundary</p></section>
 <section id="activation-functions-1" class="slide level2">
 <h2>Activation Functions</h2>
 <p>Purpose:</p>
@@ -388,6 +435,40 @@ h_j = \sigma(\mathbf{w}_j^\top \mathbf{x} + b_j)
 <p><span class="math display">\[
 \text{softmax}(\mathbf z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
 \]</span></p>
+</section>
+<section id="activation-functions-2" class="slide level2 scrollable">
+<h2>Activation Functions</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Formula</th>
+<th>Typical Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sigmoid</td>
+<td><span class="math inline">\(\frac{1}{1+e^{-z}}\)</span></td>
+<td>Probabilities</td>
+</tr>
+<tr class="even">
+<td>Tanh</td>
+<td><span class="math inline">\(\tanh(z)\)</span></td>
+<td>Centered data</td>
+</tr>
+<tr class="odd">
+<td>ReLU</td>
+<td><span class="math inline">\(\max(0,z)\)</span></td>
+<td>Default hidden layers</td>
+</tr>
+<tr class="even">
+<td>Softmax</td>
+<td><span class="math inline">\(\frac{e^z}{\sum e^z}\)</span></td>
+<td>Multiclass</td>
+</tr>
+</tbody>
+</table>
 </section></section>
 <section>
 <section id="loss-functions" class="title-slide slide level1 center">
