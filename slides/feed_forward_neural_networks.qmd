@@ -143,6 +143,63 @@ Deep:
 
 ---
 
+## Logistic Regression vs Neural Networks {.scrollable}
+
+::: {.columns}
+:::: {.column width="50%"}
+
+### Logistic Regression
+
+$$
+P(y=1 \mid \mathbf{x}) = \sigma(\mathbf{w}^\top \mathbf{x} + b)
+$$
+
+- Linear decision boundary
+- Convex optimization
+- Interpretable coefficients
+- Strong statistical grounding
+
+**Typical finance uses**
+
+- Credit scoring
+- Default probability
+- Risk classification
+
+::::
+
+:::: {.column width="50%"}
+
+### Neural Networks (MLP)
+
+$$
+P(y=1 \mid \mathbf{x}) = \sigma\big(\mathbf{W}^{(2)} \phi(\mathbf{W}^{(1)}\mathbf{x} + \mathbf{b}^{(1)}) + \mathbf{b}^{(2)}\big)
+$$
+
+- Non-linear decision boundary
+- Non-convex optimization
+- High expressive power
+- Requires tuning & regularization
+
+**Typical finance uses**
+
+- Fraud detection
+- Complex behavioral patterns
+- High-dimensional signals
+
+::::
+:::
+
+---
+
+## Decision Boundary Intuition
+
+- Logistic regression ⇒ straight line / hyperplane
+- Neural networks ⇒ curved, flexible boundaries
+
+![Curved NN boundary](/images/logistic_regression_and_decision_boundary.png){width=70%}
+
+---
+
 ## Activation Functions
 
 Purpose:
@@ -212,6 +269,18 @@ Pros:
 $$
 \text{softmax}(\mathbf z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
 $$
+
+---
+
+## Activation Functions {.scrollable}
+
+| Function | Formula                | Typical Use           |
+| -------- | ---------------------- | --------------------- |
+| Sigmoid  | $\frac{1}{1+e^{-z}}$   | Probabilities         |
+| Tanh     | $\tanh(z)$             | Centered data         |
+| ReLU     | $\max(0,z)$            | Default hidden layers |
+| Softmax  | $\frac{e^z}{\sum e^z}$ | Multiclass            |
+
 
 # Loss Functions
 

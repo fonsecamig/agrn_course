@@ -20,13 +20,12 @@ sidebar:
 
 ### Exercises
 
-- [Exercise 1](notebooks/exerc_kfold_cv.ipynb)
-- [Exercise 2](notebooks/exerc_strat_kfold_cv.ipynb)
+- [Exercise 1](https://colab.research.google.com/github/fonsecamig/mpaaaf_course/blob/main/notebooks/exerc_kfold_cv.ipynb)
+- [Exercise 2](https://colab.research.google.com/github/fonsecamig/mpaaaf_course/blob/main/notebooks/exerc_strat_kfold_cv.ipynb)
 
 ## Feed-Forward Neural Networks
 
 - [Slides 1](slides/feed_forward_neural_networks.qmd)
-- [Slides TF2](slides/intro_tensorflow2.qmd)
 
 ### Reading
 
@@ -46,8 +45,16 @@ sidebar:
 
 ### Exercises
 
-- [Exercise 1](notebooks/exerc_tf2-intro.ipynb)
-- [Exercise 2](notebooks/exerc-mlp-mnist.ipynb)
+- [Exercise 1](https://colab.research.google.com/github/fonsecamig/mpaaaf_course/blob/main/notebooks/exerc_xor_sgd.ipynb)
+
+## TensorFlow 2
+
+- [Slides](slides/intro_tensorflow2.qmd)
+
+### Exercises
+
+- [Exercise 1](https://colab.research.google.com/github/fonsecamig/mpaaaf_course/blob/main/notebooks/exerc_tf2-intro.ipynb)
+- [Exercise 2](https://colab.research.google.com/github/fonsecamig/mpaaaf_course/blob/main/notebooks/exerc-mlp-mnist.ipynb)
 
 ## References
 
