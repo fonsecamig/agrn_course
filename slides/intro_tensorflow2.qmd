@@ -102,6 +102,12 @@ tf.matmul(x, tf.transpose(y))
 
 ## Building a Model (Sequential) {.scrollable}
 
+**Concepts:**
+
+- Layers
+- Parameters
+- Trainable weights
+
 ```{python}
 model = tf.keras.Sequential([
     tf.keras.layers.Dense(32, activation="relu"),
@@ -109,16 +115,10 @@ model = tf.keras.Sequential([
 ])
 ```
 
-Model Summary
+*Model Summary*
 ```{python}
 model.summary()
 ```
-
-**Concepts:**
-
-- Layers
-- Parameters
-- Trainable weights
 
 ## Functional API {.scrollable}
 
@@ -135,8 +135,6 @@ model = tf.keras.Model(inputs, outputs)
 
 - Multiple inputs / outputs
 - Complex architectures
-
----
 
 # Training Workflow
 
@@ -167,6 +165,12 @@ model.compile(
 
 ## Fit the Model {.scrollable}
 
+**Training concepts:**
+
+- Epoch
+- Batch
+- Validation set
+
 ```{python}
 X_train, y_train = np.random.rand(100, 10), np.random.rand(100, 1)  # Training data
 history = model.fit(
@@ -177,12 +181,6 @@ history = model.fit(
     validation_split=0.2
 )
 ```
-
-**Training concepts:**
-
-- Epoch
-- Batch
-- Validation set
 
 ---
 
