@@ -720,7 +720,7 @@ y \cdot \text{logit}(\widehat{y})
 \]</span></p>
 <p><strong>Output layer:</strong> <span class="math display">\[
 \boldsymbol \delta^{(L + 1)} =
-\nabla_{\widehat{\mathbf y}} \mathscr{L} \odot \sigma'(\mathbf z^{(L + 1)})
+\nabla_{\widehat{\mathbf y}} \mathscr{L} \cdot \sigma'(\mathbf z^{(L + 1)})
 \]</span></p>
 <p><strong>Hidden layers:</strong> <span class="math display">\[\begin{align*}
 \boldsymbol \delta^{(l)}  &amp;= \frac{\partial \mathscr{L}}{\partial \mathbf z^{(l)}} \\
