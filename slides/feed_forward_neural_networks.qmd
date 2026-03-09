@@ -543,7 +543,7 @@ $$
 **Output layer:**
 $$
 \boldsymbol \delta^{(L + 1)} =
-\nabla_{\widehat{\mathbf y}} \mathscr{L} \odot \sigma'(\mathbf z^{(L + 1)})
+\nabla_{\widehat{\mathbf y}} \mathscr{L} \cdot \sigma'(\mathbf z^{(L + 1)})
 $$
 
 **Hidden layers:**
