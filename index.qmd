@@ -49,6 +49,12 @@ sidebar:
 
 ## TensorFlow 2
 
+### Reading
+
+- [https://www.tensorflow.org/tutorials/quickstart/beginner](https://www.tensorflow.org/tutorials/quickstart/beginner)
+- [https://www.tensorflow.org/tutorials/keras/classification](https://www.tensorflow.org/tutorials/keras/classification)
+- [https://www.tensorflow.org/guide/keras](https://www.tensorflow.org/guide/keras)
+
 - [Slides](slides/intro_tensorflow2.qmd)
 
 ### Exercises
