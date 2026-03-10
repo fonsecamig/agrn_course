@@ -354,7 +354,7 @@
     "href": "index.html#tensorflow-2",
     "title": "Genetic Algorithms and Neural Networks",
     "section": "TensorFlow 2",
-    "text": "TensorFlow 2\n\nSlides\n\n\nExercises\n\nExercise 1\nExercise 2"
+    "text": "TensorFlow 2\n\nReading\n\nhttps://www.tensorflow.org/tutorials/quickstart/beginner\nhttps://www.tensorflow.org/tutorials/keras/classification\nhttps://www.tensorflow.org/guide/keras\nSlides\n\n\n\nExercises\n\nExercise 1\nExercise 2"
   },
   {
     "objectID": "index.html#references",
