@@ -1,0 +1,371 @@
+---
+title: "Hyperparameter Tuning"
+subtitle: "Finding the Best Model Configuration"
+author: "Miguel Fonseca"
+format: 
+  revealjs:
+    toc: true
+---
+
+# Hyperparameters
+
+## Motivation
+
+Machine learning models have two types of parameters:
+
+- Model parameters
+    - learned automatically
+        - *e.g.* neural network weights
+- Hyperparameters
+    - defined before training
+    - control model behaviour
+    - Examples:
+        - learning rate
+        - tree depth
+        - number of layers
+        - regularisation strength
+
+:::{.callout title="Goal"}
+Find hyperparameters that maximize generalization performance.
+:::
+
+---
+
+## Hyperparameters vs Parameters
+| Type	| Examples	| Learned? |
+|---|---|---|
+| Model parameters	| weights, biases	| Yes |
+| Hyperparameters	| learning rate, depth	| No |
+
+Hyperparameters control:
+
+- model capacity
+- training dynamics
+- regularisation strength
+
+# Underfitting vs Overfitting
+
+## The Underfitting vs Overfitting Problem
+
+:::{.callout-info title="Key idea"}
+Model complexity must match the data.
+:::
+
+**Underfitting**
+
+- high bias
+- poor performance everywhere
+
+**Overfitting**
+
+- high variance
+- poor generalization
+
+---
+
+## Train vs Validation Loss Behaviour
+
+Typical behaviour:
+
+**Good fit**
+
+- training loss ↓
+- validation loss ↓
+
+**Overfitting**
+
+- training loss ↓
+- validation loss ↑
+
+**Underfitting**
+
+- both losses high
+
+---
+
+![](/images/train_validation_loss.jpeg)
+
+
+# Tuning
+
+---
+
+## Role of Hyperparameters
+
+Hyperparameters control:
+
+**Model capacity**
+
+- number of layers
+- tree depth
+- number of neurons
+
+**Regularisation**
+
+- L1 / L2 penalty
+- dropout
+
+**Optimization**
+
+- learning rate
+- batch size
+- momentum
+
+## Data Curation and Feature Engineering
+
+>Hyperparameter tuning is not the only lever.
+
+Performance depends heavily on:
+
+- Data curation
+    - removing corrupted samples
+    - class balancing
+    - deduplication
+
+- Feature engineering
+    - normalization
+    - feature selection
+    - domain features
+
+:::{.callout-warning title="Important rule"}
+Better features often beat more complex models.
+:::
+
+---
+
+## Hyperparameter Search Space
+
+Define a search space.
+
+Example:
+$$
+\begin{eqnarray}
+\verb|learning_rate| \in [1e-5 , 1e-1] \\
+\verb|num_layers| \in {1,2,3,4} \\
+\verb|batch_size| \in {16,32,64} \\
+\verb|dropout| \in [0.0 , 0.5]
+\end{eqnarray}
+$$
+
+Choosing a good search space is critical.
+
+---
+
+## Exploration vs Exploitation
+
+Two competing goals:
+
+:::{.callout title="Exploration"}
+Search new regions.
+:::
+
+:::{.callout title="Exploitation"}
+Refine promising areas.
+:::
+
+Good optimizers balance both.
+
+# Tuning Strategies
+
+## Grid Search
+
+Evaluate all combinations.
+
+:::{.callout-tip title="Pros"}
+- simple
+:::
+
+:::{.callout-important title="Cons"}
+- expensive
+- scales poorly
+:::
+
+---
+
+## Random Search
+
+Sample randomly from distributions.
+
+:::{.callout-tip title="Pros"}
+- simple
+- explores more dimensions efficiently
+- often outperforms grid search
+:::
+
+:::{.callout-important title="Cons"}
+- expensive
+- scales poorly with dimensionality increase
+:::
+
+---
+
+## Bayesian Optimization
+
+**Strategy:**
+
+- Build surrogate model with prior for hyperparameters
+- Predict promising regions
+- Evaluate there
+- Update surrogate with new data
+
+Used by:
+
+- Optuna
+- Hyperopt
+- Bayesian optimization frameworks
+
+# Categories of Hyperparameters
+
+## Scientific hyperparameters
+
+>Model architecture.
+
+Examples:
+
+- number of layers
+- kernel size
+- tree depth
+
+---
+
+## Nuisance hyperparameters
+
+>Affect training but not model architecture.
+
+Examples:
+
+- learning rate
+- batch size
+- optimizer parameters
+
+---
+
+## Fixed hyperparameters
+
+>Chosen once and rarely tuned.
+
+Examples:
+
+- activation function
+- optimizer choice
+
+# Example
+
+## Optuna
+
+```{python}
+from sklearn.datasets import make_regression
+import optuna
+import tensorflow as tf
+from tensorflow import keras
+
+X_train, y_train = make_regression(
+    n_samples=100, n_features=5, noise=0.1
+)
+X_val, y_val = make_regression(
+    n_samples=20, n_features=5, noise=0.1
+)
+
+def objective(trial):
+
+    learning_rate = trial.suggest_float(
+        "lr", 1e-5, 1e-2, log=True
+    )
+
+    n_units = trial.suggest_int("units", 32, 128)
+
+    model = keras.Sequential([
+        keras.layers.Dense(n_units, activation="relu"),
+        keras.layers.Dense(1)
+    ])
+
+    optimizer = keras.optimizers.Adam(
+        learning_rate=learning_rate
+    )
+
+    model.compile(
+        optimizer=optimizer,
+        loss="mse"
+    )
+
+    model.fit(X_train, y_train,
+              validation_data=(X_val,y_val),
+              epochs=10,
+              verbose=0)
+
+    loss = model.evaluate(X_val, y_val)
+
+    return loss
+```
+
+---
+
+## Running Optuna
+
+```{python}
+study = optuna.create_study(
+    direction="minimize"
+)
+
+study.optimize(objective, n_trials=50)
+
+print(study.best_params)
+```
+
+---
+
+## Keras Tuner Example
+
+```{python}
+from sklearn.datasets import make_regression
+import keras_tuner as kt
+from tensorflow import keras
+
+X_train, y_train = make_regression(
+    n_samples=1000, n_features=20, noise=0.1
+)
+X_val, y_val = make_regression(
+    n_samples=200, n_features=20, noise=0.1
+)
+
+def build_model(hp):
+
+    model = keras.Sequential()
+
+    units = hp.Int("units", 32, 128, step=32)
+
+    model.add(
+        keras.layers.Dense(units, activation="relu")
+    )
+
+    model.add(
+        keras.layers.Dense(1)
+    )
+
+    lr = hp.Float("lr", 1e-5, 1e-2, sampling="log")
+
+    model.compile(
+        optimizer=keras.optimizers.Adam(lr),
+        loss="mse"
+    )
+
+    return model
+```
+
+## Running Keras Tuner
+
+```{python}
+tuner = kt.Hyperband(
+    build_model,
+    objective="val_loss",
+    max_epochs=20
+)
+
+tuner.search(
+    X_train, y_train,
+    validation_data=(X_val,y_val)
+)
+
+best_model = tuner.get_best_models(1)[0]
+```
+```

@@ -49,18 +49,38 @@ sidebar:
 
 ## TensorFlow 2
 
+- [Slides](slides/intro_tensorflow2.qmd)
+
 ### Reading
 
 - [https://www.tensorflow.org/tutorials/quickstart/beginner](https://www.tensorflow.org/tutorials/quickstart/beginner)
 - [https://www.tensorflow.org/tutorials/keras/classification](https://www.tensorflow.org/tutorials/keras/classification)
 - [https://www.tensorflow.org/guide/keras](https://www.tensorflow.org/guide/keras)
 
-- [Slides](slides/intro_tensorflow2.qmd)
 
 ### Exercises
 
 - [Exercise 1](https://colab.research.google.com/github/fonsecamig/mpaaaf_course/blob/main/notebooks/exerc_tf2-intro.ipynb)
 - [Exercise 2](https://colab.research.google.com/github/fonsecamig/mpaaaf_course/blob/main/notebooks/exerc-mlp-mnist.ipynb)
+
+## Hyperparameter Tuning & Regularisation
+
+- [Slide - Hyperparameter Tuning](slides/hyperparameter_tuning.qmd)
+- [Slide - Regularisation](slides/regularization.qmd)
+
+### Reading
+
+- Bishop, C. M., & Bishop, H. (2024). *Deep learning: Foundations and concepts.* Springer. [https://www.bishopbook.com](https://www.bishopbook.com)
+  - Chapter 9: Regularisation
+- Chollet, F. (2021). *Deep learning with Python (2nd ed.).* Manning Publications.
+  - Chapter 5: Fundamentals of machine learning
+  - Chapter 13: Best practices for the real world, Section 1.1
+- Zhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). *Dive into deep learning.* Cambridge University Press. [https://d2l.ai](https://d2l.ai)
+  - [Chapter 19: Hyperparameter Optimization](https://d2l.ai/chapter_hyperparameter-optimization/index.html)
+
+### Exercises
+
+- [Exercise 1](https://colab.research.google.com/github/fonsecamig/mpaaaf_course/blob/main/notebooks/exerc_mnist_hptuning.ipynb)
 
 ## References
 
