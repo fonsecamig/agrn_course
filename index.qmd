@@ -20,8 +20,8 @@ sidebar:
 
 ### Exercises
 
-- [Exercise 1](https://colab.research.google.com/github/fonsecamig/agnr_course/blob/main/notebooks/exerc_kfold_cv.ipynb)
-- [Exercise 2](https://colab.research.google.com/github/fonsecamig/agnr_course/blob/main/notebooks/exerc_strat_kfold_cv.ipynb)
+- [Exercise 1](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_kfold_cv.ipynb)
+- [Exercise 2](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_strat_kfold_cv.ipynb)
 
 ## Feed-Forward Neural Networks
 
@@ -45,7 +45,7 @@ sidebar:
 
 ### Exercises
 
-- [Exercise 1](https://colab.research.google.com/github/fonsecamig/agnr_course/blob/main/notebooks/exerc_xor_sgd.ipynb)
+- [Exercise 1](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_xor_sgd.ipynb)
 
 ## TensorFlow 2
 
@@ -60,8 +60,8 @@ sidebar:
 
 ### Exercises
 
-- [Exercise 1](https://colab.research.google.com/github/fonsecamig/agnr_course/blob/main/notebooks/exerc_tf2-intro.ipynb)
-- [Exercise 2](https://colab.research.google.com/github/fonsecamig/agnr_course/blob/main/notebooks/exerc_mlp_mnist.ipynb)
+- [Exercise 1](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_tf2-intro.ipynb)
+- [Exercise 2](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_mlp_mnist.ipynb)
 
 ## Hyperparameter Tuning & Regularisation
 
@@ -80,8 +80,8 @@ sidebar:
 
 ### Exercises
 
-- [Exercise 1](https://colab.research.google.com/github/fonsecamig/agnr_course/blob/main/notebooks/exerc_mnist_hptuning.ipynb)
-- [Exercise 2](https://colab.research.google.com/github/fonsecamig/agnr_course/blob/main/notebooks/exerc_california_house_price.ipynb)
+- [Exercise 1](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_mnist_hptuning.ipynb)
+- [Exercise 2](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_california_house_price.ipynb)
 
 ## References
 
