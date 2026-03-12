@@ -81,7 +81,7 @@ sidebar:
 ### Exercises
 
 - [Exercise 1](https://colab.research.google.com/github/fonsecamig/agnr_course/blob/main/notebooks/exerc_mnist_hptuning.ipynb)
-- [Exercise 2](https://colab.research.google.com/github/fonsecamig/agnr_course/blob/main/notebooks/exerc_california_house_price.ipynb )
+- [Exercise 2](https://colab.research.google.com/github/fonsecamig/agnr_course/blob/main/notebooks/exerc_california_house_price.ipynb)
 
 ## References
 
