@@ -81,7 +81,7 @@
     "href": "slides/regularization.html#batch-normalization",
     "title": "Regularisation for Neural Networks",
     "section": "Batch Normalization",
-    "text": "Batch Normalization\nFor mini-batch \\(B\\):\n\\[\n\\widehat{x} = \\frac{x - \\mu_B}{\\sqrt{\\sigma_B^2 + \\epsilon}}, \\quad\ny = \\gamma \\widehat{x} + \\beta\n\\]"
+    "text": "Batch Normalization\nFor mini-batch \\(B\\):\n\\[\n\\widehat{x} = \\frac{x - \\mu_B}{\\sqrt{\\sigma_B^2 + \\epsilon}}, \\quad\ny = \\gamma \\widehat{x} + \\beta\n\\]\n\n\\(\\mu_B\\) and \\(\\sigma_B^2\\) are batch statistics\n\\(\\gamma\\) and \\(\\beta\\) are learnable parameters"
   },
   {
     "objectID": "slides/regularization.html#why-batchnorm-works",
@@ -158,7 +158,7 @@
     "href": "slides/regularization.html#key-takeaways",
     "title": "Regularisation for Neural Networks",
     "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nRegularisation controls effective capacity\nNormalisation layers regularise implicitly\nMethods are complementary\nValidation performance is the final arbiter\n\n\nGeneralisation is engineered, not accidental."
+    "text": "Key Takeaways\n\nRegularisation controls effective capacity\nNormalisation layers regularise implicitly\nMethods are complementary\nValidation performance is the final arbiter"
   },
   {
     "objectID": "slides/intro_ml.html#what-is-machine-learning",
@@ -327,41 +327,6 @@
     "title": "Introduction to Machine Learning",
     "section": "Best Practices in CV",
     "text": "Best Practices in CV\nCross-validation is often used to:\n\nCompare models\nTune hyperparameters\n\n\n\n\n\n\n\nWarning\n\n\nCross-Validation \\(\\neq\\) Test Set\n\n\n\n\n\n\n\n\n\n\nImportant Rule\n\n\nNever touch the test set until the very end\n\n\n\n\n\nCV is for model selection\nTest set is for final evaluation"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Genetic Algorithms and Neural Networks",
-    "section": "",
-    "text": "Slides\n\n\n\n\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\n\nChapter 5: Resampling Methods\n\n\n\n\n\n\nExercise 1\nExercise 2"
-  },
-  {
-    "objectID": "index.html#introduction-to-machine-learning",
-    "href": "index.html#introduction-to-machine-learning",
-    "title": "Genetic Algorithms and Neural Networks",
-    "section": "",
-    "text": "Slides\n\n\n\n\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\n\nChapter 5: Resampling Methods\n\n\n\n\n\n\nExercise 1\nExercise 2"
-  },
-  {
-    "objectID": "index.html#feed-forward-neural-networks",
-    "href": "index.html#feed-forward-neural-networks",
-    "title": "Genetic Algorithms and Neural Networks",
-    "section": "Feed-Forward Neural Networks",
-    "text": "Feed-Forward Neural Networks\n\nSlides 1\n\n\nReading\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\n\nChapter 6: Deep Neural Networks\nChapter 7: Gradient Descent\nChapter 8: Backpropagation\n\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\n\nChapter 2: The mathematical building blocksof neural networks\nChapter 4: Getting started with neural networks: Classification and regression\n\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\n\nChapter 10: Deep Learning\n\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai\n\nChapter 3: Linear Neural Networks for Regression\nChapter 4: Linear Neural Networks for Classification\nChapter 5: Multilayer Perceptrons\n\n\n\n\nExercises\n\nExercise 1"
-  },
-  {
-    "objectID": "index.html#tensorflow-2",
-    "href": "index.html#tensorflow-2",
-    "title": "Genetic Algorithms and Neural Networks",
-    "section": "TensorFlow 2",
-    "text": "TensorFlow 2\n\nReading\n\nhttps://www.tensorflow.org/tutorials/quickstart/beginner\nhttps://www.tensorflow.org/tutorials/keras/classification\nhttps://www.tensorflow.org/guide/keras\nSlides\n\n\n\nExercises\n\nExercise 1\nExercise 2"
-  },
-  {
-    "objectID": "index.html#references",
-    "href": "index.html#references",
-    "title": "Genetic Algorithms and Neural Networks",
-    "section": "References",
-    "text": "References\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai"
   },
   {
     "objectID": "slides/feed_forward_neural_networks.html#why-neural-networks",
@@ -635,6 +600,174 @@
     "title": "Feed-Forward Neural Networks",
     "section": "Example: Finance",
     "text": "Example: Finance\nApplications:\n\nCredit scoring\nDefault probability\nAsset return prediction\n\nCaveats:\n\nOverfitting\nInterpretability\nData leakage"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Genetic Algorithms and Neural Networks",
+    "section": "",
+    "text": "Slides\n\n\n\n\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\n\nChapter 5: Resampling Methods\n\n\n\n\n\n\nExercise 1\nExercise 2"
+  },
+  {
+    "objectID": "index.html#introduction-to-machine-learning",
+    "href": "index.html#introduction-to-machine-learning",
+    "title": "Genetic Algorithms and Neural Networks",
+    "section": "",
+    "text": "Slides\n\n\n\n\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\n\nChapter 5: Resampling Methods\n\n\n\n\n\n\nExercise 1\nExercise 2"
+  },
+  {
+    "objectID": "index.html#feed-forward-neural-networks",
+    "href": "index.html#feed-forward-neural-networks",
+    "title": "Genetic Algorithms and Neural Networks",
+    "section": "Feed-Forward Neural Networks",
+    "text": "Feed-Forward Neural Networks\n\nSlides 1\n\n\nReading\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\n\nChapter 6: Deep Neural Networks\nChapter 7: Gradient Descent\nChapter 8: Backpropagation\n\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\n\nChapter 2: The mathematical building blocksof neural networks\nChapter 4: Getting started with neural networks: Classification and regression\n\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\n\nChapter 10: Deep Learning\n\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai\n\nChapter 3: Linear Neural Networks for Regression\nChapter 4: Linear Neural Networks for Classification\nChapter 5: Multilayer Perceptrons\n\n\n\n\nExercises\n\nExercise 1"
+  },
+  {
+    "objectID": "index.html#tensorflow-2",
+    "href": "index.html#tensorflow-2",
+    "title": "Genetic Algorithms and Neural Networks",
+    "section": "TensorFlow 2",
+    "text": "TensorFlow 2\n\nSlides\n\n\nReading\n\nhttps://www.tensorflow.org/tutorials/quickstart/beginner\nhttps://www.tensorflow.org/tutorials/keras/classification\nhttps://www.tensorflow.org/guide/keras\n\n\n\nExercises\n\nExercise 1\nExercise 2"
+  },
+  {
+    "objectID": "index.html#hyperparameter-tuning-regularisation",
+    "href": "index.html#hyperparameter-tuning-regularisation",
+    "title": "Genetic Algorithms and Neural Networks",
+    "section": "Hyperparameter Tuning & Regularisation",
+    "text": "Hyperparameter Tuning & Regularisation\n\nSlide - Hyperparameter Tuning\nSlide - Regularisation\n\n\nReading\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\n\nChapter 9: Regularisation\n\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\n\nChapter 5: Fundamentals of machine learning\nChapter 13: Best practices for the real world, Section 1.1\n\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai\n\nChapter 19: Hyperparameter Optimization\n\n\n\n\nExercises\n\nExercise 1"
+  },
+  {
+    "objectID": "index.html#references",
+    "href": "index.html#references",
+    "title": "Genetic Algorithms and Neural Networks",
+    "section": "References",
+    "text": "References\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#motivation",
+    "href": "slides/hyperparameter_tuning.html#motivation",
+    "title": "Hyperparameter Tuning",
+    "section": "Motivation",
+    "text": "Motivation\nMachine learning models have two types of parameters:\n\nModel parameters\n\nlearned automatically\n\ne.g. neural network weights\n\n\nHyperparameters\n\ndefined before training\ncontrol model behaviour\nExamples:\n\nlearning rate\ntree depth\nnumber of layers\nregularisation strength\n\n\n\n\n\n\n\nGoal\n\n\nFind hyperparameters that maximize generalization performance."
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#hyperparameters-vs-parameters",
+    "href": "slides/hyperparameter_tuning.html#hyperparameters-vs-parameters",
+    "title": "Hyperparameter Tuning",
+    "section": "Hyperparameters vs Parameters",
+    "text": "Hyperparameters vs Parameters\n\n\n\nType\nExamples\nLearned?\n\n\n\n\nModel parameters\nweights, biases\nYes\n\n\nHyperparameters\nlearning rate, depth\nNo\n\n\n\nHyperparameters control:\n\nmodel capacity\ntraining dynamics\nregularisation strength"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#the-underfitting-vs-overfitting-problem",
+    "href": "slides/hyperparameter_tuning.html#the-underfitting-vs-overfitting-problem",
+    "title": "Hyperparameter Tuning",
+    "section": "The Underfitting vs Overfitting Problem",
+    "text": "The Underfitting vs Overfitting Problem\n\nModel complexity must match the data.\n\nUnderfitting\n\nhigh bias\npoor performance everywhere\n\nOverfitting\n\nhigh variance\npoor generalization"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#train-vs-validation-loss-behaviour",
+    "href": "slides/hyperparameter_tuning.html#train-vs-validation-loss-behaviour",
+    "title": "Hyperparameter Tuning",
+    "section": "Train vs Validation Loss Behaviour",
+    "text": "Train vs Validation Loss Behaviour\nTypical behaviour:\nGood fit\n\ntraining loss ↓\nvalidation loss ↓\n\nOverfitting\n\ntraining loss ↓\nvalidation loss ↑\n\nUnderfitting\n\nboth losses high"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#role-of-hyperparameters",
+    "href": "slides/hyperparameter_tuning.html#role-of-hyperparameters",
+    "title": "Hyperparameter Tuning",
+    "section": "Role of Hyperparameters",
+    "text": "Role of Hyperparameters\nHyperparameters control:\nModel capacity\n\nnumber of layers\ntree depth\nnumber of neurons\n\nRegularisation\n\nL1 / L2 penalty\ndropout\n\nOptimization\n\nlearning rate\nbatch size\nmomentum"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#data-curation-and-feature-engineering",
+    "href": "slides/hyperparameter_tuning.html#data-curation-and-feature-engineering",
+    "title": "Hyperparameter Tuning",
+    "section": "Data Curation and Feature Engineering",
+    "text": "Data Curation and Feature Engineering\n\nHyperparameter tuning is not the only lever.\n\nPerformance depends heavily on:\n\nData curation\n\nremoving corrupted samples\nclass balancing\ndeduplication\n\nFeature engineering\n\nnormalization\nfeature selection\ndomain features\n\n\n\n\n\n\n\n\n\nImportant rule\n\n\nBetter features often beat more complex models."
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#hyperparameter-search-space",
+    "href": "slides/hyperparameter_tuning.html#hyperparameter-search-space",
+    "title": "Hyperparameter Tuning",
+    "section": "Hyperparameter Search Space",
+    "text": "Hyperparameter Search Space\nDefine a search space.\nExample: \\[\n\\begin{eqnarray}\n\\verb|learning_rate| \\in [1e-5 , 1e-1] \\\\\n\\verb|num_layers| \\in {1,2,3,4} \\\\\n\\verb|batch_size| \\in {16,32,64} \\\\\n\\verb|dropout| \\in [0.0 , 0.5]\n\\end{eqnarray}\n\\]\nChoosing a good search space is critical."
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#exploration-vs-exploitation",
+    "href": "slides/hyperparameter_tuning.html#exploration-vs-exploitation",
+    "title": "Hyperparameter Tuning",
+    "section": "Exploration vs Exploitation",
+    "text": "Exploration vs Exploitation\nTwo competing goals:\n\n\n\n\nExploration\n\n\nSearch new regions.\n\n\n\n\n\n\n\n\nExploitation\n\n\nRefine promising areas.\n\n\n\n\nGood optimizers balance both."
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#grid-search",
+    "href": "slides/hyperparameter_tuning.html#grid-search",
+    "title": "Hyperparameter Tuning",
+    "section": "Grid Search",
+    "text": "Grid Search\nEvaluate all combinations.\n\n\n\n\n\n\n\nPros\n\n\n\nsimple\n\n\n\n\n\n\n\n\n\n\n\n\nCons\n\n\n\nexpensive\nscales poorly"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#random-search",
+    "href": "slides/hyperparameter_tuning.html#random-search",
+    "title": "Hyperparameter Tuning",
+    "section": "Random Search",
+    "text": "Random Search\nSample randomly from distributions.\n\n\n\n\n\n\n\nPros\n\n\n\nsimple\nexplores more dimensions efficiently\noften outperforms grid search\n\n\n\n\n\n\n\n\n\n\n\n\nCons\n\n\n\nexpensive\nscales poorly with dimensionality increase"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#bayesian-optimization",
+    "href": "slides/hyperparameter_tuning.html#bayesian-optimization",
+    "title": "Hyperparameter Tuning",
+    "section": "Bayesian Optimization",
+    "text": "Bayesian Optimization\nStrategy:\n\nBuild surrogate model with prior for hyperparameters\nPredict promising regions\nEvaluate there\nUpdate surrogate with new data\n\nUsed by:\n\nOptuna\nHyperopt\nBayesian optimization frameworks"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#scientific-hyperparameters",
+    "href": "slides/hyperparameter_tuning.html#scientific-hyperparameters",
+    "title": "Hyperparameter Tuning",
+    "section": "Scientific hyperparameters",
+    "text": "Scientific hyperparameters\n\nModel architecture.\n\nExamples:\n\nnumber of layers\nkernel size\ntree depth"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#nuisance-hyperparameters",
+    "href": "slides/hyperparameter_tuning.html#nuisance-hyperparameters",
+    "title": "Hyperparameter Tuning",
+    "section": "Nuisance hyperparameters",
+    "text": "Nuisance hyperparameters\n\nAffect training but not model architecture.\n\nExamples:\n\nlearning rate\nbatch size\noptimizer parameters"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#fixed-hyperparameters",
+    "href": "slides/hyperparameter_tuning.html#fixed-hyperparameters",
+    "title": "Hyperparameter Tuning",
+    "section": "Fixed hyperparameters",
+    "text": "Fixed hyperparameters\n\nChosen once and rarely tuned.\n\nExamples:\n\nactivation function\noptimizer choice"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#optuna",
+    "href": "slides/hyperparameter_tuning.html#optuna",
+    "title": "Hyperparameter Tuning",
+    "section": "Optuna",
+    "text": "Optuna\n\nfrom sklearn.datasets import make_regression\nimport optuna\nimport tensorflow as tf\nfrom tensorflow import keras\n\nX_train, y_train = make_regression(\n    n_samples=100, n_features=5, noise=0.1\n)\nX_val, y_val = make_regression(\n    n_samples=20, n_features=5, noise=0.1\n)\n\ndef objective(trial):\n\n    learning_rate = trial.suggest_float(\n        \"lr\", 1e-5, 1e-2, log=True\n    )\n\n    n_units = trial.suggest_int(\"units\", 32, 128)\n\n    model = keras.Sequential([\n        keras.layers.Dense(n_units, activation=\"relu\"),\n        keras.layers.Dense(1)\n    ])\n\n    optimizer = keras.optimizers.Adam(\n        learning_rate=learning_rate\n    )\n\n    model.compile(\n        optimizer=optimizer,\n        loss=\"mse\"\n    )\n\n    model.fit(X_train, y_train,\n              validation_data=(X_val,y_val),\n              epochs=10,\n              verbose=0)\n\n    loss = model.evaluate(X_val, y_val)\n\n    return loss"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#running-optuna",
+    "href": "slides/hyperparameter_tuning.html#running-optuna",
+    "title": "Hyperparameter Tuning",
+    "section": "Running Optuna",
+    "text": "Running Optuna\n\nstudy = optuna.create_study(\n    direction=\"minimize\"\n)\n\nstudy.optimize(objective, n_trials=50)\n\nprint(study.best_params)\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17610.7188\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17610.7188\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 7ms/step - loss: 17526.4961\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - loss: 17526.4961\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17637.0195\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17637.0195\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17699.6074\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - loss: 17699.6074\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17656.0820\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 18ms/step - loss: 17656.0820\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 7ms/step - loss: 17685.9668\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - loss: 17685.9668\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 17658.8535\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17658.8535\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 17698.4375\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - loss: 17698.4375\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 16939.1992\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 13ms/step - loss: 16939.1992\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17707.1406\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17707.1406\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 14021.9219\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 14021.9219\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 7ms/step - loss: 14072.2344\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 13ms/step - loss: 14072.2344\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 12033.5908\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 12033.5908\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 14063.6748\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 14063.6748\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 16955.6621\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 16955.6621\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17638.4395\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17638.4395\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17008.2988\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17008.2988\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 14095.8174\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 14095.8174\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17100.4336\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - loss: 17100.4336\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17659.3477\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17659.3477\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 15922.7031\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 15922.7031\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 13446.0361\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 13446.0361\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 17218.2539\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17218.2539\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 15013.1934\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 15013.1934\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 12712.9277\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - loss: 12712.9277\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17604.3867\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17604.3867\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 16602.7891\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 16602.7891\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17479.0508\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17479.0508\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17259.6875\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17259.6875\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 13814.2969\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 13814.2969\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 16809.2598\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 16809.2598\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 14038.3965\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 14038.3965\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 13466.4082\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - loss: 13466.4082\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 15993.1582\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - loss: 15993.1582\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17265.5254\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17265.5254\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 16343.1191\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - loss: 16343.1191\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17749.0410\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17749.0410\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17546.7559\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - loss: 17546.7559\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17455.8008\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - loss: 17455.8008\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17711.8047\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17711.8047\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 17247.5781\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17247.5781\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 13473.1045\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - loss: 13473.1045\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 15614.5674\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - loss: 15614.5674\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 16362.2969\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 16362.2969\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 14203.9873\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 14203.9873\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 15493.3311\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 15493.3311\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 16341.4160\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 16341.4160\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 17644.1914\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 17644.1914\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 15685.6221\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - loss: 15685.6221\n\n\n\n\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - loss: 16902.4395\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 13ms/step - loss: 16902.4395\n\n\n\n\n{'lr': 0.009931097351671385, 'units': 127}"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#keras-tuner-example",
+    "href": "slides/hyperparameter_tuning.html#keras-tuner-example",
+    "title": "Hyperparameter Tuning",
+    "section": "Keras Tuner Example",
+    "text": "Keras Tuner Example\n\nfrom sklearn.datasets import make_regression\nimport keras_tuner as kt\nfrom tensorflow import keras\n\nX_train, y_train = make_regression(\n    n_samples=1000, n_features=20, noise=0.1\n)\nX_val, y_val = make_regression(\n    n_samples=200, n_features=20, noise=0.1\n)\n\ndef build_model(hp):\n\n    model = keras.Sequential()\n\n    units = hp.Int(\"units\", 32, 128, step=32)\n\n    model.add(\n        keras.layers.Dense(units, activation=\"relu\")\n    )\n\n    model.add(\n        keras.layers.Dense(1)\n    )\n\n    lr = hp.Float(\"lr\", 1e-5, 1e-2, sampling=\"log\")\n\n    model.compile(\n        optimizer=keras.optimizers.Adam(lr),\n        loss=\"mse\"\n    )\n\n    return model"
+  },
+  {
+    "objectID": "slides/hyperparameter_tuning.html#running-keras-tuner",
+    "href": "slides/hyperparameter_tuning.html#running-keras-tuner",
+    "title": "Hyperparameter Tuning",
+    "section": "Running Keras Tuner",
+    "text": "Running Keras Tuner\n\ntuner = kt.Hyperband(\n    build_model,\n    objective=\"val_loss\",\n    max_epochs=20\n)\n\ntuner.search(\n    X_train, y_train,\n    validation_data=(X_val,y_val)\n)\n\nbest_model = tuner.get_best_models(1)[0]\n\nReloading Tuner from ./untitled_project/tuner0.json\n\n\n```"
   },
   {
     "objectID": "slides/intro_tensorflow2.html#what-is-tensorflow",
