@@ -65,8 +65,8 @@ sidebar:
 
 ## Hyperparameter Tuning & Regularisation
 
-- [Slide - Hyperparameter Tuning](slides/hyperparameter_tuning.qmd)
-- [Slide - Regularisation](slides/regularization.qmd)
+- [Slides - Hyperparameter Tuning](slides/hyperparameter_tuning.qmd)
+- [Slides - Regularisation](slides/regularization.qmd)
 
 ### Reading
 
