@@ -123,6 +123,9 @@ $$
 - Approximate ensemble learning
 - Strong regularisation effect
 
+:::{-::: {.callout-warning}
+Not to be used on inference time!
+:::}
 ---
 
 ## Dropout: Practical Notes

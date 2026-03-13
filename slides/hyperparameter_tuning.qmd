@@ -43,6 +43,95 @@ Hyperparameters control:
 - training dynamics
 - regularisation strength
 
+# Categories of Hyperparameters
+
+## Scientific hyperparameters
+
+>Model architecture.
+
+Examples:
+
+- number of layers
+- kernel size
+- tree depth
+
+---
+
+## Nuisance hyperparameters
+
+>Affect training but not model architecture.
+
+Examples:
+
+- learning rate
+- batch size
+- optimizer parameters
+
+---
+
+## Fixed hyperparameters
+
+>Chosen once and rarely tuned.
+
+Examples:
+
+- activation function
+- optimizer choice
+
+---
+
+## Genetic Algorithms for Hyperparameter Optimization
+
+### Idea
+
+Treat each **hyperparameter configuration** as an individual in a population.
+
+Example genome:
+
+$$
+\theta = (learning\ rate,\ batch\ size,\ dropout,\ layers)
+$$
+
+Each individual is evaluated by training the model and measuring **validation performance**.
+
+:::{.fragment}
+### Evolutionary Process
+
+1. **Initialize population** with random hyperparameters
+2. **Evaluate fitness**
+
+$$
+fitness = - \text{validation loss}
+$$
+
+3. **Selection**
+
+Choose best-performing individuals
+
+4. **Crossover**
+
+Combine hyperparameters from two parents
+
+5. **Mutation**
+
+Randomly change some hyperparameters
+
+6. Repeat for multiple generations
+:::
+
+:::{.fragment}
+### Advantages
+
+✔ Works with **non-differentiable objectives**  
+✔ Naturally handles **mixed hyperparameters**  
+✔ Global search
+:::
+
+### Limitations
+
+✖ Computationally expensive  
+✖ Slower convergence than Bayesian optimisation
+
 # Underfitting vs Overfitting
 
 ## The Underfitting vs Overfitting Problem
@@ -87,8 +176,6 @@ Typical behaviour:
 
 
 # Tuning
-
----
 
 ## Role of Hyperparameters
 
@@ -199,55 +286,178 @@ Sample randomly from distributions.
 
 ---
 
-## Bayesian Optimization
+## Bayesian Hyperparameter Optimization
 
-**Strategy:**
+### Problem
 
-- Build surrogate model with prior for hyperparameters
-- Predict promising regions
-- Evaluate there
-- Update surrogate with new data
+Training a model with hyperparameters:
 
-Used by:
+$$
+\theta^* = \arg\min_{\theta} f(\theta)
+$$
 
-- Optuna
-- Hyperopt
-- Bayesian optimization frameworks
+where  
 
-# Categories of Hyperparameters
+- $\theta$ - hyperparameters  
+- $f(\theta)$ - validation loss after training  
 
-## Scientific hyperparameters
+Training the model is **expensive**, so we want to evaluate **as few configurations as possible**.
 
->Model architecture.
+:::{.fragment}
+### Key Idea
 
-Examples:
+Instead of blind search, we **build a probabilistic model of the objective function**.
 
-- number of layers
-- kernel size
-- tree depth
+Typical surrogate models:
+
+- Gaussian Processes
+- Tree Parzen Estimators (Optuna)
+- Random Forest Surrogates
+:::
+
+:::{.fragment}
+### Intuition
+
+1. Train model with hyperparameters \( \theta_1 \)
+2. Observe validation loss
+3. Update surrogate model
+4. Choose **next hyperparameters intelligently**
+:::
 
 ---
 
-## Nuisance hyperparameters
+## Bayesian Optimization Workflow
 
->Affect training but not model architecture.
+### Algorithm
 
-Examples:
+1. Sample a few hyperparameters randomly
+2. Fit a **surrogate model**
 
-- learning rate
-- batch size
-- optimizer parameters
+$$
+\hat{f}(\theta)
+$$
+
+3. Use an **acquisition function** to choose next hyperparameters
+
+Common acquisition functions:
+
+- Expected Improvement (EI)
+- Probability of Improvement
+- Upper Confidence Bound
+
+::: {.fragment}
+### Exploration vs Exploitation
+
+The acquisition function balances:
+
+| Exploration | Exploitation |
+|---|---|
+| Try uncertain regions | Try promising regions |
+| Learn about space | Improve best result |
+:::
+
+:::{.fragment}
+### Result
+
+Bayesian optimisation finds **good hyperparameters with far fewer trials** than:
+
+- Grid search
+- Random search
+:::
 
 ---
 
-## Fixed hyperparameters
+## Visual Intuition of Bayesian Optimization
 
->Chosen once and rarely tuned.
+![](https://upload.wikimedia.org/wikipedia/commons/3/35/Bayesian_optimization.svg){width=70%}
 
-Examples:
+### Surrogate Model
 
-- activation function
-- optimizer choice
+The expensive objective function \(f(\theta)\) is approximated by a probabilistic model:
+
+$$
+\hat{f}(\theta)
+$$
+
+Typically a **Gaussian Process**.
+
+The model provides:
+
+- predicted mean
+- uncertainty estimate
+
+:::{.fragment}
+
+### Acquisition Function
+
+The acquisition function selects the **next hyperparameter configuration**.
+
+Example: **Expected Improvement**
+
+$$
+EI(\theta) = \mathbb{E}[\max(f_{best} - f(\theta),0)]
+$$
+:::
+
+:::{.fragment}
+### Key Insight
+
+The next evaluation is chosen where we expect **maximum improvement**, balancing:
+
+- promising regions  
+- uncertain regions
+:::
+
+---
+
+## Hyperband Algorithm for Hyperparameter Optimization
+
+### Motivation
+
+Training models with many hyperparameter configurations is **expensive**.
+
+Instead of fully training every configuration, Hyperband:
+
+> Quickly eliminates poor configurations and allocates resources to promising ones.
+
+:::{.fragment}
+### Core Idea
+
+Hyperband uses **successive halving**.
+
+1. Start with **many hyperparameter configurations**
+2. Train each for a **small number of epochs**
+3. Keep the **best fraction**
+4. Increase training budget for survivors
+5. Repeat until one configuration remains
+:::
+
+### Example
+
+| Round | Configurations | Training Epochs |
+|------|------|------|
+| 1 | 81 | 1 |
+| 2 | 27 | 3 |
+| 3 | 9 | 9 |
+| 4 | 3 | 27 |
+| 5 | 1 | 81 |
+
+Poor models are discarded early.
+
+:::{.fragment}
+### Advantages
+
+✔ Very efficient use of computation  
+✔ Works well for deep learning  
+✔ Parallelizable  
+
+### Used in
+
+- **Keras Tuner**
+- **Ray Tune**
+- **Google Vizier**
+
+---
 
 # Example
 
