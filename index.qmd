@@ -77,7 +77,7 @@ sidebar:
   - Chapter 13: Best practices for the real world, Section 1.1
 - Zhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). *Dive into deep learning.* Cambridge University Press. [https://d2l.ai](https://d2l.ai)
   - [Chapter 19: Hyperparameter Optimization](https://d2l.ai/chapter_hyperparameter-optimization/index.html)
-
+- [Deep Learning Tuning Playbook](https://github.com/google-research/tuning_playbook)
 ### Exercises
 
 - [Exercise 1](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_mnist_hptuning.ipynb)
