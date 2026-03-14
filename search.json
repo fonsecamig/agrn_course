@@ -669,7 +669,7 @@
     "href": "index.html#hyperparameter-tuning-regularisation",
     "title": "Genetic Algorithms and Neural Networks",
     "section": "Hyperparameter Tuning & Regularisation",
-    "text": "Hyperparameter Tuning & Regularisation\n\nSlides - Hyperparameter Tuning\nSlides - Regularisation\n\n\nReading\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\n\nChapter 9: Regularisation\n\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\n\nChapter 5: Fundamentals of machine learning\nChapter 13: Best practices for the real world, Section 1.1\n\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai\n\nChapter 19: Hyperparameter Optimization\n\nDeep Learning Tuning Playbook ### Exercises\nExercise 1\nExercise 2"
+    "text": "Hyperparameter Tuning & Regularisation\n\nSlides - Hyperparameter Tuning\nSlides - Regularisation\n\n\nReading\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\n\nChapter 9: Regularisation\n\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\n\nChapter 5: Fundamentals of machine learning\nChapter 13: Best practices for the real world, Section 1.1\n\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai\n\nChapter 19: Hyperparameter Optimization\n\nDeep Learning Tuning Playbook\n\n\n\nExercises\n\nExercise 1\nExercise 2"
   },
   {
     "objectID": "index.html#references",
