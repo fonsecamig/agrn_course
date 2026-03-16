@@ -6,7 +6,7 @@
   </url>
   <url>
     <loc>https://fonsecamig.github.io/agrn_course/slides/intro_ml.html</loc>
-    <lastmod>2026-02-25T16:34:29.755Z</lastmod>
+    <lastmod>2026-03-15T16:26:29.970Z</lastmod>
   </url>
   <url>
     <loc>https://fonsecamig.github.io/agrn_course/slides/feed_forward_neural_networks.html</loc>
@@ -14,7 +14,11 @@
   </url>
   <url>
     <loc>https://fonsecamig.github.io/agrn_course/index.html</loc>
-    <lastmod>2026-03-14T17:00:04.961Z</lastmod>
+    <lastmod>2026-03-16T17:52:32.602Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/cnn.html</loc>
+    <lastmod>2026-03-15T16:31:53.005Z</lastmod>
   </url>
   <url>
     <loc>https://fonsecamig.github.io/agrn_course/slides/hyperparameter_tuning.html</loc>

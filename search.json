@@ -662,7 +662,7 @@
     "href": "index.html#tensorflow-2",
     "title": "Genetic Algorithms and Neural Networks",
     "section": "TensorFlow 2",
-    "text": "TensorFlow 2\n\nSlides\n\n\nReading\n\nhttps://www.tensorflow.org/tutorials/quickstart/beginner\nhttps://www.tensorflow.org/tutorials/keras/classification\nhttps://www.tensorflow.org/guide/keras\n\n\n\nExercises\n\nExercise 1\nExercise 2"
+    "text": "TensorFlow 2\n\nSlides\n\n\nReading\n\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\n\nChapter 3: Introduction to Keras and TensorFlow\n\nhttps://www.tensorflow.org/tutorials/quickstart/beginner\nhttps://www.tensorflow.org/tutorials/keras/classification\nhttps://www.tensorflow.org/guide/keras\n\n\n\nExercises\n\nExercise 1\nExercise 2"
   },
   {
     "objectID": "index.html#hyperparameter-tuning-regularisation",
@@ -677,6 +677,202 @@
     "title": "Genetic Algorithms and Neural Networks",
     "section": "References",
     "text": "References\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\nJames, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An introduction to statistical learning: With applications in Python. Springer. https://www.statlearning.com\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai"
+  },
+  {
+    "objectID": "slides/cnn.html#why-not-fully-connected-networks-for-images",
+    "href": "slides/cnn.html#why-not-fully-connected-networks-for-images",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Why not Fully Connected Networks for Images?",
+    "text": "Why not Fully Connected Networks for Images?\n\nImages: 224×224×3 → 150,528 features\nDense layer with 1,000 neurons:\n\n\\[\n150,528 \\times 1000 = 150M \\text{ parameters}\n\\]\nProblems:\n\nToo many parameters\nNo spatial structure\nNo translation invariance"
+  },
+  {
+    "objectID": "slides/cnn.html#key-ideas-behind-cnns",
+    "href": "slides/cnn.html#key-ideas-behind-cnns",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Key Ideas Behind CNNs",
+    "text": "Key Ideas Behind CNNs\n\nLocal connectivity\nEarliest layers of the network focus on local regions.\nTranslation equivariance\nThe network should respond similarly to the same patch, regardless of where it appears in the image (translation invariance).\nHierarchical feature learning Deeper layers should be able to capture longer-range features of the image"
+  },
+  {
+    "objectID": "slides/cnn.html#continuous-convolution",
+    "href": "slides/cnn.html#continuous-convolution",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Continuous Convolution",
+    "text": "Continuous Convolution\n\\[\n(f * g)(t) = \\int_{-\\infty}^{\\infty} f(\\tau) g(t - \\tau) d\\tau\n\\]\nInterpretation:\n\nFlip one function\nSlide it\nCompute overlap (inner product)"
+  },
+  {
+    "objectID": "slides/cnn.html#discrete-convolution-1d",
+    "href": "slides/cnn.html#discrete-convolution-1d",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Discrete Convolution (1D)",
+    "text": "Discrete Convolution (1D)\n\\[\n(y * k)[n] = \\sum_{m=-\\infty}^{\\infty} y[m] \\cdot k[n - m]\n\\]\nIn practice (finite signals):\n\\[\nz[i] = \\sum_{j=0}^{K-1} x[i-j] \\cdot w[j]\n\\]"
+  },
+  {
+    "objectID": "slides/cnn.html#convolution-as-sliding-dot-product",
+    "href": "slides/cnn.html#convolution-as-sliding-dot-product",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Convolution as Sliding Dot Product",
+    "text": "Convolution as Sliding Dot Product\n\nKernel (filter) = small learnable weight matrix\n\nSlide across input\nCompute dot product\n\n\nThis is:\n\nA linear operator\nWith shared weights"
+  },
+  {
+    "objectID": "slides/cnn.html#convolution-vs-cross-correlation",
+    "href": "slides/cnn.html#convolution-vs-cross-correlation",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Convolution vs Cross-Correlation",
+    "text": "Convolution vs Cross-Correlation\nDeep learning frameworks usually compute:\n\\[\nz[i] = \\sum_{j=0}^{K-1} x[i+j] w[j]\n\\]\n(No flipping.)"
+  },
+  {
+    "objectID": "slides/cnn.html#when-do-we-use-them",
+    "href": "slides/cnn.html#when-do-we-use-them",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "When do we use them?",
+    "text": "When do we use them?\n\nTime series\nAudio\nFinancial data\nGenomics sequences"
+  },
+  {
+    "objectID": "slides/cnn.html#d-convolution-example",
+    "href": "slides/cnn.html#d-convolution-example",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "1D Convolution Example",
+    "text": "1D Convolution Example\nInput:\n\\[\nx = [1, 2, 3, 4, 5]\n\\]\nKernel: \\[\nw = [1, 0, -1]\n\\]\nOutput (stride 1):\n\\[\nz[0] = 1*1 + 2*0 + 3*(-1)\n\\]"
+  },
+  {
+    "objectID": "slides/cnn.html#d-convolution-in-tensorflow",
+    "href": "slides/cnn.html#d-convolution-in-tensorflow",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "1D Convolution in TensorFlow",
+    "text": "1D Convolution in TensorFlow\n\nimport tensorflow as tf\n\nmodel = tf.keras.Sequential([\n    tf.keras.layers.Conv1D(\n        filters=32,\n        kernel_size=3,\n        activation='relu',\n        input_shape=(100, 1)\n    )\n])"
+  },
+  {
+    "objectID": "slides/cnn.html#d-convolutions-2",
+    "href": "slides/cnn.html#d-convolutions-2",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "2D Convolutions",
+    "text": "2D Convolutions\nUsed for:\n\nImages\nVideo frames\nSpatial data"
+  },
+  {
+    "objectID": "slides/cnn.html#d-convolution-formula",
+    "href": "slides/cnn.html#d-convolution-formula",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "2D Convolution Formula",
+    "text": "2D Convolution Formula\n\\[\nZ(i,j) = \\sum_m \\sum_n X(i+m, j+n) W(m,n)\n\\]\nKernel is now a matrix."
+  },
+  {
+    "objectID": "slides/cnn.html#convolution-over-rgb-images",
+    "href": "slides/cnn.html#convolution-over-rgb-images",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Convolution Over RGB Images",
+    "text": "Convolution Over RGB Images\nInput shape:\n\\[\nH \\times W \\times C\n\\]\nKernel shape:\n\\[\nk \\times k \\times C\n\\]\nEach filter spans all channels."
+  },
+  {
+    "objectID": "slides/cnn.html#multiple-filters",
+    "href": "slides/cnn.html#multiple-filters",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Multiple Filters",
+    "text": "Multiple Filters\nIf we use 64 filters:\nOutput depth:\n\\[\nH' \\times W' \\times 64\n\\]\nEach filter learns a feature:\n\nedges\ntextures\nshapes"
+  },
+  {
+    "objectID": "slides/cnn.html#d-convolution-in-tensorflow-1",
+    "href": "slides/cnn.html#d-convolution-in-tensorflow-1",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "2D Convolution in TensorFlow",
+    "text": "2D Convolution in TensorFlow\n\nmodel = tf.keras.Sequential([\n    tf.keras.layers.Conv2D(\n        filters=32,\n        kernel_size=(3,3),\n        activation='relu',\n        input_shape=(28, 28, 1)\n    )\n])"
+  },
+  {
+    "objectID": "slides/cnn.html#why-padding",
+    "href": "slides/cnn.html#why-padding",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Why padding?",
+    "text": "Why padding?\nWithout padding:\n\nSpatial dimensions shrink\n\nWith kernel size 3:\n\\[H_{out} = h - 2\\]"
+  },
+  {
+    "objectID": "slides/cnn.html#types-of-padding",
+    "href": "slides/cnn.html#types-of-padding",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Types of Padding",
+    "text": "Types of Padding\nValid Padding\n\nNo padding\nOutput shrinks\n\nSame Padding\n\nZero-padding\nOutput size preserved"
+  },
+  {
+    "objectID": "slides/cnn.html#output-size-formula",
+    "href": "slides/cnn.html#output-size-formula",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Output Size Formula",
+    "text": "Output Size Formula\n\\[\nH_{out} = \\frac{H + 2P - K}{S} + 1\n\\]\nWhere:\n\n\\(P\\): padding\n\\(K\\): kernel size\n\\(S\\): stride"
+  },
+  {
+    "objectID": "slides/cnn.html#why-pooling",
+    "href": "slides/cnn.html#why-pooling",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Why Pooling?",
+    "text": "Why Pooling?\n\nDownsample feature maps\nReduce parameters\nIncrease receptive field\nAdd translation invariance"
+  },
+  {
+    "objectID": "slides/cnn.html#types-of-pooling",
+    "href": "slides/cnn.html#types-of-pooling",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Types of Pooling",
+    "text": "Types of Pooling\nMax Pooling\n\\[Z = \\max(x_{window})\\]\nKeeps strongest activation.\nAverage Pooling\n\\[Z = \\text{mean}(x_{window})\\]\nSmoother representation."
+  },
+  {
+    "objectID": "slides/cnn.html#pooling-in-tensorflow",
+    "href": "slides/cnn.html#pooling-in-tensorflow",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Pooling in TensorFlow",
+    "text": "Pooling in TensorFlow\n\ntf.keras.layers.MaxPooling2D(pool_size=(2,2))\n\n&lt;MaxPooling2D name=max_pooling2d_4, built=True&gt;"
+  },
+  {
+    "objectID": "slides/cnn.html#cnn-architecture-pattern",
+    "href": "slides/cnn.html#cnn-architecture-pattern",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "CNN Architecture Pattern",
+    "text": "CNN Architecture Pattern\nTypical CNN:\nConv → ReLU → Conv → ReLU → Pool\nConv → ReLU → Conv → ReLU → Pool\nFlatten → Dense → Output\nExample CNN (MNIST)\n\nmodel = tf.keras.Sequential([\n    tf.keras.layers.Conv2D(32, 3, activation='relu', padding='same'),\n    tf.keras.layers.MaxPooling2D(2),\n    tf.keras.layers.Conv2D(64, 3, activation='relu', padding='same'),\n    tf.keras.layers.MaxPooling2D(2),\n    tf.keras.layers.Flatten(),\n    tf.keras.layers.Dense(128, activation='relu'),\n    tf.keras.layers.Dense(10, activation='softmax')\n])"
+  },
+  {
+    "objectID": "slides/cnn.html#receptive-field",
+    "href": "slides/cnn.html#receptive-field",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Receptive Field",
+    "text": "Receptive Field\nThe receptive field grows with depth.\nDeeper neurons:\n\n“see” larger parts of image\nlearn abstract features"
+  },
+  {
+    "objectID": "slides/cnn.html#vanishing-gradient-problem",
+    "href": "slides/cnn.html#vanishing-gradient-problem",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Vanishing Gradient Problem",
+    "text": "Vanishing Gradient Problem\nDeep CNNs suffer from:\n\nGradient decay\nHard optimization\nSolution: Residual Connections"
+  },
+  {
+    "objectID": "slides/cnn.html#residual-connections",
+    "href": "slides/cnn.html#residual-connections",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Residual Connections",
+    "text": "Residual Connections\nIntroduced in:\n\nResNet (2015) [REF AQUI]\n\nInstead of learning:\n\\[HD(x)\\]\nLearn:\n\\[\nF(x) = H(x) - x\n\\]\nSo:\n\\[\nH(x) = F(x) + x\n\\]"
+  },
+  {
+    "objectID": "slides/cnn.html#residual-block",
+    "href": "slides/cnn.html#residual-block",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Residual Block",
+    "text": "Residual Block\nOutput:\n\\[y = F(x) + x\\]\nThis is called a skip connection."
+  },
+  {
+    "objectID": "slides/cnn.html#why-residuals-help",
+    "href": "slides/cnn.html#why-residuals-help",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Why Residuals Help",
+    "text": "Why Residuals Help\n\nEasier optimization\nIdentity mapping available\nPrevents degradation\nEnables 100+ layer networks"
+  },
+  {
+    "objectID": "slides/cnn.html#residual-block-in-tensorflow",
+    "href": "slides/cnn.html#residual-block-in-tensorflow",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Residual Block in TensorFlow",
+    "text": "Residual Block in TensorFlow\n\nfrom tensorflow.keras import layers\n\ndef residual_block(x, filters):\n    shortcut = x\n    \n    x = layers.Conv2D(filters, 3, padding='same', activation='relu')(x)\n    x = layers.Conv2D(filters, 3, padding='same')(x)\n    \n    x = layers.Add()([x, shortcut])\n    x = layers.Activation('relu')(x)\n    \n    return x"
+  },
+  {
+    "objectID": "slides/cnn.html#full-cnn-with-residuals",
+    "href": "slides/cnn.html#full-cnn-with-residuals",
+    "title": "Convolutional Neural Networks (CNN)",
+    "section": "Full CNN with Residuals",
+    "text": "Full CNN with Residuals\n\ninputs = tf.keras.Input(shape=(32,32,3))\nx = tf.keras.layers.Conv2D(32, 3, padding='same')(inputs)\n\nx = residual_block(x, 32)\nx = tf.keras.layers.MaxPooling2D()(x)\n\nx = residual_block(x, 32)\nx = tf.keras.layers.GlobalAveragePooling2D()(x)\n\noutputs = tf.keras.layers.Dense(10, activation='softmax')(x)\n\nmodel = tf.keras.Model(inputs, outputs)"
   },
   {
     "objectID": "slides/hyperparameter_tuning.html#motivation",
