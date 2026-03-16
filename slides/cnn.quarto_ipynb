@@ -140,7 +140,7 @@
         "\n",
         "## 1D Convolution in TensorFlow"
       ],
-      "id": "258886c0"
+      "id": "3d93fa4c"
     },
     {
       "cell_type": "code",
@@ -157,7 +157,7 @@
         "    )\n",
         "])"
       ],
-      "id": "cc6284a1",
+      "id": "941063a8",
       "execution_count": null,
       "outputs": []
     },
@@ -233,7 +233,7 @@
         "\n",
         "## 2D Convolution in TensorFlow"
       ],
-      "id": "1b8a0ecc"
+      "id": "e822bc28"
     },
     {
       "cell_type": "code",
@@ -248,7 +248,7 @@
         "    )\n",
         "])"
       ],
-      "id": "f4ebcec9",
+      "id": "296e9f51",
       "execution_count": null,
       "outputs": []
     },
@@ -329,7 +329,7 @@
         "\n",
         "## Pooling in TensorFlow"
       ],
-      "id": "18ac35b4"
+      "id": "1c18a2a2"
     },
     {
       "cell_type": "code",
@@ -337,7 +337,7 @@
       "source": [
         "tf.keras.layers.MaxPooling2D(pool_size=(2,2))"
       ],
-      "id": "a0f6e14d",
+      "id": "f4671c91",
       "execution_count": null,
       "outputs": []
     },
@@ -359,7 +359,7 @@
         "\n",
         "### Example CNN (MNIST)"
       ],
-      "id": "47ec970e"
+      "id": "0359e2a6"
     },
     {
       "cell_type": "code",
@@ -375,7 +375,7 @@
         "    tf.keras.layers.Dense(10, activation='softmax')\n",
         "])"
       ],
-      "id": "e04cda70",
+      "id": "51e870fc",
       "execution_count": null,
       "outputs": []
     },
@@ -449,7 +449,7 @@
         "\n",
         "## Residual Block in TensorFlow"
       ],
-      "id": "f2bb83b9"
+      "id": "921cf88d"
     },
     {
       "cell_type": "code",
@@ -468,7 +468,7 @@
         "    \n",
         "    return x"
       ],
-      "id": "5d0acee5",
+      "id": "045a7d44",
       "execution_count": null,
       "outputs": []
     },
@@ -480,7 +480,7 @@
         "\n",
         "## Full CNN with Residuals"
       ],
-      "id": "e527962f"
+      "id": "19840ae2"
     },
     {
       "cell_type": "code",
@@ -499,7 +499,7 @@
         "\n",
         "model = tf.keras.Model(inputs, outputs)"
       ],
-      "id": "46f26cc2",
+      "id": "05051bb1",
       "execution_count": null,
       "outputs": []
     }

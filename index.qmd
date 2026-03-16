@@ -55,6 +55,7 @@ sidebar:
 
 - Chollet, F. (2021). *Deep learning with Python (2nd ed.).* Manning Publications.
   - Chapter 3: Introduction to Keras and TensorFlow
+  - Chapter 7: Working with Keras: A deep dive
 - [https://www.tensorflow.org/tutorials/quickstart/beginner](https://www.tensorflow.org/tutorials/quickstart/beginner)
 - [https://www.tensorflow.org/tutorials/keras/classification](https://www.tensorflow.org/tutorials/keras/classification)
 - [https://www.tensorflow.org/guide/keras](https://www.tensorflow.org/guide/keras)
