@@ -469,7 +469,7 @@
         "\n",
         "## Optuna"
       ],
-      "id": "e6073b4e"
+      "id": "154d3460"
     },
     {
       "cell_type": "code",
@@ -518,7 +518,7 @@
         "\n",
         "    return loss"
       ],
-      "id": "2dea2209",
+      "id": "7538942f",
       "execution_count": null,
       "outputs": []
     },
@@ -530,7 +530,7 @@
         "\n",
         "## Running Optuna"
       ],
-      "id": "48eda23d"
+      "id": "8fdb780d"
     },
     {
       "cell_type": "code",
@@ -544,7 +544,7 @@
         "\n",
         "print(study.best_params)"
       ],
-      "id": "90f3dfa3",
+      "id": "fed7b31f",
       "execution_count": null,
       "outputs": []
     },
@@ -556,7 +556,7 @@
         "\n",
         "## Keras Tuner Example"
       ],
-      "id": "e9b7442e"
+      "id": "856d3d16"
     },
     {
       "cell_type": "code",
@@ -596,7 +596,7 @@
         "\n",
         "    return model"
       ],
-      "id": "c5e82879",
+      "id": "4e23fbee",
       "execution_count": null,
       "outputs": []
     },
@@ -606,7 +606,7 @@
       "source": [
         "## Running Keras Tuner"
       ],
-      "id": "ea954ef6"
+      "id": "d58310c0"
     },
     {
       "cell_type": "code",
@@ -625,7 +625,7 @@
         "\n",
         "best_model = tuner.get_best_models(1)[0]"
       ],
-      "id": "66e4e9b3",
+      "id": "8ec5cfbb",
       "execution_count": null,
       "outputs": []
     },
@@ -635,7 +635,7 @@
       "source": [
         "```"
       ],
-      "id": "e4846f58"
+      "id": "ecee0f8f"
     }
   ],
   "metadata": {

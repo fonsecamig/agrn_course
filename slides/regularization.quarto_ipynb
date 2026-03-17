@@ -102,7 +102,7 @@
         "\n",
         "## Tensorflow Implementation"
       ],
-      "id": "b1a5abc8"
+      "id": "5855fb10"
     },
     {
       "cell_type": "code",
@@ -135,7 +135,7 @@
         "    loss=\"mse\"\n",
         ")"
       ],
-      "id": "737c604e",
+      "id": "5cfc2024",
       "execution_count": null,
       "outputs": []
     },
@@ -187,7 +187,7 @@
         "\n",
         "### Tensorflow Implementation"
       ],
-      "id": "7ee06f80"
+      "id": "2b1e206c"
     },
     {
       "cell_type": "code",
@@ -208,7 +208,7 @@
         "    loss=\"mse\"\n",
         ")"
       ],
-      "id": "21ad92d4",
+      "id": "8ef3b630",
       "execution_count": null,
       "outputs": []
     },
@@ -282,7 +282,7 @@
         "\n",
         "## BatchNorm - TensorFlow Implementation"
       ],
-      "id": "206e8fe3"
+      "id": "f2722ce4"
     },
     {
       "cell_type": "code",
@@ -300,7 +300,7 @@
         "    layers.Dense(1)\n",
         "])"
       ],
-      "id": "9c15d96b",
+      "id": "d13902e7",
       "execution_count": null,
       "outputs": []
     },
@@ -333,7 +333,7 @@
         "\n",
         "## LayerNorm - TensorFlow Implementation"
       ],
-      "id": "1b1da1d9"
+      "id": "f1889b93"
     },
     {
       "cell_type": "code",
@@ -351,7 +351,7 @@
         "    layers.Dense(1)\n",
         "])"
       ],
-      "id": "5bf33441",
+      "id": "6c4821af",
       "execution_count": null,
       "outputs": []
     },
@@ -393,8 +393,14 @@
         "\n",
         "- Equivalent to L2 in linear models\n",
         "\n",
-        "---\n",
-        "\n",
+        "---"
+      ],
+      "id": "63b81736"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
         "import numpy as np\n",
         "from sklearn.model_selection import train_test_split\n",
         "\n",
@@ -425,10 +431,16 @@
         "    monitor=\"val_loss\",\n",
         "    patience=10,\n",
         "    restore_best_weights=True\n",
-        ")\n",
-        "````\n",
-        "\n",
-        "\n",
+        ")"
+      ],
+      "id": "64f14178",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
         "# Practical guidelines\n",
         "\n",
         "## Regularisation Strategy\n",
@@ -461,7 +473,7 @@
         "\n",
         "<!-- > Generalisation is engineered, not accidental. -->"
       ],
-      "id": "80095c23"
+      "id": "b88d0fdc"
     }
   ],
   "metadata": {
