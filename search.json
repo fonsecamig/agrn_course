@@ -658,6 +658,13 @@
     "text": "Hyperparameter Tuning & Regularisation\n\nSlides - Hyperparameter Tuning\nSlides - Regularisation\n\n\nReading\n\nBishop, C. M., & Bishop, H. (2024). Deep learning: Foundations and concepts. Springer. https://www.bishopbook.com\n\nChapter 9: Regularisation\n\nChollet, F. (2021). Deep learning with Python (2nd ed.). Manning Publications.\n\nChapter 5: Fundamentals of machine learning\nChapter 13: Best practices for the real world, Section 1.1\n\nZhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). Dive into deep learning. Cambridge University Press. https://d2l.ai\n\nChapter 19: Hyperparameter Optimization\n\nDeep Learning Tuning Playbook\n\n\n\nExercises\n\nExercise 1\nExercise 2"
   },
   {
+    "objectID": "index.html#convolutional-neural-networks",
+    "href": "index.html#convolutional-neural-networks",
+    "title": "Genetic Algorithms and Neural Networks",
+    "section": "Convolutional Neural Networks",
+    "text": "Convolutional Neural Networks\n\nSlides\n\n\nExercises\n\nExercise 1"
+  },
+  {
     "objectID": "index.html#references",
     "href": "index.html#references",
     "title": "Genetic Algorithms and Neural Networks",
@@ -802,7 +809,7 @@
     "href": "slides/cnn.html#pooling-in-tensorflow",
     "title": "Convolutional Neural Networks (CNN)",
     "section": "Pooling in TensorFlow",
-    "text": "Pooling in TensorFlow\n\ntf.keras.layers.MaxPooling2D(pool_size=(2,2))\n\n&lt;MaxPooling2D name=max_pooling2d_4, built=True&gt;"
+    "text": "Pooling in TensorFlow\n\ntf.keras.layers.MaxPooling2D(pool_size=(2,2))\n\n&lt;MaxPooling2D name=max_pooling2d, built=True&gt;"
   },
   {
     "objectID": "slides/cnn.html#cnn-architecture-pattern",
