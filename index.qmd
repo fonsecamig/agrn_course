@@ -71,6 +71,7 @@ sidebar:
 - [Slides - Hyperparameter Tuning](slides/hyperparameter_tuning.qmd)
 - [Slides - Regularisation](slides/regularization.qmd)
 
+
 ### Reading
 
 - Bishop, C. M., & Bishop, H. (2024). *Deep learning: Foundations and concepts.* Springer. [https://www.bishopbook.com](https://www.bishopbook.com)
@@ -86,6 +87,14 @@ sidebar:
 
 - [Exercise 1](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_mnist_hptuning.ipynb)
 - [Exercise 2](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_california_house_price.ipynb)
+
+## Convolutional Neural Networks
+
+- [Slides](slides/cnn.qmd)
+
+### Exercises
+
+- [Exercise 1](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_cnn_mnist.ipynb)
 
 ## References
 
