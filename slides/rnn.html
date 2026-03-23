@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.7.32">
 
   <meta name="author" content="Miguel Fonseca">
-  <title>AGRN – Convolutional Neural Networks (CNN)</title>
+  <title>AGRN – Recurrent Neural Networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -190,13 +190,17 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Convolutional Neural Networks (CNN)</h1>
+  <h1 class="title">Recurrent Neural Networks</h1>
+  <p class="subtitle">Modeling Sequential Data with Memory</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -210,432 +214,409 @@ Miguel Fonseca
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of contents</h2>
 <ul>
-<li><a href="#/motivation" id="/toc-motivation">Motivation</a></li>
-<li><a href="#/convolutions" id="/toc-convolutions">Convolutions</a></li>
-<li><a href="#/d-convolutions" id="/toc-d-convolutions">1D Convolutions</a></li>
-<li><a href="#/d-convolutions-1" id="/toc-d-convolutions-1">2D Convolutions</a></li>
-<li><a href="#/padding" id="/toc-padding">Padding</a></li>
-<li><a href="#/pooling" id="/toc-pooling">Pooling</a></li>
-<li><a href="#/cnn-architecture" id="/toc-cnn-architecture">CNN Architecture</a></li>
-<li><a href="#/residual-networks" id="/toc-residual-networks">Residual Networks</a></li>
+<li><a href="#/feedforward-networks-vs.-recurrent-networks" id="/toc-feedforward-networks-vs.-recurrent-networks">Feedforward Networks vs.&nbsp;Recurrent Networks</a></li>
+<li><a href="#/the-recurrent-neural-network-rnn" id="/toc-the-recurrent-neural-network-rnn">The Recurrent Neural Network (RNN)</a></li>
+<li><a href="#/long-short-term-memory-lstm" id="/toc-long-short-term-memory-lstm">Long Short-Term Memory (LSTM)</a></li>
+<li><a href="#/gated-recurrent-unit-gru" id="/toc-gated-recurrent-unit-gru">Gated Recurrent Unit (GRU)</a></li>
+<li><a href="#/regularization-in-rnns" id="/toc-regularization-in-rnns">Regularization in RNNs</a></li>
+<li><a href="#/extensions" id="/toc-extensions">Extensions</a></li>
+<li><a href="#/final-notes" id="/toc-final-notes">Final Notes</a></li>
 </ul>
 </nav>
 </section>
 <section>
-<section id="motivation" class="title-slide slide level1 center">
-<h1>Motivation</h1>
+<section id="feedforward-networks-vs.-recurrent-networks" class="title-slide slide level1 center">
+<h1>Feedforward Networks vs.&nbsp;Recurrent Networks</h1>
 
 </section>
-<section id="why-not-fully-connected-networks-for-images" class="slide level2">
-<h2>Why not Fully Connected Networks for Images?</h2>
-<ul>
-<li>Images: 224×224×3 → 150,528 features</li>
-<li>Dense layer with 1,000 neurons:</li>
-</ul>
+<section id="why-do-we-need-rnns" class="slide level2">
+<h2>Why Do We Need RNNs?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="feedforward-networks-assume-independence">Feedforward Networks Assume Independence</h3>
+<p>For MLPs:</p>
 <p><span class="math display">\[
-150,528 \times 1000 = 150M \text{ parameters}
+\mathbf x_i \perp \mathbf x_j
 \]</span></p>
-<p>Problems:</p>
+<p>But many datasets are sequential!</p>
+</div><div class="column" style="width:50%;">
+<h3 id="recurrent-networks-capture-dependencies">Recurrent Networks Capture Dependencies</h3>
+<p><span class="math display">\[
+P(\mathbf x_t | \mathbf x_{t-1}, \mathbf x_{t-2}, ..., \mathbf x_1)
+\]</span></p>
+<p>Cases where RNNs are useful:</p>
 <ul>
-<li>Too many parameters</li>
-<li>No spatial structure</li>
-<li>No translation invariance</li>
+<li>Text</li>
+<li>Speech</li>
+<li>Financial time-series</li>
+<li>Biological sequences</li>
+<li>Sensor signals</li>
 </ul>
+</div></div>
 </section>
-<section id="key-ideas-behind-cnns" class="slide level2 scrollable">
-<h2>Key Ideas Behind CNNs</h2>
-<ol type="1">
-<li class="fragment"><p><strong>Local connectivity</strong></p>
-<p>Earliest layers of the network focus on local regions.</p></li>
-<li class="fragment"><p><strong>Translation equivariance</strong></p>
-<p>The network should respond similarly to the same patch, regardless of where it appears in the image (<em>translation invariance</em>).</p></li>
-<li class="fragment"><p><strong>Hierarchical feature learning</strong> Deeper layers should be able to capture longer-range features of the image</p></li>
-</ol>
+<section id="applications" class="slide level2">
+<h2>Applications</h2>
+<ul>
+<li>Language modeling</li>
+<li>Machine translation</li>
+<li>Speech recognition</li>
+<li>Time-series forecasting</li>
+<li>Genomics</li>
+<li>Video processing</li>
+</ul>
 </section></section>
 <section>
-<section id="convolutions" class="title-slide slide level1 center">
-<h1>Convolutions</h1>
+<section id="the-recurrent-neural-network-rnn" class="title-slide slide level1 center">
+<h1>The Recurrent Neural Network (RNN)</h1>
 
 </section>
-<section id="continuous-convolution" class="slide level2">
-<h2>Continuous Convolution</h2>
+<section id="core-recurrence" class="slide level2">
+<h2>Core Recurrence</h2>
 <p><span class="math display">\[
-(f * g)(t) = \int_{-\infty}^{\infty} f(\tau) g(t - \tau) d\tau
+\mathbf z_t =\mathbf W_h \mathbf h_{t-1} + \mathbf W_x \mathbf x_t + \mathbf b
 \]</span></p>
-<p>Interpretation:</p>
-<ul>
-<li>Flip one function</li>
-<li>Slide it</li>
-<li>Compute overlap (inner product)</li>
-</ul>
+<p><span class="math display">\[
+\mathbf h_t = \sigma(\mathbf z_t)
+\]</span></p>
+<p><span class="math display">\[
+\mathbf y_t = \mathbf W_y \mathbf h_t
+\]</span></p>
+<p>Same weights reused across time.</p>
 </section>
-<section class="slide level2">
+<section id="unrolled-through-time" class="slide level2">
+<h2>Unrolled Through Time</h2>
 
-
-<img data-src="../images/continuous_convolution_anim.gif" class="r-stretch"></section>
-<section id="discrete-convolution-1d" class="slide level2">
-<h2>Discrete Convolution (1D)</h2>
-<p><span class="math display">\[
-(y * k)[n] = \sum_{m=-\infty}^{\infty} y[m] \cdot k[n - m]
-\]</span></p>
-<p>In practice (finite signals):</p>
-<p><span class="math display">\[
-z[i] = \sum_{j=0}^{K-1} x[i-j] \cdot w[j]
-\]</span></p>
-</section>
-<section class="slide level2">
-
-
-<img data-src="../images/discrete_convolution_anim.gif" class="r-stretch"></section>
-<section id="convolution-as-sliding-dot-product" class="slide level2">
-<h2>Convolution as Sliding Dot Product</h2>
-<ul>
-<li>Kernel (filter) = small learnable weight matrix
-<ul>
-<li>Slide across input</li>
-<li>Compute dot product</li>
-</ul></li>
-</ul>
-<p>This is:</p>
-<ul>
-<li>A linear operator</li>
-<li>With shared weights</li>
-</ul>
-</section>
-<section id="convolution-vs-cross-correlation" class="slide level2">
-<h2>Convolution vs Cross-Correlation</h2>
-<p>Deep learning frameworks usually compute:</p>
-<p><span class="math display">\[
-z[i] = \sum_{j=0}^{K-1} x[i+j] w[j]
-\]</span></p>
-<p>(No flipping.)</p>
-</section></section>
-<section>
-<section id="d-convolutions" class="title-slide slide level1 center">
-<h1>1D Convolutions</h1>
-
-</section>
-<section id="when-do-we-use-them" class="slide level2">
-<h2>When do we use them?</h2>
-<ul>
-<li>Time series</li>
-<li>Audio</li>
-<li>Financial data</li>
-<li>Genomics sequences</li>
-</ul>
-</section>
-<section id="d-convolution-example" class="slide level2">
-<h2>1D Convolution Example</h2>
-<p>Input:</p>
-<p><span class="math display">\[
-x = [1, 2, 3, 4, 5]
-\]</span></p>
-<p>Kernel: <span class="math display">\[
-w = [1, 0, -1]
-\]</span></p>
-<p>Output (stride 1):</p>
-<p><span class="math display">\[
-z[0] = 1*1 + 2*0 + 3*(-1)
-\]</span></p>
-</section>
-<section id="d-convolution-in-tensorflow" class="slide level2">
-<h2>1D Convolution in TensorFlow</h2>
-<div id="2ac86a9f" class="cell" data-execution_count="1">
+<img data-src="../images/rnn_unrolled.svg" class="r-stretch quarto-figure-center"><p class="caption">Unrolled RNN</p></section>
+<section id="tensorflow-simple-rnn" class="slide level2">
+<h2>TensorFlow: Simple RNN</h2>
+<div id="c0795496" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>model <span class="op">=</span> tf.keras.Sequential([</span>
-<span id="cb1-4"><a></a>    tf.keras.layers.Conv1D(</span>
-<span id="cb1-5"><a></a>        filters<span class="op">=</span><span class="dv">32</span>,</span>
-<span id="cb1-6"><a></a>        kernel_size<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb1-7"><a></a>        activation<span class="op">=</span><span class="st">'relu'</span>,</span>
-<span id="cb1-8"><a></a>        input_shape<span class="op">=</span>(<span class="dv">100</span>, <span class="dv">1</span>)</span>
-<span id="cb1-9"><a></a>    )</span>
-<span id="cb1-10"><a></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a></a><span class="im">from</span> tensorflow <span class="im">import</span> keras</span>
+<span id="cb1-3"><a></a><span class="im">from</span> tensorflow.keras <span class="im">import</span> layers</span>
+<span id="cb1-4"><a></a></span>
+<span id="cb1-5"><a></a>model <span class="op">=</span> keras.Sequential([</span>
+<span id="cb1-6"><a></a>    layers.SimpleRNN(<span class="dv">64</span>, return_sequences<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb1-7"><a></a>    layers.SimpleRNN(<span class="dv">32</span>),</span>
+<span id="cb1-8"><a></a>    layers.Dense(<span class="dv">1</span>)</span>
+<span id="cb1-9"><a></a>])</span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mse"</span>)</span>
+<span id="cb1-12"><a></a>model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential_12"</span>
+</pre>
 </div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃<span style="font-weight: bold"> Layer (type)                    </span>┃<span style="font-weight: bold"> Output Shape           </span>┃<span style="font-weight: bold">       Param # </span>┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ simple_rnn_6 (<span style="color: #0087ff; text-decoration-color: #0087ff">SimpleRNN</span>)        │ ?                      │   <span style="color: #00af00; text-decoration-color: #00af00">0</span> (unbuilt) │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ simple_rnn_7 (<span style="color: #0087ff; text-decoration-color: #0087ff">SimpleRNN</span>)        │ ?                      │   <span style="color: #00af00; text-decoration-color: #00af00">0</span> (unbuilt) │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_12 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                │ ?                      │   <span style="color: #00af00; text-decoration-color: #00af00">0</span> (unbuilt) │
+└─────────────────────────────────┴────────────────────────┴───────────────┘
+</pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Total params: </span><span style="color: #00af00; text-decoration-color: #00af00">0</span> (0.00 B)
+</pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">0</span> (0.00 B)
+</pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Non-trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">0</span> (0.00 B)
+</pre>
+</div>
+</div>
+</section>
+<section id="backpropagation-through-time-bptt" class="slide level2">
+<h2>Backpropagation Through Time (BPTT)</h2>
+<p>Training objective:</p>
+<p><span class="math display">\[
+\frac{\partial \mathscr L}{\partial \mathbf W_h} =\sum_{t=1}^{T}\frac{\partial \mathscr L}{\partial \mathbf h_t}\frac{\partial \mathbf h_t}{\partial \mathbf W_h}
+\]</span></p>
+<p>But:</p>
+<p><span class="math display">\[
+\frac{\partial \mathbf h_t}{\partial \mathbf h_{t-k}}=\prod_{i=t-k+1}^{t}\frac{\partial \mathbf h_i}{\partial \mathbf h_{i-1}}
+\]</span></p>
+<p>with:</p>
+<p><span class="math display">\[
+\frac{\partial \mathbf h_i}{\partial \mathbf h_{i-1}}
+=\mathbf W_h \cdot \text{diag}(\sigma'(\mathbf z_t))
+\]</span></p>
+<p>Repeated matrix multiplication → instability.</p>
+</section>
+<section id="the-vanishing-gradient-problem" class="slide level2">
+<h2>The Vanishing Gradient Problem</h2>
+<p>Simplified Recurrence</p>
+<p><span class="math display">\[
+h_t = \sigma(W_h h_{t-1})
+\]</span></p>
+<p>Derivative:</p>
+<p><span class="math display">\[
+\frac{\partial h_t}{\partial h_{t-1}}
+=
+W_h \cdot \text{diag}(1 - \sigma^2(z))
+\]</span></p>
+<p>Since:</p>
+<p><span class="math display">\[
+|1 - \sigma^2(z)| \le 1
+\]</span></p>
+<p>Repeated products:</p>
+<p><span class="math display">\[
+\prod_{i=1}^{k} W_h \lambda_i
+\]</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>If:</p>
+<p><span class="math display">\[
+\rho(W_h) &lt; 1
+\]</span></p>
+<blockquote>
+<p>Gradient vanishes.</p>
+</blockquote>
+</div><div class="column" style="width:50%;">
+<p>If:</p>
+<p><span class="math display">\[
+\rho(W_h) &gt; 1
+\]</span></p>
+<blockquote>
+<p>Exploding gradient.</p>
+</blockquote>
+</div></div>
 </section></section>
 <section>
-<section id="d-convolutions-1" class="title-slide slide level1 center">
-<h1>2D Convolutions</h1>
+<section id="long-short-term-memory-lstm" class="title-slide slide level1 center">
+<h1>Long Short-Term Memory (LSTM)</h1>
 
 </section>
-<section id="d-convolutions-2" class="slide level2">
-<h2>2D Convolutions</h2>
-<p>Used for:</p>
-<ul>
-<li>Images</li>
-<li>Video frames</li>
-<li>Spatial data</li>
-</ul>
-</section>
-<section id="d-convolution-formula" class="slide level2">
-<h2>2D Convolution Formula</h2>
+<section id="lstm-gate-equations" class="slide level2">
+<h2>LSTM Gate Equations</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Allow constant error flow through a memory cell.</p>
+</div>
+</div>
+</div>
+<p><strong>Forget gate:</strong></p>
 <p><span class="math display">\[
-\mathbf Z_r(i,j) = \sum_m \sum_n\mathbf X_l(i+m, j+n)\mathbf W_r(m,n)
+\mathbf f_t = \sigma\left(\mathbf W_f [\mathbf h_{t-1} \, \mathbf x_t] + \mathbf b_f\right)
 \]</span></p>
-<ul>
-<li>Kernel is now a tensor of shape <span class="math inline">\(k \times k \times C\)</span>.</li>
-<li>Output is a 2D feature map for each filter.</li>
-</ul>
-</section>
-<section id="convolution-over-rgb-images" class="slide level2">
-<h2>Convolution Over RGB Images</h2>
-<p>Input shape:</p>
+<p><strong>Input gate:</strong></p>
 <p><span class="math display">\[
-H \times W \times C
+\mathbf i_t = \sigma\left(\mathbf W_i [\mathbf h_{t-1} \, \mathbf x_t] + \mathbf b_i\right)
 \]</span></p>
-<p>Kernel shape:</p>
+<p><strong>Output:</strong></p>
 <p><span class="math display">\[
-k \times k \times C
+\mathbf o_t = \sigma\left(\mathbf W_o [\mathbf h_{t-1} \, \mathbf x_t] + \mathbf b_o\right)
 \]</span></p>
-<p>Each filter spans all channels.</p>
+<p><strong>Input Node</strong></p>
+<p><span class="math display">\[
+\widetilde{\mathbf c} = \tanh\left(\mathbf W_c [\mathbf h_{t-1} \, \mathbf x_t] + \mathbf b_c\right)
+\]</span></p>
 </section>
 <section class="slide level2">
 
 
-<img data-src="../images/2d_convolution_anim.gif" class="r-stretch"></section>
-<section id="multiple-filters" class="slide level2">
-<h2>Multiple Filters</h2>
-<p><strong>If we use 64 filters:</strong></p>
-<p>Output depth:</p>
+<img data-src="../images/lstm-1.svg" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">LSTM Cell Update with Input</p></section>
+<section id="cell-update" class="slide level2">
+<h2>Cell update</h2>
 <p><span class="math display">\[
-H' \times W' \times 64
+\mathbf c_t = \mathbf f_t \odot \mathbf c_{t-1} + \mathbf i_t \odot \tilde{\mathbf c}_t
 \]</span></p>
-<p>Each filter learns a feature:</p>
-<ul>
-<li>edges</li>
-<li>textures</li>
-<li>shapes</li>
-</ul>
-</section>
-<section id="d-convolution-in-tensorflow-1" class="slide level2">
-<h2>2D Convolution in TensorFlow</h2>
-<div id="b5381821" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>model <span class="op">=</span> tf.keras.Sequential([</span>
-<span id="cb2-2"><a></a>    tf.keras.layers.Conv2D(</span>
-<span id="cb2-3"><a></a>        filters<span class="op">=</span><span class="dv">32</span>,</span>
-<span id="cb2-4"><a></a>        kernel_size<span class="op">=</span>(<span class="dv">3</span>,<span class="dv">3</span>),</span>
-<span id="cb2-5"><a></a>        activation<span class="op">=</span><span class="st">'relu'</span>,</span>
-<span id="cb2-6"><a></a>        input_shape<span class="op">=</span>(<span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>)</span>
-<span id="cb2-7"><a></a>    )</span>
-<span id="cb2-8"><a></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section>
-<section>
-<section id="padding" class="title-slide slide level1 center">
-<h1>Padding</h1>
-
-</section>
-<section id="why-padding" class="slide level2">
-<h2>Why padding?</h2>
-<p>Without padding:</p>
-<ul>
-<li>Spatial dimensions shrink</li>
-</ul>
-<p>With kernel size 3:</p>
-<p><span class="math display">\[H_{out} = h - 2\]</span></p>
-</section>
-<section id="types-of-padding" class="slide level2">
-<h2>Types of Padding</h2>
-<h3 id="valid-padding">Valid Padding</h3>
-<ul>
-<li>No padding</li>
-<li>Output shrinks</li>
-</ul>
-<h3 id="same-padding">Same Padding</h3>
-<ul>
-<li>Zero-padding</li>
-<li>Output size preserved</li>
-</ul>
-</section>
-<section id="output-size-formula" class="slide level2">
-<h2>Output Size Formula</h2>
 <p><span class="math display">\[
-H_{out} = \frac{H + 2P - K}{S} + 1
+\mathbf h_t = \mathbf o_t \odot \tanh(\mathbf c_t)
 \]</span></p>
-<p>Where:</p>
-<ul>
-<li><span class="math inline">\(P\)</span>: padding</li>
-<li><span class="math inline">\(K\)</span>: kernel size</li>
-<li><span class="math inline">\(S\)</span>: stride</li>
-</ul>
-</section></section>
-<section>
-<section id="pooling" class="title-slide slide level1 center">
-<h1>Pooling</h1>
+</section>
+<section class="slide level2">
 
+
+<img data-src="../images/lstm-3.svg" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">LSTM cell</p></section>
+<section id="why-lstm-works" class="slide level2">
+<h2>Why LSTM Works</h2>
+<p>If:</p>
+<p><span class="math display">\[
+\mathbf f_t \approx 1
+\]</span></p>
+<p>Then:</p>
+<p><span class="math display">\[
+\frac{\partial \mathbf c_t}{\partial \mathbf c_{t-1}} \approx 1
+\]</span></p>
+<blockquote>
+<p>Gradient preserved.</p>
+</blockquote>
 </section>
-<section id="why-pooling" class="slide level2">
-<h2>Why Pooling?</h2>
-<ul>
-<li class="fragment">Downsample feature maps</li>
-<li class="fragment">Reduce parameters</li>
-<li class="fragment">Increase receptive field</li>
-<li class="fragment">Add translation invariance</li>
-</ul>
-</section>
-<section id="types-of-pooling" class="slide level2">
-<h2>Types of Pooling</h2>
-<h3 id="max-pooling">Max Pooling</h3>
-<p><span class="math display">\[\mathbf Z = \max(\mathbf X_{window})\]</span></p>
-<p>Keeps strongest activation.</p>
-<h3 id="average-pooling">Average Pooling</h3>
-<p><span class="math display">\[\mathbf Z = \text{mean}(\mathbf X_{window})\]</span></p>
-<p>Smoother representation.</p>
-</section>
-<section id="pooling-in-tensorflow" class="slide level2">
-<h2>Pooling in TensorFlow</h2>
-<div id="823cc808" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>tf.keras.layers.MaxPooling2D(pool_size<span class="op">=</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>&lt;MaxPooling2D name=max_pooling2d, built=True&gt;</code></pre>
-</div>
+<section id="tensorflow-lstm" class="slide level2">
+<h2>Tensorflow: LSTM</h2>
+<div id="ba526422" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>model <span class="op">=</span> keras.Sequential([</span>
+<span id="cb2-2"><a></a>    layers.LSTM(<span class="dv">64</span>, return_sequences<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb2-3"><a></a>    layers.LSTM(<span class="dv">32</span>),</span>
+<span id="cb2-4"><a></a>    layers.Dense(<span class="dv">1</span>)</span>
+<span id="cb2-5"><a></a>])</span>
+<span id="cb2-6"><a></a></span>
+<span id="cb2-7"><a></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"adam"</span>, loss<span class="op">=</span><span class="st">"mse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
-<section id="cnn-architecture" class="title-slide slide level1 center">
-<h1>CNN Architecture</h1>
+<section id="gated-recurrent-unit-gru" class="title-slide slide level1 center">
+<h1>Gated Recurrent Unit (GRU)</h1>
 
 </section>
-<section id="cnn-architecture-pattern" class="slide level2">
-<h2>CNN Architecture Pattern</h2>
-<p>Typical CNN:</p>
+<section id="gru-equations" class="slide level2">
+<h2>GRU Equations</h2>
+<blockquote>
+<p>Simpler alternative to LSTM.</p>
+</blockquote>
+<p><strong>Update gate:</strong></p>
+<p><span class="math display">\[
+\mathbf z_t = \sigma\left(\mathbf W_z [\mathbf h_{t-1} \, \mathbf x_t] + \mathbf b_z\right)
+\]</span></p>
+<p><strong>Reset gate:</strong></p>
+<p><span class="math display">\[
+\mathbf r_t = \sigma\left(\mathbf W_r [\mathbf h_{t-1} \, \mathbf x_t] + \mathbf b_r\right)
+\]</span></p>
+<p><strong>Candidate cell state:</strong></p>
+<p><span class="math display">\[
+\widetilde{\mathbf h}_t = \tanh\left(\mathbf W_h [\mathbf r_t \! \odot \! \mathbf h_{t-1} \, \mathbf x_t] + \mathbf b_h\right)
+\]</span></p>
+</section>
+<section class="slide level2">
+
+
+<img data-src="../images/gru-2.svg" class="r-stretch quarto-figure-center"><p class="caption">GRU Cell Update</p></section>
+<section id="gru-update" class="slide level2">
+<h2>GRU Update</h2>
+<p><span class="math display">\[
+\mathbf h_t = (1 - \mathbf z_t) \odot \mathbf h_{t-1} + \mathbf z_t \odot \widetilde{\mathbf h}_t
+\]</span></p>
+</section>
+<section id="gru-cell" class="slide level2">
+<h2><img data-src="../images/gru-3.svg" alt="GRU Cell"></h2>
+</section>
+<section id="tensorflow-gru" class="slide level2">
+<h2>Tensorflow: GRU</h2>
+<div id="49b23cee" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>model <span class="op">=</span> keras.Sequential([</span>
+<span id="cb3-2"><a></a>    layers.GRU(<span class="dv">64</span>, return_sequences<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb3-3"><a></a>    layers.GRU(<span class="dv">32</span>),</span>
+<span id="cb3-4"><a></a>    layers.Dense(<span class="dv">1</span>)</span>
+<span id="cb3-5"><a></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="regularization-in-rnns" class="title-slide slide level1 center">
+<h1>Regularization in RNNs</h1>
+
+</section>
+<section id="recurrent-dropout" class="slide level2">
+<h2>Recurrent Dropout</h2>
+<p>Standard dropout disrupts temporal memory.</p>
+<p><strong>Recurrent dropout:</strong></p>
+<ul>
+<li>Applied on recurrent connections</li>
+<li>Same mask across timesteps</li>
+</ul>
+</section>
+<section id="tensorflow-recurrent-dropout" class="slide level2">
+<h2>TensorFlow: Recurrent Dropout</h2>
+<div id="e104fd89" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>model <span class="op">=</span> keras.Sequential([</span>
+<span id="cb4-2"><a></a>    layers.LSTM(</span>
+<span id="cb4-3"><a></a>        <span class="dv">64</span>,</span>
+<span id="cb4-4"><a></a>        return_sequences<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-5"><a></a>        dropout<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb4-6"><a></a>        recurrent_dropout<span class="op">=</span><span class="fl">0.2</span></span>
+<span id="cb4-7"><a></a>    ),</span>
+<span id="cb4-8"><a></a>    layers.LSTM(<span class="dv">32</span>),</span>
+<span id="cb4-9"><a></a>    layers.Dense(<span class="dv">1</span>)</span>
+<span id="cb4-10"><a></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="gradient-clipping" class="slide level2">
+<h2>Gradient Clipping</h2>
+<p><span class="math display">\[
+\nabla_{\boldsymbol \theta} \mathscr L \leftarrow \frac{\nabla_{\boldsymbol \theta} \mathscr L}{\max(1, \frac{||\nabla_{\boldsymbol \theta} \mathscr L||}{\lambda})}
+\]</span></p>
+<p>Prevent exploding gradients:</p>
+<div id="a37e7031" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>optimizer <span class="op">=</span> tf.keras.optimizers.Adam(</span>
+<span id="cb5-2"><a></a>    learning_rate<span class="op">=</span><span class="fl">0.001</span>,</span>
+<span id="cb5-3"><a></a>    clipnorm<span class="op">=</span><span class="fl">1.0</span></span>
+<span id="cb5-4"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="extensions" class="title-slide slide level1 center">
+<h1>Extensions</h1>
+
+</section>
+<section id="deep-rnns" class="slide level2">
+<h2>Deep RNNs</h2>
+<p>Stack multiple RNN layers for hierarchical representations:</p>
+
+<img data-src="../images/rnn_deep.svg" class="r-stretch quarto-figure-center"><p class="caption">Deep RNN</p></section>
+<section id="bidirectional-rnns" class="slide level2">
+<h2>Bidirectional RNNs</h2>
+<p>Process sequences in both directions:</p>
+
+<img data-src="../images/rnn_bidirectional.svg" class="r-stretch quarto-figure-center"><p class="caption">Bidirectional RNN</p></section></section>
+<section>
+<section id="final-notes" class="title-slide slide level1 center">
+<h1>Final Notes</h1>
+
+</section>
+<section id="model-comparison" class="slide level2">
+<h2>Model Comparison</h2>
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: center;">Layer</th>
+<th>Model</th>
+<th>Long Dependencies</th>
+<th>Complexity</th>
+<th>Speed</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Input</td>
+<td>RNN</td>
+<td>Poor</td>
+<td>Low</td>
+<td>Fast</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Conv → ReLU → Conv → ReLU (Block 1)</td>
+<td>LSTM</td>
+<td>Excellent</td>
+<td>High</td>
+<td>Slower</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Pooling</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Conv → ReLU → Conv → ReLU (Block 2)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Pooling</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Flatten</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Dense</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Output</td>
+<td>GRU</td>
+<td>Very Good</td>
+<td>Medium</td>
+<td>Faster</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="example-cnn-mnist" class="slide level2">
-<h2>Example CNN (MNIST)</h2>
-<div id="e8aea299" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>model <span class="op">=</span> tf.keras.Sequential([</span>
-<span id="cb5-2"><a></a>    tf.keras.layers.Conv2D(<span class="dv">32</span>, <span class="dv">3</span>, activation<span class="op">=</span><span class="st">'relu'</span>, padding<span class="op">=</span><span class="st">'same'</span>),</span>
-<span id="cb5-3"><a></a>    tf.keras.layers.MaxPooling2D(<span class="dv">2</span>),</span>
-<span id="cb5-4"><a></a>    tf.keras.layers.Conv2D(<span class="dv">64</span>, <span class="dv">3</span>, activation<span class="op">=</span><span class="st">'relu'</span>, padding<span class="op">=</span><span class="st">'same'</span>),</span>
-<span id="cb5-5"><a></a>    tf.keras.layers.MaxPooling2D(<span class="dv">2</span>),</span>
-<span id="cb5-6"><a></a>    tf.keras.layers.Flatten(),</span>
-<span id="cb5-7"><a></a>    tf.keras.layers.Dense(<span class="dv">128</span>, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
-<span id="cb5-8"><a></a>    tf.keras.layers.Dense(<span class="dv">10</span>, activation<span class="op">=</span><span class="st">'softmax'</span>)</span>
-<span id="cb5-9"><a></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="receptive-field" class="slide level2">
-<h2>Receptive Field</h2>
-<p>The receptive field grows with depth.</p>
-<p><strong>Deeper neurons:</strong></p>
+<section id="limitations-of-rnns" class="slide level2">
+<h2>Limitations of RNNs</h2>
 <ul>
-<li>“see” larger parts of image</li>
-<li>learn abstract features</li>
+<li>Sequential computation</li>
+<li>Hard to parallelize</li>
+<li>Long sequences still challenging</li>
+<li>Transformers dominate NLP</li>
 </ul>
-
-<img data-src="../images/receptive_field_cnn.png" class="r-stretch"></section></section>
-<section>
-<section id="residual-networks" class="title-slide slide level1 center">
-<h1>Residual Networks</h1>
-
-</section>
-<section id="vanishing-gradient-problem" class="slide level2">
-<h2>Vanishing Gradient Problem</h2>
-<p>Deep CNNs suffer from:</p>
-<ul>
-<li>Gradient decay</li>
-<li>Hard optimization</li>
-<li>Solution: Residual Connections</li>
-</ul>
-</section>
-<section id="residual-connections" class="slide level2">
-<h2>Residual Connections</h2>
-<p>Introduced in:</p>
-<blockquote>
-<p>He, K., Zhang, X., Ren, S., &amp; Sun, J. (2015). <em>Deep Residual Learning for Image Recognition</em>. arXiv:1512.03385.</p>
-</blockquote>
-<p>Instead of learning:</p>
-<p><span class="math display">\[HD(x)\]</span></p>
-<p>Learn:</p>
-<p><span class="math display">\[
-F(x) = H(x) - x
-\]</span></p>
-<p>So:</p>
-<p><span class="math display">\[
-H(x) = F(x) + x
-\]</span></p>
-</section>
-<section id="residual-block" class="slide level2">
-<h2>Residual Block</h2>
-<p>Output:</p>
-<p><span class="math display">\[y = F(x) + x\]</span></p>
-<p>This is called a <strong>skip connection</strong>.</p>
-</section>
-<section id="why-residuals-help" class="slide level2">
-<h2>Why Residuals Help</h2>
-<ul>
-<li>Easier optimization</li>
-<li>Identity mapping available</li>
-<li>Prevents degradation</li>
-<li>Enables 100+ layer networks</li>
-</ul>
-</section>
-<section id="residual-block-in-tensorflow" class="slide level2">
-<h2>Residual Block in TensorFlow</h2>
-<div id="b889cb1d" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> tensorflow.keras <span class="im">import</span> layers</span>
-<span id="cb6-2"><a></a></span>
-<span id="cb6-3"><a></a><span class="kw">def</span> residual_block(x, filters):</span>
-<span id="cb6-4"><a></a>    shortcut <span class="op">=</span> x</span>
-<span id="cb6-5"><a></a>    </span>
-<span id="cb6-6"><a></a>    x <span class="op">=</span> layers.Conv2D(filters, <span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
-<span id="cb6-7"><a></a>    x <span class="op">=</span> layers.Conv2D(filters, <span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>)(x)</span>
-<span id="cb6-8"><a></a>    </span>
-<span id="cb6-9"><a></a>    x <span class="op">=</span> layers.Add()([x, shortcut])</span>
-<span id="cb6-10"><a></a>    x <span class="op">=</span> layers.Activation(<span class="st">'relu'</span>)(x)</span>
-<span id="cb6-11"><a></a>    </span>
-<span id="cb6-12"><a></a>    <span class="cf">return</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="full-cnn-with-residuals" class="slide level2">
-<h2>Full CNN with Residuals</h2>
-<div id="076f4b53" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>inputs <span class="op">=</span> tf.keras.Input(shape<span class="op">=</span>(<span class="dv">32</span>,<span class="dv">32</span>,<span class="dv">3</span>))</span>
-<span id="cb7-2"><a></a>x <span class="op">=</span> tf.keras.layers.Conv2D(<span class="dv">32</span>, <span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>)(inputs)</span>
-<span id="cb7-3"><a></a></span>
-<span id="cb7-4"><a></a>x <span class="op">=</span> residual_block(x, <span class="dv">32</span>)</span>
-<span id="cb7-5"><a></a>x <span class="op">=</span> tf.keras.layers.MaxPooling2D()(x)</span>
-<span id="cb7-6"><a></a></span>
-<span id="cb7-7"><a></a>x <span class="op">=</span> residual_block(x, <span class="dv">32</span>)</span>
-<span id="cb7-8"><a></a>x <span class="op">=</span> tf.keras.layers.GlobalAveragePooling2D()(x)</span>
-<span id="cb7-9"><a></a></span>
-<span id="cb7-10"><a></a>outputs <span class="op">=</span> tf.keras.layers.Dense(<span class="dv">10</span>, activation<span class="op">=</span><span class="st">'softmax'</span>)(x)</span>
-<span id="cb7-11"><a></a></span>
-<span id="cb7-12"><a></a>model <span class="op">=</span> tf.keras.Model(inputs, outputs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 
 
 </section></section>
