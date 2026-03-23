@@ -71,7 +71,6 @@ sidebar:
 - [Slides - Hyperparameter Tuning](slides/hyperparameter_tuning.qmd)
 - [Slides - Regularisation](slides/regularization.qmd)
 
-
 ### Reading
 
 - Bishop, C. M., & Bishop, H. (2024). *Deep learning: Foundations and concepts.* Springer. [https://www.bishopbook.com](https://www.bishopbook.com)
