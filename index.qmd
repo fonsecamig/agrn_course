@@ -124,7 +124,7 @@ sidebar:
 
 ### Exercises
 
-- [Exercise 1](https://colab.research.google.com/github/fonsecamig/mpaaaf_course/blob/main/notebooks/exerc_rnn_financial.ipynb)
+- [Exercise 1](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_rnn_financial.ipynb)
 
 ## References
 
