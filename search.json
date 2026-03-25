@@ -32,7 +32,7 @@
     "href": "slides/rnn.html#tensorflow-simple-rnn",
     "title": "Recurrent Neural Networks",
     "section": "TensorFlow: Simple RNN",
-    "text": "TensorFlow: Simple RNN\n\nimport tensorflow as tf\nfrom tensorflow import keras\nfrom tensorflow.keras import layers\n\nmodel = keras.Sequential([\n    layers.SimpleRNN(64, return_sequences=True),\n    layers.SimpleRNN(32),\n    layers.Dense(1)\n])\n\nmodel.compile(optimizer=\"adam\", loss=\"mse\")\nmodel.summary()\n\nModel: \"sequential_12\"\n\n\n\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓\n┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃\n┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩\n│ simple_rnn_6 (SimpleRNN)        │ ?                      │   0 (unbuilt) │\n├─────────────────────────────────┼────────────────────────┼───────────────┤\n│ simple_rnn_7 (SimpleRNN)        │ ?                      │   0 (unbuilt) │\n├─────────────────────────────────┼────────────────────────┼───────────────┤\n│ dense_12 (Dense)                │ ?                      │   0 (unbuilt) │\n└─────────────────────────────────┴────────────────────────┴───────────────┘\n\n\n\n Total params: 0 (0.00 B)\n\n\n\n Trainable params: 0 (0.00 B)\n\n\n\n Non-trainable params: 0 (0.00 B)"
+    "text": "TensorFlow: Simple RNN\n\nimport tensorflow as tf\nfrom tensorflow import keras\nfrom tensorflow.keras import layers\n\nmodel = keras.Sequential([\n    layers.SimpleRNN(64, return_sequences=True),\n    layers.SimpleRNN(32),\n    layers.Dense(1)\n])\n\nmodel.compile(optimizer=\"adam\", loss=\"mse\")\nmodel.summary()\n\nModel: \"sequential_8\"\n\n\n\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓\n┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃\n┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩\n│ simple_rnn_4 (SimpleRNN)        │ ?                      │   0 (unbuilt) │\n├─────────────────────────────────┼────────────────────────┼───────────────┤\n│ simple_rnn_5 (SimpleRNN)        │ ?                      │   0 (unbuilt) │\n├─────────────────────────────────┼────────────────────────┼───────────────┤\n│ dense_8 (Dense)                 │ ?                      │   0 (unbuilt) │\n└─────────────────────────────────┴────────────────────────┴───────────────┘\n\n\n\n Total params: 0 (0.00 B)\n\n\n\n Trainable params: 0 (0.00 B)\n\n\n\n Non-trainable params: 0 (0.00 B)"
   },
   {
     "objectID": "slides/rnn.html#backpropagation-through-time-bptt",
@@ -46,7 +46,7 @@
     "href": "slides/rnn.html#the-vanishing-gradient-problem",
     "title": "Recurrent Neural Networks",
     "section": "The Vanishing Gradient Problem",
-    "text": "The Vanishing Gradient Problem\nSimplified Recurrence\n\\[\nh_t = \\sigma(W_h h_{t-1})\n\\]\nDerivative:\n\\[\n\\frac{\\partial h_t}{\\partial h_{t-1}}\n=\nW_h \\cdot \\text{diag}(1 - \\sigma^2(z))\n\\]\nSince:\n\\[\n|1 - \\sigma^2(z)| \\le 1\n\\]\nRepeated products:\n\\[\n\\prod_{i=1}^{k} W_h \\lambda_i\n\\]\n\n\nIf:\n\\[\n\\rho(W_h) &lt; 1\n\\]\n\nGradient vanishes.\n\n\nIf:\n\\[\n\\rho(W_h) &gt; 1\n\\]\n\nExploding gradient."
+    "text": "The Vanishing Gradient Problem\nSimplified Recurrence\n\\[\n\\mathbf h_t = \\sigma(\\mathbf W_h \\mathbf h_{t-1})\n\\]\nDerivative:\n\\[\n\\frac{\\partial \\mathbf h_t}{\\partial \\mathbf h_{t-1}}\n=\n\\mathbf W_h \\cdot \\text{diag}(\\sigma'(\\mathbf z))\n\\]\nRepeated products:\n\\[\n\\prod_{i=1}^{k} \\mathbf W_h \\boldsymbol{\\lambda}_i\n\\]\n\n\nIf:\n\\[\n\\rho(\\mathbf W_h) &lt; 1\n\\]\n\nGradient vanishes.\n\n\nIf:\n\\[\n\\rho(\\mathbf W_h) &gt; 1\n\\]\n\nExploding gradient."
   },
   {
     "objectID": "slides/rnn.html#lstm-gate-equations",
@@ -60,7 +60,7 @@
     "href": "slides/rnn.html#cell-update",
     "title": "Recurrent Neural Networks",
     "section": "Cell update",
-    "text": "Cell update\n\\[\n\\mathbf c_t = \\mathbf f_t \\odot \\mathbf c_{t-1} + \\mathbf i_t \\odot \\tilde{\\mathbf c}_t\n\\]\n\\[\n\\mathbf h_t = \\mathbf o_t \\odot \\tanh(\\mathbf c_t)\n\\]"
+    "text": "Cell update\n\\[\n\\mathbf c_t = \\mathbf f_t \\odot \\mathbf c_{t-1} + \\mathbf i_t \\odot \\widetilde{\\mathbf c}_t\n\\]\n\\[\n\\mathbf h_t = \\mathbf o_t \\odot \\tanh(\\mathbf c_t)\n\\]"
   },
   {
     "objectID": "slides/rnn.html#why-lstm-works",
