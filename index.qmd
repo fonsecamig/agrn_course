@@ -127,6 +127,20 @@ sidebar:
 - [Exercise 1](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_rnn_financial.ipynb)
 - [Exercise 2](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_rnn_wind.ipynb)
 
+## Tokenization, Padding, Masking and Embeddings
+
+- [Slides](slides/tokenization_pading_masking_embeddings.qmd)
+
+### Reading
+
+- Bishop, C. M., & Bishop, H. (2024). *Deep learning: Foundations and concepts.* Springer. [https://www.bishopbook.com](https://www.bishopbook.com)
+  - Chapter 12: Transformers, Section 11.2
+- Chollet, F. (2021). *Deep learning with Python (2nd ed.).* Manning Publications.
+  - Chapter 11: Deep learning for text, Sections 11.1, 11.2 and 11.3
+- Zhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). *Dive into deep learning.* Cambridge University Press. [https://d2l.ai](https://d2l.ai)
+  - Chapter 9: Recurrent Neural Networks, Sections 9.1, 9.2 and 9.3
+  - Chapter 15: Natural Language Processing: Pretraining
+
 ## References
 
 - Bishop, C. M., & Bishop, H. (2024). *Deep learning: Foundations and concepts.* Springer. [https://www.bishopbook.com](https://www.bishopbook.com)
