@@ -141,6 +141,10 @@ sidebar:
   - Chapter 9: Recurrent Neural Networks, Sections 9.1, 9.2 and 9.3
   - Chapter 15: Natural Language Processing: Pretraining
 
+### Exercises
+
+- [Exercise 1](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/exerc_rnn_imdb.ipynb)
+
 ## References
 
 - Bishop, C. M., & Bishop, H. (2024). *Deep learning: Foundations and concepts.* Springer. [https://www.bishopbook.com](https://www.bishopbook.com)
