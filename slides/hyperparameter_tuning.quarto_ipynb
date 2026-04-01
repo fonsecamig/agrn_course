@@ -469,7 +469,7 @@
         "\n",
         "## Optuna"
       ],
-      "id": "907670bb"
+      "id": "12896d26"
     },
     {
       "cell_type": "code",
@@ -518,7 +518,7 @@
         "\n",
         "    return loss"
       ],
-      "id": "a6353bc1",
+      "id": "98a71cc1",
       "execution_count": null,
       "outputs": []
     },
@@ -530,7 +530,7 @@
         "\n",
         "## Running Optuna"
       ],
-      "id": "73217959"
+      "id": "bb09c7d8"
     },
     {
       "cell_type": "code",
@@ -544,7 +544,7 @@
         "\n",
         "print(study.best_params)"
       ],
-      "id": "6de3687c",
+      "id": "4ade03b5",
       "execution_count": null,
       "outputs": []
     },
@@ -556,7 +556,7 @@
         "\n",
         "## Keras Tuner Example"
       ],
-      "id": "99cc0858"
+      "id": "7ddbddf6"
     },
     {
       "cell_type": "code",
@@ -596,7 +596,7 @@
         "\n",
         "    return model"
       ],
-      "id": "a4f0e13a",
+      "id": "115ccd3d",
       "execution_count": null,
       "outputs": []
     },
@@ -606,7 +606,7 @@
       "source": [
         "## Running Keras Tuner"
       ],
-      "id": "91ed5a1e"
+      "id": "45bcd7ff"
     },
     {
       "cell_type": "code",
@@ -625,7 +625,7 @@
         "\n",
         "best_model = tuner.get_best_models(1)[0]"
       ],
-      "id": "c4a6a19f",
+      "id": "7a47cbae",
       "execution_count": null,
       "outputs": []
     },
@@ -635,7 +635,7 @@
       "source": [
         "```"
       ],
-      "id": "ab4ae194"
+      "id": "236f42f0"
     }
   ],
   "metadata": {
@@ -643,7 +643,7 @@
       "name": "python3",
       "language": "python",
       "display_name": "Python 3 (ipykernel)",
-      "path": "/Users/miguelfonseca/venvs/agrn/share/jupyter/kernels/python3"
+      "path": "/Users/miguelfonseca/.pyenv/versions/agrn/share/jupyter/kernels/python3"
     }
   },
   "nbformat": 4,

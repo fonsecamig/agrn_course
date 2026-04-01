@@ -102,7 +102,7 @@
         "\n",
         "## Tensorflow Implementation"
       ],
-      "id": "d95bac72"
+      "id": "53e3474a"
     },
     {
       "cell_type": "code",
@@ -135,7 +135,7 @@
         "    loss=\"mse\"\n",
         ")"
       ],
-      "id": "76d2ffc9",
+      "id": "fa9c0c9e",
       "execution_count": null,
       "outputs": []
     },
@@ -187,7 +187,7 @@
         "\n",
         "### Tensorflow Implementation"
       ],
-      "id": "2c18e019"
+      "id": "dd2d7dab"
     },
     {
       "cell_type": "code",
@@ -208,7 +208,7 @@
         "    loss=\"mse\"\n",
         ")"
       ],
-      "id": "d91d740e",
+      "id": "582c6aa6",
       "execution_count": null,
       "outputs": []
     },
@@ -282,7 +282,7 @@
         "\n",
         "## BatchNorm - TensorFlow Implementation"
       ],
-      "id": "6480230e"
+      "id": "26568319"
     },
     {
       "cell_type": "code",
@@ -300,7 +300,7 @@
         "    layers.Dense(1)\n",
         "])"
       ],
-      "id": "a9b2447c",
+      "id": "8083f36b",
       "execution_count": null,
       "outputs": []
     },
@@ -333,7 +333,7 @@
         "\n",
         "## LayerNorm - TensorFlow Implementation"
       ],
-      "id": "507c974c"
+      "id": "8e098dec"
     },
     {
       "cell_type": "code",
@@ -351,7 +351,7 @@
         "    layers.Dense(1)\n",
         "])"
       ],
-      "id": "c3260e52",
+      "id": "e6a95a58",
       "execution_count": null,
       "outputs": []
     },
@@ -395,7 +395,7 @@
         "\n",
         "---"
       ],
-      "id": "fbed1a8f"
+      "id": "84a7f68c"
     },
     {
       "cell_type": "code",
@@ -433,7 +433,7 @@
         "    restore_best_weights=True\n",
         ")"
       ],
-      "id": "513229bf",
+      "id": "fa26b593",
       "execution_count": null,
       "outputs": []
     },
@@ -473,7 +473,7 @@
         "\n",
         "<!-- > Generalisation is engineered, not accidental. -->"
       ],
-      "id": "0170b743"
+      "id": "6683c9dc"
     }
   ],
   "metadata": {
@@ -481,7 +481,7 @@
       "name": "python3",
       "language": "python",
       "display_name": "Python 3 (ipykernel)",
-      "path": "/Users/miguelfonseca/venvs/agrn/share/jupyter/kernels/python3"
+      "path": "/Users/miguelfonseca/.pyenv/versions/agrn/share/jupyter/kernels/python3"
     }
   },
   "nbformat": 4,

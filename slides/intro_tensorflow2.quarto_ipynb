@@ -49,7 +49,7 @@
         "\n",
         "## Creating Tensors {.scrollable}"
       ],
-      "id": "3e66503c"
+      "id": "36f64b9c"
     },
     {
       "cell_type": "code",
@@ -62,7 +62,7 @@
         "b = tf.constant([1, 2, 3])\n",
         "c = tf.constant([[1., 2.], [3., 4.]])"
       ],
-      "id": "d9a88891",
+      "id": "eb9b162f",
       "execution_count": null,
       "outputs": []
     },
@@ -72,7 +72,7 @@
       "source": [
         "## Tensor Properties {.scrollable}"
       ],
-      "id": "cc5215a6"
+      "id": "e03c9776"
     },
     {
       "cell_type": "code",
@@ -82,7 +82,7 @@
         "c.dtype\n",
         "tf.rank(c)"
       ],
-      "id": "7bd9e568",
+      "id": "77f3b07b",
       "execution_count": null,
       "outputs": []
     },
@@ -98,7 +98,7 @@
         "\n",
         "TensorFlow feels like NumPy:"
       ],
-      "id": "8bfedd74"
+      "id": "581f91d9"
     },
     {
       "cell_type": "code",
@@ -110,7 +110,7 @@
         "x + y\n",
         "x * y"
       ],
-      "id": "cb4163cf",
+      "id": "9f1d000e",
       "execution_count": null,
       "outputs": []
     },
@@ -120,7 +120,7 @@
       "source": [
         "Matrix multiplication:"
       ],
-      "id": "9f8edf68"
+      "id": "d15545d3"
     },
     {
       "cell_type": "code",
@@ -128,7 +128,7 @@
       "source": [
         "tf.matmul(x, tf.transpose(y))"
       ],
-      "id": "20d9e858",
+      "id": "dd92a692",
       "execution_count": null,
       "outputs": []
     },
@@ -162,7 +162,7 @@
         "- Parameters\n",
         "- Trainable weights"
       ],
-      "id": "04fc5ccd"
+      "id": "56f8f6a0"
     },
     {
       "cell_type": "code",
@@ -173,7 +173,7 @@
         "    tf.keras.layers.Dense(1)\n",
         "])"
       ],
-      "id": "73d87ffa",
+      "id": "94c51039",
       "execution_count": null,
       "outputs": []
     },
@@ -183,7 +183,7 @@
       "source": [
         "*Model Summary*"
       ],
-      "id": "b8151b99"
+      "id": "146f0bb5"
     },
     {
       "cell_type": "code",
@@ -191,7 +191,7 @@
       "source": [
         "model.summary()"
       ],
-      "id": "9b9f0525",
+      "id": "76657a7e",
       "execution_count": null,
       "outputs": []
     },
@@ -201,7 +201,7 @@
       "source": [
         "## Functional API {.scrollable}"
       ],
-      "id": "3732c738"
+      "id": "5f6d663a"
     },
     {
       "cell_type": "code",
@@ -213,7 +213,7 @@
         "\n",
         "model = tf.keras.Model(inputs, outputs)"
       ],
-      "id": "836b557d",
+      "id": "c35c3a21",
       "execution_count": null,
       "outputs": []
     },
@@ -240,7 +240,7 @@
         "\n",
         "## Compile Step {.scrollable}"
       ],
-      "id": "3a5870df"
+      "id": "0891a3df"
     },
     {
       "cell_type": "code",
@@ -252,7 +252,7 @@
         "    metrics=[\"mae\"]\n",
         ")"
       ],
-      "id": "d57dc180",
+      "id": "25ec169d",
       "execution_count": null,
       "outputs": []
     },
@@ -274,7 +274,7 @@
         "- Batch\n",
         "- Validation set"
       ],
-      "id": "660855f5"
+      "id": "7b0e55ec"
     },
     {
       "cell_type": "code",
@@ -289,7 +289,7 @@
         "    validation_split=0.2\n",
         ")"
       ],
-      "id": "867cebe3",
+      "id": "086d3bf5",
       "execution_count": null,
       "outputs": []
     },
@@ -301,7 +301,7 @@
         "\n",
         "## Evaluate and Predict {.scrollable}"
       ],
-      "id": "9fce4296"
+      "id": "0dc5e83e"
     },
     {
       "cell_type": "code",
@@ -310,7 +310,7 @@
         "X_test, y_test = np.random.rand(20, 10), np.random.rand(20, 1)  # Test data\n",
         "model.evaluate(X_test, y_test)"
       ],
-      "id": "a611099c",
+      "id": "3660b536",
       "execution_count": null,
       "outputs": []
     },
@@ -321,7 +321,7 @@
         "X_new = np.random.rand(5, 10)  # New data for prediction\n",
         "model.predict(X_new)"
       ],
-      "id": "0593d204",
+      "id": "885ee025",
       "execution_count": null,
       "outputs": []
     }
@@ -331,7 +331,7 @@
       "name": "python3",
       "language": "python",
       "display_name": "Python 3 (ipykernel)",
-      "path": "/Users/miguelfonseca/venvs/agrn/share/jupyter/kernels/python3"
+      "path": "/Users/miguelfonseca/.pyenv/versions/agrn/share/jupyter/kernels/python3"
     }
   },
   "nbformat": 4,

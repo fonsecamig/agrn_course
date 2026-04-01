@@ -89,7 +89,7 @@
         "\n",
         "## TensorFlow: Simple RNN"
       ],
-      "id": "296d0882"
+      "id": "ae0fe248"
     },
     {
       "cell_type": "code",
@@ -108,7 +108,7 @@
         "model.compile(optimizer=\"adam\", loss=\"mse\")\n",
         "model.summary()"
       ],
-      "id": "5984633f",
+      "id": "5c460452",
       "execution_count": null,
       "outputs": []
     },
@@ -266,7 +266,7 @@
         "\n",
         "## Tensorflow: LSTM"
       ],
-      "id": "fcbcfd6e"
+      "id": "1cf1de6d"
     },
     {
       "cell_type": "code",
@@ -280,7 +280,7 @@
         "\n",
         "model.compile(optimizer=\"adam\", loss=\"mse\")"
       ],
-      "id": "7ba6d454",
+      "id": "42105e5e",
       "execution_count": null,
       "outputs": []
     },
@@ -331,7 +331,7 @@
         "\n",
         "## Tensorflow: GRU"
       ],
-      "id": "25c124b7"
+      "id": "6e064ea5"
     },
     {
       "cell_type": "code",
@@ -343,7 +343,7 @@
         "    layers.Dense(1)\n",
         "])"
       ],
-      "id": "65e4bfbf",
+      "id": "0e9a0ac2",
       "execution_count": null,
       "outputs": []
     },
@@ -366,7 +366,7 @@
         "\n",
         "## TensorFlow: Recurrent Dropout"
       ],
-      "id": "359bd971"
+      "id": "5f7afd34"
     },
     {
       "cell_type": "code",
@@ -382,7 +382,7 @@
         "    layers.Dense(1)\n",
         "])"
       ],
-      "id": "40963990",
+      "id": "dc4bb2d2",
       "execution_count": null,
       "outputs": []
     },
@@ -400,7 +400,7 @@
         "\n",
         "Prevent exploding gradients:"
       ],
-      "id": "0a89caeb"
+      "id": "ce8b3519"
     },
     {
       "cell_type": "code",
@@ -411,7 +411,7 @@
         "    clipnorm=1.0\n",
         ")"
       ],
-      "id": "8ee3e0a4",
+      "id": "5d1bd975",
       "execution_count": null,
       "outputs": []
     },
@@ -452,7 +452,7 @@
         "- Long sequences still challenging\n",
         "- Transformers dominate NLP"
       ],
-      "id": "1e1ca504"
+      "id": "e267c175"
     }
   ],
   "metadata": {
@@ -460,7 +460,7 @@
       "name": "python3",
       "language": "python",
       "display_name": "Python 3 (ipykernel)",
-      "path": "/Users/miguelfonseca/venvs/agrn/share/jupyter/kernels/python3"
+      "path": "/Users/miguelfonseca/.pyenv/versions/agrn/share/jupyter/kernels/python3"
     }
   },
   "nbformat": 4,

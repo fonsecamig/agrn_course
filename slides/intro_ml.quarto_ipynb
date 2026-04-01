@@ -228,7 +228,7 @@
         "\n",
         "## Example: Data Splitting in Python {.scrollable}"
       ],
-      "id": "fcf95360"
+      "id": "cfbd1f22"
     },
     {
       "cell_type": "code",
@@ -253,7 +253,7 @@
         "\n",
         "X_train.shape, X_val.shape, X_test.shape"
       ],
-      "id": "f25cfdb7",
+      "id": "a431e696",
       "execution_count": null,
       "outputs": []
     },
@@ -355,7 +355,7 @@
         "\n",
         "## Regression Example (scikit-learn) {.scrollable}"
       ],
-      "id": "9f047018"
+      "id": "790f82ae"
     },
     {
       "cell_type": "code",
@@ -381,7 +381,7 @@
         "print(\"MSE per fold:\", mse_scores)\n",
         "print(\"Mean MSE:\", mse_scores.mean())"
       ],
-      "id": "1eabe326",
+      "id": "b125e156",
       "execution_count": null,
       "outputs": []
     },
@@ -409,7 +409,7 @@
         "\n",
         "## Classification Example"
       ],
-      "id": "d372c56b"
+      "id": "9a6b10ab"
     },
     {
       "cell_type": "code",
@@ -438,7 +438,7 @@
         "\n",
         "scores"
       ],
-      "id": "6d8efdba",
+      "id": "9e7e9a5d",
       "execution_count": null,
       "outputs": []
     },
@@ -466,7 +466,7 @@
         "- CV is for model selection\n",
         "- Test set is for final evaluation"
       ],
-      "id": "0d94cc0e"
+      "id": "ac5c9f16"
     }
   ],
   "metadata": {
@@ -474,7 +474,7 @@
       "name": "python3",
       "language": "python",
       "display_name": "Python 3 (ipykernel)",
-      "path": "/Users/miguelfonseca/venvs/agrn/share/jupyter/kernels/python3"
+      "path": "/Users/miguelfonseca/.pyenv/versions/agrn/share/jupyter/kernels/python3"
     }
   },
   "nbformat": 4,
