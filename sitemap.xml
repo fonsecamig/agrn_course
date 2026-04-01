@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://fonsecamig.github.io/agrn_course/slides/rnn.html</loc>
-    <lastmod>2026-03-31T17:28:04.931Z</lastmod>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/tokenization_pading_masking_embeddings.html</loc>
+    <lastmod>2026-04-01T11:39:03.727Z</lastmod>
   </url>
   <url>
-    <loc>https://fonsecamig.github.io/agrn_course/slides/intro_tensorflow2.html</loc>
-    <lastmod>2026-03-07T19:10:26.786Z</lastmod>
-  </url>
-  <url>
-    <loc>https://fonsecamig.github.io/agrn_course/slides/hyperparameter_tuning.html</loc>
-    <lastmod>2026-03-13T19:04:44.152Z</lastmod>
-  </url>
-  <url>
-    <loc>https://fonsecamig.github.io/agrn_course/slides/cnn.html</loc>
-    <lastmod>2026-03-23T12:18:40.919Z</lastmod>
-  </url>
-  <url>
-    <loc>https://fonsecamig.github.io/agrn_course/index.html</loc>
-    <lastmod>2026-04-01T11:34:56.914Z</lastmod>
-  </url>
-  <url>
-    <loc>https://fonsecamig.github.io/agrn_course/slides/feed_forward_neural_networks.html</loc>
-    <lastmod>2026-03-12T12:39:40.462Z</lastmod>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/regularization.html</loc>
+    <lastmod>2026-03-17T17:42:50.350Z</lastmod>
   </url>
   <url>
     <loc>https://fonsecamig.github.io/agrn_course/slides/intro_ml.html</loc>
     <lastmod>2026-03-15T16:26:29.970Z</lastmod>
   </url>
   <url>
-    <loc>https://fonsecamig.github.io/agrn_course/slides/regularization.html</loc>
-    <lastmod>2026-03-17T17:42:50.350Z</lastmod>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/feed_forward_neural_networks.html</loc>
+    <lastmod>2026-03-12T12:39:40.462Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fonsecamig.github.io/agrn_course/index.html</loc>
+    <lastmod>2026-04-01T14:11:57.700Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/cnn.html</loc>
+    <lastmod>2026-03-23T12:18:40.919Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/hyperparameter_tuning.html</loc>
+    <lastmod>2026-03-13T19:04:44.152Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/intro_tensorflow2.html</loc>
+    <lastmod>2026-03-07T19:10:26.786Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fonsecamig.github.io/agrn_course/slides/rnn.html</loc>
+    <lastmod>2026-03-31T17:28:04.931Z</lastmod>
   </url>
 </urlset>
