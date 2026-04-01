@@ -39,5 +39,13 @@ website:
             href: slides/intro_ml.qmd
           - text: "Feed Forward Neural Networks"
             href: slides/feed_forward_neural_networks.qmd
-          # - text: "Introduction to TensorFlow 2"
-          #   href: slides/intro_tensorflow2.qmd
+          - text: "Introduction to TensorFlow 2"
+            href: slides/intro_tensorflow2.qmd
+          - text: "Hyperparameter Tuning"
+            href: slides/hyperparameter_tuning.qmd
+          - text: "Regularization"
+            href: slides/regularization.qmd
+          - text: "Convolutional Neural Networks"
+            href: slides/cnn.qmd
+          - text: "Recurrent Neural Networks"
+            href: slides/rnn.qmd
