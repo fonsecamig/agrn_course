@@ -57,7 +57,7 @@
         "\n",
         "## Tokenization in TensorFlow"
       ],
-      "id": "5ecd19b7"
+      "id": "ac16a0e2"
     },
     {
       "cell_type": "code",
@@ -77,7 +77,7 @@
         "\n",
         "print(sequences)"
       ],
-      "id": "2010c393",
+      "id": "a61ad6f7",
       "execution_count": null,
       "outputs": []
     },
@@ -87,7 +87,7 @@
       "source": [
         "**Vocabulary Mapping**"
       ],
-      "id": "c0ca52c4"
+      "id": "a7ae6115"
     },
     {
       "cell_type": "code",
@@ -95,7 +95,7 @@
       "source": [
         "print(tokenizer.word_index)"
       ],
-      "id": "e1164453",
+      "id": "282964d5",
       "execution_count": null,
       "outputs": []
     },
@@ -145,7 +145,7 @@
         "\n",
         "## Padding Sequences"
       ],
-      "id": "b0d31c09"
+      "id": "4aea2fd6"
     },
     {
       "cell_type": "code",
@@ -156,7 +156,7 @@
         "padded = pad_sequences(sequences, padding='post')\n",
         "print(padded)"
       ],
-      "id": "c79b08a3",
+      "id": "ab5b20d1",
       "execution_count": null,
       "outputs": []
     },
@@ -250,7 +250,7 @@
         "\n",
         "## Embedding Layer"
       ],
-      "id": "99a5f798"
+      "id": "df1aad38"
     },
     {
       "cell_type": "code",
@@ -260,7 +260,7 @@
         "\n",
         "embedding_layer = Embedding(input_dim=1000, output_dim=16)"
       ],
-      "id": "6c2294ca",
+      "id": "91543a3a",
       "execution_count": null,
       "outputs": []
     },
@@ -293,7 +293,7 @@
         "\n",
         "## Full Pipeline Example"
       ],
-      "id": "3293de73"
+      "id": "fccfff0b"
     },
     {
       "cell_type": "code",
@@ -310,7 +310,7 @@
         "\n",
         "model.summary()"
       ],
-      "id": "ee069474",
+      "id": "5cdbe3f3",
       "execution_count": null,
       "outputs": []
     },
@@ -341,7 +341,7 @@
         "\n",
         "**TensorFlow Example**"
       ],
-      "id": "31201dee"
+      "id": "b8e4a943"
     },
     {
       "cell_type": "code",
@@ -353,7 +353,7 @@
         "    mask_zero=True\n",
         ")"
       ],
-      "id": "ca18ad5a",
+      "id": "f1456218",
       "execution_count": null,
       "outputs": []
     },
@@ -384,7 +384,7 @@
         "\n",
         "Mask must be explicitly defined, e.g.:"
       ],
-      "id": "85f77bb1"
+      "id": "c9c48226"
     },
     {
       "cell_type": "code",
@@ -393,7 +393,7 @@
         "x = tf.constant([[1, 2, -999], [3, -999, -999]])\n",
         "mask = tf.math.not_equal(x, -999)"
       ],
-      "id": "e51f9ba8",
+      "id": "39a01259",
       "execution_count": null,
       "outputs": []
     },
@@ -407,7 +407,7 @@
         "\n",
         "### Masking with RNN - Text"
       ],
-      "id": "7faa0b8f"
+      "id": "797d6f78"
     },
     {
       "cell_type": "code",
@@ -419,7 +419,7 @@
         "    tf.keras.layers.Dense(1)\n",
         "])"
       ],
-      "id": "b184a547",
+      "id": "13dadb14",
       "execution_count": null,
       "outputs": []
     },
@@ -429,7 +429,7 @@
       "source": [
         "### Masking with RNN - Time Series"
       ],
-      "id": "a2c021e8"
+      "id": "e6041ffa"
     },
     {
       "cell_type": "code",
@@ -443,7 +443,7 @@
         "    tf.keras.layers.Dense(1)\n",
         "])"
       ],
-      "id": "9969d52a",
+      "id": "b48f92ed",
       "execution_count": null,
       "outputs": []
     },
@@ -520,7 +520,7 @@
         "\n",
         ">Time step → feature vector"
       ],
-      "id": "d6b3040f"
+      "id": "1caac69b"
     }
   ],
   "metadata": {

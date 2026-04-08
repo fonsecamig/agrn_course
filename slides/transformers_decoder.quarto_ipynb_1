@@ -2,7 +2,7 @@
  "cells": [
   {
    "cell_type": "markdown",
-   "id": "da9ab241",
+   "id": "1f5a6720",
    "metadata": {},
    "source": [
     "---\n",
@@ -145,27 +145,27 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "15a1f166",
+   "id": "8f19e488",
    "metadata": {},
    "outputs": [
     {
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "2026-04-06 19:13:27.130313: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M4\n",
-      "2026-04-06 19:13:27.130338: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 32.00 GB\n",
-      "2026-04-06 19:13:27.130344: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 12.48 GB\n",
-      "2026-04-06 19:13:27.130357: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.\n",
-      "2026-04-06 19:13:27.130365: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -> physical PluggableDevice (device: 0, name: METAL, pci bus id: <undefined>)\n"
+      "2026-04-07 18:20:25.268404: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M4\n",
+      "2026-04-07 18:20:25.268442: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 32.00 GB\n",
+      "2026-04-07 18:20:25.268449: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 12.48 GB\n",
+      "2026-04-07 18:20:25.268676: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.\n",
+      "2026-04-07 18:20:25.268688: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -> physical PluggableDevice (device: 0, name: METAL, pci bus id: <undefined>)\n"
      ]
     },
     {
      "data": {
       "text/plain": [
        "<tf.Tensor: shape=(1, 3, 4), dtype=float32, numpy=\n",
-       "array([[[ 0.19770181,  0.0159554 , -0.04683047,  0.06285222],\n",
-       "        [ 0.18818839,  0.03374203, -0.08994682, -0.02152336],\n",
-       "        [ 0.17005526,  0.02724158, -0.08138186, -0.00728826]]],\n",
+       "array([[[ 0.36003572,  0.06284941,  0.22211196,  0.04177851],\n",
+       "        [ 0.26141042,  0.0411386 ,  0.09489822, -0.08353767],\n",
+       "        [ 0.3234022 ,  0.06112718,  0.12811773, -0.06480807]]],\n",
        "      dtype=float32)>"
       ]
      },
@@ -199,7 +199,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "4143368e",
+   "id": "0f33abc4",
    "metadata": {},
    "source": [
     "---\n",
@@ -210,7 +210,7 @@
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "45e27b69",
+   "id": "0a2e25f8",
    "metadata": {},
    "outputs": [],
    "source": [
@@ -234,17 +234,20 @@
   },
   {
    "cell_type": "markdown",
-   "id": "0997f917",
+   "id": "64d45e2f",
    "metadata": {},
    "source": [
     "---\n",
     "\n",
-    "## Training Objective\n",
+    "## Natural Language Processing (NLP)\n",
     "\n",
-    "### Predict next token\n",
+    "### Training Objective\n",
+    "\n",
+    "**Predict next token**\n",
+    "\n",
     "- Cross-entropy loss\n",
     "$$\n",
-    "L = -\\sum y \\log(\\hat{y})\n",
+    "\\mathscr L = -\\sum y \\log(\\widehat{y})\n",
     "$$\n",
     "\n",
     "> Teacher forcing: use true tokens as input during training\n",

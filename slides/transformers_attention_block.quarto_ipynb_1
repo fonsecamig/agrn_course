@@ -1,7 +1,7 @@
 {
   "cells": [
     {
-      "cell_type": "raw",
+      "cell_type": "markdown",
       "metadata": {},
       "source": [
         "---\n",
@@ -182,18 +182,17 @@
         "\n",
         "![Multi-head](images/multihead_self_attention.png)\n",
         "\n",
-        "---"
-      ],
-      "id": "250f7777"
-    },
-    {
-      "cell_type": "markdown",
-      "metadata": {},
-      "source": [
+        "---\n",
+        "\n",
         "# Self Attention Block\n",
         "\n",
         "## Feed-Forward Layer\n",
         "\n",
+        "$$\n",
+        "\\text{FFN}(\\mathbf x) = \\text{ReLU}(\\mathbf x^\\top\\mathbf W_1 + \\mathbf b_1)\\mathbf W_2 + \\mathbf b_2\n",
+        "$$\n",
+        "\n",
+        "- Applied independently to each token\n",
         "\n",
         "---\n",
         "\n",
@@ -218,7 +217,7 @@
         "\n",
         "## TensorFlow 2: Attention Layer"
       ],
-      "id": "0c66b40d"
+      "id": "ebfb4a26"
     },
     {
       "cell_type": "code",
@@ -237,7 +236,7 @@
         "\n",
         "output"
       ],
-      "id": "3491d13f",
+      "id": "6cce3151",
       "execution_count": null,
       "outputs": []
     }
