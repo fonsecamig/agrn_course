@@ -216,24 +216,11 @@ Miguel Fonseca
 <ul>
 <li><a href="#/motivation" id="/toc-motivation">Motivation</a></li>
 <li><a href="#/querykeyvalue-mechanism" id="/toc-querykeyvalue-mechanism">Query–Key–Value Mechanism</a></li>
-<li><a href="#/multi-head-attention" id="/toc-multi-head-attention">Multi-head attention</a></li>
-<li><a href="#/multi-head-attention-1" id="/toc-multi-head-attention-1">Multi-Head Attention</a></li>
+<li><a href="#/multi-head-attention" id="/toc-multi-head-attention">Multi-Head Attention</a></li>
 <li><a href="#/self-attention-block" id="/toc-self-attention-block">Self Attention Block</a></li>
 <li><a href="#/implementation-in-tensorflow-2" id="/toc-implementation-in-tensorflow-2">Implementation in TensorFlow 2</a></li>
 </ul>
 </nav>
-</section>
-<section class="slide level2">
-
-<!-- ## Overview
-
-- Why attention?
-- Query–Key–Value mechanism
-- Self-attention (math + intuition)
-- Multi-head attention
-- TensorFlow 2 implementation
-
---- -->
 </section>
 <section>
 <section id="motivation" class="title-slide slide level1 center">
@@ -254,10 +241,7 @@ Miguel Fonseca
 <li>Long-range dependencies</li>
 </ul></li>
 </ul>
-<p>👉 Idea: <strong>Let each word “look” at all others</strong></p>
-</section>
-<section class="slide level2">
-
+<p>Idea: <strong>Let each word “look” at all others</strong></p>
 </section></section>
 <section>
 <section id="querykeyvalue-mechanism" class="title-slide slide level1 center">
@@ -288,14 +272,6 @@ Miguel Fonseca
 <p><span class="math display">\[
 \mathbf q = \mathbf W_Q^\top\mathbf x, \quad \mathbf k = \mathbf W_K^\top\mathbf x, \quad \mathbf v = \mathbf W_V^\top\mathbf x
 \]</span></p>
-</section>
-<section class="slide level2">
-
-</section></section>
-<section>
-<section id="multi-head-attention" class="title-slide slide level1 center">
-<h1>Multi-head attention</h1>
-
 </section>
 <section id="attention-score" class="slide level2">
 <h2>Attention Score</h2>
@@ -375,16 +351,13 @@ Miguel Fonseca
 <li>Apply softmax</li>
 <li>Multiply by <span class="math inline">\(\mathbf V\)</span></li>
 </ol>
-</section>
-<section class="slide level2">
-
 </section></section>
 <section>
-<section id="multi-head-attention-1" class="title-slide slide level1 center">
+<section id="multi-head-attention" class="title-slide slide level1 center">
 <h1>Multi-Head Attention</h1>
 
 </section>
-<section id="multi-head-attention-2" class="slide level2">
+<section id="multi-head-attention-1" class="slide level2">
 <h2>Multi-Head Attention</h2>
 <p>Instead of one attention:</p>
 <p><span class="math display">\[
@@ -409,10 +382,7 @@ Miguel Fonseca
 <section id="visual-multi-head-attention" class="slide level2">
 <h2>Visual: Multi-Head Attention</h2>
 
-<img data-src="images/multihead_self_attention.png" class="r-stretch quarto-figure-center"><p class="caption">Multi-head</p></section>
-<section class="slide level2">
-
-</section></section>
+<img data-src="../images/multihead_self_attention.png" class="r-stretch quarto-figure-center"><p class="caption">Multi-head</p></section></section>
 <section>
 <section id="self-attention-block" class="title-slide slide level1 center">
 <h1>Self Attention Block</h1>
@@ -440,10 +410,7 @@ Miguel Fonseca
 <section id="visual-self-attention-block" class="slide level2">
 <h2>Visual: Self-Attention Block</h2>
 
-<img data-src="images/self_attention_block.png" class="r-stretch quarto-figure-center"><p class="caption">Self-attention block</p></section>
-<section class="slide level2">
-
-</section></section>
+<img data-src="../images/self_attention_block.png" class="r-stretch quarto-figure-center"><p class="caption">Self-attention block</p></section></section>
 <section>
 <section id="implementation-in-tensorflow-2" class="title-slide slide level1 center">
 <h1>Implementation in TensorFlow 2</h1>
@@ -451,7 +418,7 @@ Miguel Fonseca
 </section>
 <section id="tensorflow-2-attention-layer" class="slide level2">
 <h2>TensorFlow 2: Attention Layer</h2>
-<div id="b02f29b9" class="cell" data-execution_count="1">
+<div id="3138d928" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
 <span id="cb1-2"><a></a></span>
 <span id="cb1-3"><a></a>x <span class="op">=</span> tf.random.uniform((<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>))  <span class="co"># (batch_size, seq_len, d_model)</span></span>
@@ -466,9 +433,10 @@ Miguel Fonseca
 <span id="cb1-12"><a></a>output</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>&lt;tf.Tensor: shape=(1, 3, 4), dtype=float32, numpy=
-array([[[0.16917157, 0.10916841, 0.01860224, 0.09225465],
-        [0.16885284, 0.10939799, 0.01909851, 0.09222253],
-        [0.16872567, 0.10947151, 0.01908976, 0.09256172]]], dtype=float32)&gt;</code></pre>
+array([[[-0.11769266, -0.06076243, -0.05045551, -0.10745258],
+        [-0.11770036, -0.06076515, -0.05047991, -0.10747439],
+        [-0.11768679, -0.06076168, -0.0504638 , -0.10744315]]],
+      dtype=float32)&gt;</code></pre>
 </div>
 </div>
 
