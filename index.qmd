@@ -140,6 +140,7 @@ sidebar:
 - Zhang, A., Lipton, Z. C., Li, M., & Smola, A. J. (2023). *Dive into deep learning.* Cambridge University Press. [https://d2l.ai](https://d2l.ai)
   - Chapter 9: Recurrent Neural Networks, Sections 9.1, 9.2 and 9.3
   - Chapter 15: Natural Language Processing: Pretraining
+  - [Code Example](https://colab.research.google.com/github/fonsecamig/agrn_course/blob/main/notebooks/tf2_nlp_tokenization_notebook.ipynb)
 
 ### Exercises
 

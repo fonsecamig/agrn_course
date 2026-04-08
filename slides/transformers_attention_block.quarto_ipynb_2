@@ -217,7 +217,7 @@
         "\n",
         "## TensorFlow 2: Attention Layer"
       ],
-      "id": "8e9b0f57"
+      "id": "d5935277"
     },
     {
       "cell_type": "code",
@@ -236,7 +236,7 @@
         "\n",
         "output"
       ],
-      "id": "8e12a214",
+      "id": "ce860189",
       "execution_count": null,
       "outputs": []
     }
