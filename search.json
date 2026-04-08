@@ -137,7 +137,7 @@
     "href": "slides/tokenization_pading_masking_embeddings.html#why-embeddings-work",
     "title": "Tokenization, Embeddings, Padding, and Masking",
     "section": "Why Embeddings Work",
-    "text": "Why Embeddings Work\nSemantic Geometry\nSimilar words → close vectors\n\n\n\n\nExample\n\n\nking - man + woman ≈ queen\n\n\n\n\nvs One-Hot Encoding\n\n\n\nOne-hot\nEmbedding\n\n\n\n\nSparse\nDense\n\n\nNo meaning\nSemantic meaning\n\n\n\nTraining\n\nLearned via backpropagation\nOnly used rows are updated"
+    "text": "Why Embeddings Work\nSemantic Geometry\nSimilar words → close vectors\n\n\n\n\nExample\n\n\nking - man + woman ≈ queen\n\n\n\n\nvs One-Hot Encoding\n\n\n\nOne-hot\nEmbedding\n\n\n\n\nSparse\nDense\n\n\nNo meaning\nSemantic meaning\n\n\n\nTraining\n\nLearned via backpropagation\nOnly used columns are updated"
   },
   {
     "objectID": "slides/tokenization_pading_masking_embeddings.html#embedding-layer",

@@ -288,7 +288,7 @@ Miguel Fonseca
 </section>
 <section id="tokenization-in-tensorflow" class="slide level2">
 <h2>Tokenization in TensorFlow</h2>
-<div id="309752ec" class="cell" data-execution_count="1">
+<div id="1b78a6d7" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> tensorflow.keras.preprocessing.text <span class="im">import</span> Tokenizer</span>
 <span id="cb1-2"><a></a></span>
 <span id="cb1-3"><a></a>texts <span class="op">=</span> [</span>
@@ -307,7 +307,7 @@ Miguel Fonseca
 </div>
 </div>
 <p><strong>Vocabulary Mapping</strong></p>
-<div id="88cc89a1" class="cell" data-execution_count="2">
+<div id="569cbfe3" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="bu">print</span>(tokenizer.word_index)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'&lt;OOV&gt;': 1, 'learning': 2, 'is': 3, 'deep': 4, 'powerful': 5, 'machine': 6, 'fun': 7}</code></pre>
@@ -357,7 +357,7 @@ Miguel Fonseca
 </section>
 <section id="padding-sequences" class="slide level2">
 <h2>Padding Sequences</h2>
-<div id="b0eb4bfc" class="cell" data-execution_count="3">
+<div id="6c7c66be" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> tensorflow.keras.preprocessing.sequence <span class="im">import</span> pad_sequences</span>
 <span id="cb6-2"><a></a></span>
 <span id="cb6-3"><a></a>padded <span class="op">=</span> pad_sequences(sequences, padding<span class="op">=</span><span class="st">'post'</span>)</span>
@@ -475,12 +475,12 @@ w \rightarrow \mathbf{e}_w \in \mathbb{R}^d
 <h3 id="training">Training</h3>
 <ul>
 <li>Learned via backpropagation</li>
-<li>Only used rows are updated</li>
+<li>Only used columns are updated</li>
 </ul>
 </section>
 <section id="embedding-layer" class="slide level2">
 <h2>Embedding Layer</h2>
-<div id="b033abff" class="cell" data-execution_count="4">
+<div id="2b3a4ae2" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Embedding</span>
 <span id="cb8-2"><a></a></span>
 <span id="cb8-3"><a></a>embedding_layer <span class="op">=</span> Embedding(input_dim<span class="op">=</span><span class="dv">1000</span>, output_dim<span class="op">=</span><span class="dv">16</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -511,7 +511,7 @@ w \rightarrow \mathbf{e}_w \in \mathbb{R}^d
 </section>
 <section id="full-pipeline-example" class="slide level2">
 <h2>Full Pipeline Example</h2>
-<div id="6a0fe290" class="cell" data-execution_count="5">
+<div id="0b9fcda9" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
 <span id="cb9-2"><a></a></span>
 <span id="cb9-3"><a></a>model <span class="op">=</span> tf.keras.Sequential([</span>
@@ -576,7 +576,7 @@ w \rightarrow \mathbf{e}_w \in \mathbb{R}^d
 <li>0 → ignore</li>
 </ul>
 <p><strong>TensorFlow Example</strong></p>
-<div id="912a6a0d" class="cell" data-execution_count="6">
+<div id="0adaba43" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>embedding <span class="op">=</span> tf.keras.layers.Embedding(</span>
 <span id="cb10-2"><a></a>    input_dim<span class="op">=</span><span class="dv">10000</span>,</span>
 <span id="cb10-3"><a></a>    output_dim<span class="op">=</span><span class="dv">64</span>,</span>
@@ -615,7 +615,7 @@ w \rightarrow \mathbf{e}_w \in \mathbb{R}^d
 </div>
 </div>
 <p>Mask must be explicitly defined, e.g.:</p>
-<div id="e04646cb" class="cell" data-execution_count="7">
+<div id="a62b6f68" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>x <span class="op">=</span> tf.constant([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">999</span>], [<span class="dv">3</span>, <span class="op">-</span><span class="dv">999</span>, <span class="op">-</span><span class="dv">999</span>]])</span>
 <span id="cb11-2"><a></a>mask <span class="op">=</span> tf.math.not_equal(x, <span class="op">-</span><span class="dv">999</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -623,7 +623,7 @@ w \rightarrow \mathbf{e}_w \in \mathbb{R}^d
 <section id="masking-in-tensorflow" class="slide level2">
 <h2>Masking in TensorFlow</h2>
 <h3 id="masking-with-rnn---text">Masking with RNN - Text</h3>
-<div id="cb4aa781" class="cell" data-execution_count="8">
+<div id="816f73cf" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>model <span class="op">=</span> tf.keras.Sequential([</span>
 <span id="cb12-2"><a></a>    tf.keras.layers.Embedding(<span class="dv">1000</span>, <span class="dv">16</span>, mask_zero<span class="op">=</span><span class="va">True</span>),</span>
 <span id="cb12-3"><a></a>    tf.keras.layers.LSTM(<span class="dv">32</span>),</span>
@@ -631,7 +631,7 @@ w \rightarrow \mathbf{e}_w \in \mathbb{R}^d
 <span id="cb12-5"><a></a>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <h3 id="masking-with-rnn---time-series">Masking with RNN - Time Series</h3>
-<div id="6db976de" class="cell" data-execution_count="9">
+<div id="943d1d60" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
 <span id="cb13-2"><a></a></span>
 <span id="cb13-3"><a></a>model <span class="op">=</span> tf.keras.Sequential([</span>
