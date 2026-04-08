@@ -202,7 +202,7 @@ king - man + woman ≈ queen
 ### Training
 
 - Learned via backpropagation
-- Only used rows are updated
+- Only used columns are updated
 
 ---
 
