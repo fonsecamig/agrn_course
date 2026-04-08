@@ -140,7 +140,7 @@
         "\n",
         "mask = tf.linalg.band_part(tf.ones((seq_len, seq_len)), -1, 0)"
       ],
-      "id": "4a87ee67"
+      "id": "930f82dc"
     },
     {
       "cell_type": "code",
@@ -167,7 +167,7 @@
         "\n",
         "output"
       ],
-      "id": "6dd7d97a",
+      "id": "e56c5168",
       "execution_count": null,
       "outputs": []
     },
@@ -179,7 +179,7 @@
         "\n",
         "Decoder Block in TensorFlow 2"
       ],
-      "id": "2064a278"
+      "id": "ecb44159"
     },
     {
       "cell_type": "code",
@@ -202,7 +202,7 @@
         "        ffn_output = self.ffn(x)\n",
         "        return self.norm2(x + ffn_output)"
       ],
-      "id": "e0ab7b1c",
+      "id": "bf7cce31",
       "execution_count": null,
       "outputs": []
     },
@@ -243,7 +243,7 @@
         "::::\n",
         ":::"
       ],
-      "id": "67586a4a"
+      "id": "f6a2a356"
     }
   ],
   "metadata": {

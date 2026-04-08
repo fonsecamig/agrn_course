@@ -7,15 +7,6 @@ format:
     toc: true
 ---
 
-<!-- ## Overview
-
-- Why attention?
-- Query–Key–Value mechanism
-- Self-attention (math + intuition)
-- Multi-head attention
-- TensorFlow 2 implementation
-
---- -->
 # Motivation
 
 ## Why Attention?
@@ -27,10 +18,8 @@ format:
   - Parallel computation
   - Long-range dependencies
 
-👉 Idea:
+Idea:
 **Let each word “look” at all others**
-
----
 
 # Query–Key–Value Mechanism
 
@@ -60,10 +49,6 @@ Each token is mapped to:
 $$
 \mathbf q = \mathbf W_Q^\top\mathbf x, \quad \mathbf k = \mathbf W_K^\top\mathbf x, \quad \mathbf v = \mathbf W_V^\top\mathbf x
 $$
-
----
-
-# Multi-head attention
 
 ## Attention Score
 
@@ -142,8 +127,6 @@ Word: **bank**
 3. Apply softmax
 4. Multiply by $\mathbf V$
 
----
-
 # Multi-Head Attention
 
 ## Multi-Head Attention
@@ -174,9 +157,7 @@ Each head learns:
 
 ## Visual: Multi-Head Attention
 
-![Multi-head](images/multihead_self_attention.png)
-
----
+![Multi-head](/images/multihead_self_attention.png)
 
 # Self Attention Block
 
@@ -203,9 +184,7 @@ Structure:
 
 ## Visual: Self-Attention Block
 
-![Self-attention block](images/self_attention_block.png)
-
----
+![Self-attention block](/images/self_attention_block.png)
 
 # Implementation in TensorFlow 2
 
@@ -225,4 +204,3 @@ output = attention(query=x, value=x, key=x)
 
 output
 ```
-
