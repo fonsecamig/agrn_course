@@ -365,7 +365,7 @@ model.compile(
 model.fit(x_train, y_train, epochs=3, batch_size=64)
 ``` -->
 
-# Finance
+<!-- # Finance
 
 ## Finance Analogy: Time Series as “Text”
 
@@ -403,4 +403,4 @@ Mask: `[1, 1, 0, 0]`
 
 Instead of words → vectors:
 
->Time step → feature vector
+>Time step → feature vector -->
