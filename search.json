@@ -182,13 +182,6 @@
     "text": "Masking in TensorFlow\nMasking with RNN - Text\n\nmodel = tf.keras.Sequential([\n    tf.keras.layers.Embedding(1000, 16, mask_zero=True),\n    tf.keras.layers.LSTM(32),\n    tf.keras.layers.Dense(1)\n])\n\nMasking with RNN - Time Series\n\nimport tensorflow as tf\n\nmodel = tf.keras.Sequential([\n    tf.keras.layers.Masking(mask_value=-999.0),\n    tf.keras.layers.LSTM(32),\n    tf.keras.layers.Dense(1)\n])"
   },
   {
-    "objectID": "slides/tokenization_pading_masking_embeddings.html#finance-analogy-time-series-as-text",
-    "href": "slides/tokenization_pading_masking_embeddings.html#finance-analogy-time-series-as-text",
-    "title": "Tokenization, Embeddings, Padding, and Masking",
-    "section": "Finance Analogy: Time Series as “Text”",
-    "text": "Finance Analogy: Time Series as “Text”\n\n\n\nNLP Concept\nFinance Time Series Equivalent\n\n\n\n\nTokens\nTime steps (prices, returns)\n\n\nSentence\nPrice history window\n\n\nVocabulary\nFeature space (indicators)\n\n\nSequence\nTime series\n\n\n\nPadding in Finance\nDifferent assets / samples have:\n\nDifferent history lengths\nMissing observations\n\nExample:\n\nStock A: [r₁, r₂, r₃, r₄]\nStock B: [r₁, r₂]\n\nPad: [r₁, r₂, 0, 0]\nMasking in Finance\nIgnore:\n\nMissing data\nNon-trading days\nIncomplete windows\n\nMask: [1, 1, 0, 0]\nEmbeddings in Finance\nInstead of words → vectors:\n\nTime step → feature vector"
-  },
-  {
     "objectID": "slides/regularization.html#why-regularisation",
     "href": "slides/regularization.html#why-regularisation",
     "title": "Regularisation for Neural Networks",
