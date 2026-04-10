@@ -221,17 +221,6 @@ Miguel Fonseca
 </ul>
 </nav>
 </section>
-<section class="slide level2">
-
-<!-- ## Overview
-
-- Transformer decoder block
-- Positional encoding
-- Causal masking
-- TensorFlow 2 implementation
-
---- -->
-</section>
 <section>
 <section id="transformer-decoders" class="title-slide slide level1 center">
 <h1>Transformer Decoders</h1>
@@ -248,10 +237,7 @@ Miguel Fonseca
 <section id="decoder-architecture" class="slide level2">
 <h2>Decoder Architecture</h2>
 
-<img data-src="https://jalammar.github.io/images/t/transformer_decoder.png" class="r-stretch quarto-figure-center"><p class="caption">Decoder</p></section>
-<section class="slide level2">
-
-</section></section>
+<img data-src="../images/transformer_decoder.png" class="r-stretch quarto-figure-center"><p class="caption">Decoder</p></section></section>
 <section>
 <section id="causal-self-attention" class="title-slide slide level1 center">
 <h1>Causal Self-Attention</h1>
@@ -278,8 +264,8 @@ Miguel Fonseca
 <h2>Why Masking?</h2>
 <p>During training:</p>
 <ul>
-<li>input: “The cat sat”</li>
-<li>target: “The cat sat”</li>
+<li>input: “The cat”</li>
+<li>target: “cat sat”</li>
 </ul>
 <blockquote>
 <p>Must not see future tokens</p>
@@ -295,9 +281,6 @@ Miguel Fonseca
 1 &amp; 1 &amp; 1 &amp; 1
 \end{bmatrix}
 \]</span></p>
-</section>
-<section class="slide level2">
-
 </section></section>
 <section>
 <section id="positional-encoding" class="title-slide slide level1 center">
@@ -321,7 +304,10 @@ Miguel Fonseca
 </div>
 </div>
 </div>
-<p><strong>Solution:</strong> - Add positional information</p>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Add positional information</li>
+</ul>
 </section>
 <section id="sinusoidal-encoding" class="slide level2">
 <h2>Sinusoidal Encoding</h2>
@@ -331,9 +317,6 @@ Miguel Fonseca
 <p><span class="math display">\[
 \text{PE}(p, 2i+1) = \cos\left(\frac{p}{K^{2i/d}}\right)
 \]</span></p>
-</section>
-<section class="slide level2">
-
 <h3 id="properties">Properties</h3>
 <ul>
 <li>Unique representation per position</li>
@@ -344,15 +327,16 @@ Miguel Fonseca
 <p><span class="math display">\[
 \mathbf x_{\text{final}} = \mathbf x_{\text{embedding}} + \text{PE}
 \]</span></p>
-<p><strong>Because:</strong> - same dimension - model learns to separate signals</p>
+<p><strong>Because:</strong></p>
+<ul>
+<li>same dimension</li>
+<li>model learns to separate signals</li>
+</ul>
 <h3 id="intuition">Intuition</h3>
 <ul>
 <li>Embedding → <em>what</em></li>
 <li>Position → <em>where</em></li>
 </ul>
-</section>
-<section class="slide level2">
-
 </section></section>
 <section>
 <section id="implementation" class="title-slide slide level1 center">
@@ -361,41 +345,41 @@ Miguel Fonseca
 </section>
 <section id="masked-attention-in-tensorflow-2" class="slide level2">
 <h2>Masked Attention in TensorFlow 2</h2>
-<p>mask = tf.linalg.band_part(tf.ones((seq_len, seq_len)), -1, 0)</p>
-<div id="8f19e488" class="cell" data-execution_count="1">
+<div id="1e51f132" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
 <span id="cb1-2"><a></a></span>
 <span id="cb1-3"><a></a>x <span class="op">=</span> tf.random.uniform((<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>))  <span class="co"># (batch_size, seq_len, d_model)</span></span>
 <span id="cb1-4"><a></a>seq_len <span class="op">=</span> tf.shape(x)[<span class="dv">1</span>]</span>
 <span id="cb1-5"><a></a></span>
-<span id="cb1-6"><a></a>attention <span class="op">=</span> tf.keras.layers.MultiHeadAttention(</span>
-<span id="cb1-7"><a></a>    num_heads<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb1-8"><a></a>    key_dim<span class="op">=</span><span class="dv">64</span></span>
-<span id="cb1-9"><a></a>)</span>
-<span id="cb1-10"><a></a></span>
-<span id="cb1-11"><a></a>mask <span class="op">=</span> tf.linalg.band_part(tf.ones((seq_len, seq_len)), <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb1-6"><a></a>mask <span class="op">=</span> tf.linalg.band_part(tf.ones((seq_len, seq_len)), <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a>attention <span class="op">=</span> tf.keras.layers.MultiHeadAttention(</span>
+<span id="cb1-9"><a></a>    num_heads<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb1-10"><a></a>    key_dim<span class="op">=</span><span class="dv">64</span></span>
+<span id="cb1-11"><a></a>)</span>
 <span id="cb1-12"><a></a></span>
-<span id="cb1-13"><a></a>output <span class="op">=</span> attention(</span>
-<span id="cb1-14"><a></a>    query<span class="op">=</span>x,</span>
-<span id="cb1-15"><a></a>    value<span class="op">=</span>x,</span>
-<span id="cb1-16"><a></a>    key<span class="op">=</span>x,</span>
-<span id="cb1-17"><a></a>    attention_mask<span class="op">=</span>mask</span>
-<span id="cb1-18"><a></a>)</span>
-<span id="cb1-19"><a></a></span>
-<span id="cb1-20"><a></a>output</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-13"><a></a>mask <span class="op">=</span> tf.linalg.band_part(tf.ones((seq_len, seq_len)), <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb1-14"><a></a></span>
+<span id="cb1-15"><a></a>output <span class="op">=</span> attention(</span>
+<span id="cb1-16"><a></a>    query<span class="op">=</span>x,</span>
+<span id="cb1-17"><a></a>    value<span class="op">=</span>x,</span>
+<span id="cb1-18"><a></a>    key<span class="op">=</span>x,</span>
+<span id="cb1-19"><a></a>    attention_mask<span class="op">=</span>mask</span>
+<span id="cb1-20"><a></a>)</span>
+<span id="cb1-21"><a></a></span>
+<span id="cb1-22"><a></a>output</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>&lt;tf.Tensor: shape=(1, 3, 4), dtype=float32, numpy=
-array([[[ 0.36003572,  0.06284941,  0.22211196,  0.04177851],
-        [ 0.26141042,  0.0411386 ,  0.09489822, -0.08353767],
-        [ 0.3234022 ,  0.06112718,  0.12811773, -0.06480807]]],
+array([[[ 0.14390883, -0.06979615, -0.12640989,  0.05036893],
+        [ 0.15393323, -0.07861734, -0.08606688,  0.07448976],
+        [ 0.14096715, -0.09058762, -0.0876243 ,  0.07107954]]],
       dtype=float32)&gt;</code></pre>
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<p>Decoder Block in TensorFlow 2</p>
-<div id="0a2e25f8" class="cell" data-execution_count="2">
+<section id="decoder-block-in-tensorflow-2" class="slide level2">
+<h2>Decoder Block in TensorFlow 2</h2>
+<div id="8ebae67f" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="kw">class</span> DecoderBlock(tf.keras.layers.Layer):</span>
 <span id="cb3-2"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, d_model, num_heads):</span>
 <span id="cb3-3"><a></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
