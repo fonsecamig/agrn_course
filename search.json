@@ -18,21 +18,7 @@
     "href": "slides/transformers_decoder.html#causal-masked-attention",
     "title": "Transformer Architecture",
     "section": "Causal (Masked) Attention",
-    "text": "Causal (Masked) Attention\nPrevent future leakage:\n\\[\n\\text{Mask}_{i,j} =\n\\begin{cases}\n0 & j \\le i \\\\\n-\\infty & j &gt; i\n\\end{cases}\n\\]"
-  },
-  {
-    "objectID": "slides/transformers_decoder.html#masked-attention-formula",
-    "href": "slides/transformers_decoder.html#masked-attention-formula",
-    "title": "Transformer Architecture",
-    "section": "Masked Attention Formula",
-    "text": "Masked Attention Formula\n\\[\n\\text{softmax}\\left(\\frac{QK^T + M}{\\sqrt{d_k}}\\right)\n\\]"
-  },
-  {
-    "objectID": "slides/transformers_decoder.html#why-masking",
-    "href": "slides/transformers_decoder.html#why-masking",
-    "title": "Transformer Architecture",
-    "section": "Why Masking?",
-    "text": "Why Masking?\nDuring training:\n\ninput: “The cat”\ntarget: “cat sat”\n\n\nMust not see future tokens"
+    "text": "Causal (Masked) Attention\nPrevent future leakage:\n\\[\n\\mathbf{M}_{i,j} =\n\\begin{cases}\n0 & j \\le i \\\\\n-\\infty & j &gt; i\n\\end{cases}\n\\]\nMasked Attention Formula\n\\[\n\\text{softmax}\\left(\\frac{\\mathbf{Q}\\mathbf{K}^\\top + \\mathbf{M}}{\\sqrt{d_k}}\\right)\n\\]"
   },
   {
     "objectID": "slides/transformers_decoder.html#visual-causal-mask",
@@ -40,6 +26,13 @@
     "title": "Transformer Architecture",
     "section": "Visual: Causal Mask",
     "text": "Visual: Causal Mask\n\\[\n\\begin{bmatrix}\n1 & 0 & 0 & 0 \\\\\n1 & 1 & 0 & 0 \\\\\n1 & 1 & 1 & 0 \\\\\n1 & 1 & 1 & 1\n\\end{bmatrix}\n\\]"
+  },
+  {
+    "objectID": "slides/transformers_decoder.html#why-masking",
+    "href": "slides/transformers_decoder.html#why-masking",
+    "title": "Transformer Architecture",
+    "section": "Why Masking?",
+    "text": "Why Masking?\nDuring training:\n\ninput: “The cat”\ntarget: “cat sat”\n\n\nMust not see future tokens\n\n\n\n\n\n\n\n\n\n\n\n\n\\(t\\)\n1\n2\n\\(\\cdots\\)\n\\(T - 1\\)\n\\(T\\)\n\n\n\n\ntarget\n\\(\\mathbf x_2\\)\n\\(\\mathbf x_3\\)\n\\(\\cdots\\)\n\\(\\mathbf x_{T}\\)\n\\(\\mathbf x_{T + 1}\\)\n\n\ninput\n\n\\(\\mathbf x_1\\)\n\\(\\cdots\\)\n\\(\\mathbf x_{T - 1}\\)\n\\(\\mathbf x_{T}\\)"
   },
   {
     "objectID": "slides/transformers_decoder.html#positional-encoding-problem",
@@ -60,7 +53,7 @@
     "href": "slides/transformers_decoder.html#masked-attention-in-tensorflow-2",
     "title": "Transformer Architecture",
     "section": "Masked Attention in TensorFlow 2",
-    "text": "Masked Attention in TensorFlow 2\n\nimport tensorflow as tf\n\nx = tf.random.uniform((1, 3, 4))  # (batch_size, seq_len, d_model)\nseq_len = tf.shape(x)[1]\n\nmask = tf.linalg.band_part(tf.ones((seq_len, seq_len)), -1, 0)\n\nattention = tf.keras.layers.MultiHeadAttention(\n    num_heads=4,\n    key_dim=64\n)\n\nmask = tf.linalg.band_part(tf.ones((seq_len, seq_len)), -1, 0)\n\noutput = attention(\n    query=x,\n    value=x,\n    key=x,\n    attention_mask=mask\n)\n\noutput\n\n&lt;tf.Tensor: shape=(1, 3, 4), dtype=float32, numpy=\narray([[[ 0.14390883, -0.06979615, -0.12640989,  0.05036893],\n        [ 0.15393323, -0.07861734, -0.08606688,  0.07448976],\n        [ 0.14096715, -0.09058762, -0.0876243 ,  0.07107954]]],\n      dtype=float32)&gt;"
+    "text": "Masked Attention in TensorFlow 2\n\nimport tensorflow as tf\n\nx = tf.random.uniform((1, 3, 4))  # (batch_size, seq_len, d_model)\nseq_len = tf.shape(x)[1]\n\nmask = tf.linalg.band_part(tf.ones((seq_len, seq_len)), -1, 0)\n\nattention = tf.keras.layers.MultiHeadAttention(\n    num_heads=4,\n    key_dim=64\n)\n\nmask = tf.linalg.band_part(tf.ones((seq_len, seq_len)), -1, 0)\n\noutput = attention(\n    query=x,\n    value=x,\n    key=x,\n    attention_mask=mask\n)\n\noutput\n\n&lt;tf.Tensor: shape=(1, 3, 4), dtype=float32, numpy=\narray([[[ 0.14868712,  0.23032422, -0.0543755 , -0.12496108],\n        [ 0.10628691,  0.17089209, -0.05284817, -0.08975393],\n        [ 0.06802264,  0.1904671 , -0.06373197, -0.10999584]]],\n      dtype=float32)&gt;"
   },
   {
     "objectID": "slides/transformers_decoder.html#decoder-block-in-tensorflow-2",
@@ -1600,6 +1593,6 @@
     "href": "slides/transformers_attention_block.html#tensorflow-2-attention-layer",
     "title": "Transformer Architecture",
     "section": "TensorFlow 2: Attention Layer",
-    "text": "TensorFlow 2: Attention Layer\n\nimport tensorflow as tf\n\nx = tf.random.uniform((1, 3, 4))  # (batch_size, seq_len, d_model)\n\nattention = tf.keras.layers.MultiHeadAttention(\n    num_heads=4,\n    key_dim=64\n)\n\noutput = attention(query=x, value=x, key=x)\n\noutput\n\n&lt;tf.Tensor: shape=(1, 3, 4), dtype=float32, numpy=\narray([[[-0.11769266, -0.06076243, -0.05045551, -0.10745258],\n        [-0.11770036, -0.06076515, -0.05047991, -0.10747439],\n        [-0.11768679, -0.06076168, -0.0504638 , -0.10744315]]],\n      dtype=float32)&gt;"
+    "text": "TensorFlow 2: Attention Layer\n\nimport tensorflow as tf\n\nx = tf.random.uniform((1, 3, 4))  # (batch_size, seq_len, d_model)\n\nattention = tf.keras.layers.MultiHeadAttention(\n    num_heads=4,\n    key_dim=64\n)\n\noutput = attention(query=x, value=x, key=x)\n\noutput\n\n&lt;tf.Tensor: shape=(1, 3, 4), dtype=float32, numpy=\narray([[[ 0.2471442 ,  0.12176879,  0.31482267, -0.10664301],\n        [ 0.24723798,  0.12194601,  0.31456983, -0.10749603],\n        [ 0.24739562,  0.12218888,  0.31505007, -0.10726672]]],\n      dtype=float32)&gt;"
   }
 ]

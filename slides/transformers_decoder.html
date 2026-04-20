@@ -247,29 +247,16 @@ Miguel Fonseca
 <h2>Causal (Masked) Attention</h2>
 <p>Prevent future leakage:</p>
 <p><span class="math display">\[
-\text{Mask}_{i,j} =
+\mathbf{M}_{i,j} =
 \begin{cases}
 0 &amp; j \le i \\
 -\infty &amp; j &gt; i
 \end{cases}
 \]</span></p>
-</section>
-<section id="masked-attention-formula" class="slide level2">
-<h2>Masked Attention Formula</h2>
+<h3 id="masked-attention-formula">Masked Attention Formula</h3>
 <p><span class="math display">\[
-\text{softmax}\left(\frac{QK^T + M}{\sqrt{d_k}}\right)
+\text{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^\top + \mathbf{M}}{\sqrt{d_k}}\right)
 \]</span></p>
-</section>
-<section id="why-masking" class="slide level2">
-<h2>Why Masking?</h2>
-<p>During training:</p>
-<ul>
-<li>input: “The cat”</li>
-<li>target: “cat sat”</li>
-</ul>
-<blockquote>
-<p>Must not see future tokens</p>
-</blockquote>
 </section>
 <section id="visual-causal-mask" class="slide level2">
 <h2>Visual: Causal Mask</h2>
@@ -281,6 +268,55 @@ Miguel Fonseca
 1 &amp; 1 &amp; 1 &amp; 1
 \end{bmatrix}
 \]</span></p>
+</section>
+<section id="why-masking" class="slide level2">
+<h2>Why Masking?</h2>
+<p>During training:</p>
+<ul>
+<li><strong>input:</strong> “The cat”</li>
+<li><strong>target:</strong> “cat sat”</li>
+</ul>
+<blockquote>
+<p>Must not see future tokens</p>
+</blockquote>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(t\)</span></th>
+<th>1</th>
+<th>2</th>
+<th><span class="math inline">\(\cdots\)</span></th>
+<th><span class="math inline">\(T - 1\)</span></th>
+<th><span class="math inline">\(T\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>target</td>
+<td><span class="math inline">\(\mathbf x_2\)</span></td>
+<td><span class="math inline">\(\mathbf x_3\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+<td><span class="math inline">\(\mathbf x_{T}\)</span></td>
+<td><span class="math inline">\(\mathbf x_{T + 1}\)</span></td>
+</tr>
+<tr class="even">
+<td>input</td>
+<td></td>
+<td><span class="math inline">\(\mathbf x_1\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+<td><span class="math inline">\(\mathbf x_{T - 1}\)</span></td>
+<td><span class="math inline">\(\mathbf x_{T}\)</span></td>
+</tr>
+</tbody>
+</table>
 </section></section>
 <section>
 <section id="positional-encoding" class="title-slide slide level1 center">
@@ -337,7 +373,11 @@ Miguel Fonseca
 <li>Embedding → <em>what</em></li>
 <li>Position → <em>where</em></li>
 </ul>
-</section></section>
+</section>
+<section class="slide level2">
+
+
+<img data-src="../images/positional_encoding.png" class="r-stretch quarto-figure-center"><p class="caption">Positional Encoding</p></section></section>
 <section>
 <section id="implementation" class="title-slide slide level1 center">
 <h1>Implementation</h1>
@@ -345,7 +385,7 @@ Miguel Fonseca
 </section>
 <section id="masked-attention-in-tensorflow-2" class="slide level2">
 <h2>Masked Attention in TensorFlow 2</h2>
-<div id="1e51f132" class="cell" data-execution_count="1">
+<div id="8b9a7dd3" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
 <span id="cb1-2"><a></a></span>
 <span id="cb1-3"><a></a>x <span class="op">=</span> tf.random.uniform((<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>))  <span class="co"># (batch_size, seq_len, d_model)</span></span>
@@ -370,16 +410,16 @@ Miguel Fonseca
 <span id="cb1-22"><a></a>output</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>&lt;tf.Tensor: shape=(1, 3, 4), dtype=float32, numpy=
-array([[[ 0.14390883, -0.06979615, -0.12640989,  0.05036893],
-        [ 0.15393323, -0.07861734, -0.08606688,  0.07448976],
-        [ 0.14096715, -0.09058762, -0.0876243 ,  0.07107954]]],
+array([[[ 0.14868712,  0.23032422, -0.0543755 , -0.12496108],
+        [ 0.10628691,  0.17089209, -0.05284817, -0.08975393],
+        [ 0.06802264,  0.1904671 , -0.06373197, -0.10999584]]],
       dtype=float32)&gt;</code></pre>
 </div>
 </div>
 </section>
 <section id="decoder-block-in-tensorflow-2" class="slide level2">
 <h2>Decoder Block in TensorFlow 2</h2>
-<div id="8ebae67f" class="cell" data-execution_count="2">
+<div id="9b6eceb2" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="kw">class</span> DecoderBlock(tf.keras.layers.Layer):</span>
 <span id="cb3-2"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, d_model, num_heads):</span>
 <span id="cb3-3"><a></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
