@@ -29,31 +29,18 @@ Components:
 Prevent future leakage:
 
 $$
-\text{Mask}_{i,j} =
+\mathbf{M}_{i,j} =
 \begin{cases}
 0 & j \le i \\
 -\infty & j > i
 \end{cases}
 $$
 
----
-
-## Masked Attention Formula
+### Masked Attention Formula
 
 $$
-\text{softmax}\left(\frac{QK^T + M}{\sqrt{d_k}}\right)
+\text{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^\top + \mathbf{M}}{\sqrt{d_k}}\right)
 $$
-
----
-
-## Why Masking?
-
-During training:
-
-- input: "The cat"
-- target: "cat sat"
-
->Must not see future tokens
 
 ---
 
@@ -67,6 +54,24 @@ $$
 1 & 1 & 1 & 1
 \end{bmatrix}
 $$
+
+---
+
+## Why Masking?
+
+During training:
+
+- **input:** "The cat"
+- **target:** "cat sat"
+
+>Must not see future tokens
+
+| $t$ | 1 | 2 | $\cdots$ | $T - 1$ | $T$ |
+| --- | --- | --- | --- | --- | --- |
+| target | $\mathbf x_2$ | $\mathbf x_3$ | $\cdots$ | $\mathbf x_{T}$ | $\mathbf x_{T + 1}$ |
+| input | | $\mathbf x_1$ | $\cdots$ | $\mathbf x_{T - 1}$ | $\mathbf x_{T}$ |
+
+
 
 # Positional Encoding
 
@@ -113,6 +118,10 @@ $$
 
 - Embedding → *what*
 - Position → *where*
+
+---
+
+![Positional Encoding](/images/positional_encoding.png)
 
 # Implementation
 
