@@ -1537,7 +1537,7 @@
     "href": "slides/transformers_attention_block.html#example-nlp",
     "title": "Transformer Architecture",
     "section": "Example (NLP)",
-    "text": "Example (NLP)\nSentence: &gt; “The bank will not approve the loan”\nWord: bank\n\nattends to:\n\n“loan” → financial meaning\nnot “river”"
+    "text": "Example (NLP)\nSentence:\n\n“The bank will not approve the loan”\n\nWord: bank\n\nattends to:\n\n“loan” → financial meaning\nnot “river”"
   },
   {
     "objectID": "slides/transformers_attention_block.html#full-attention-pipeline",
@@ -1593,6 +1593,6 @@
     "href": "slides/transformers_attention_block.html#tensorflow-2-attention-layer",
     "title": "Transformer Architecture",
     "section": "TensorFlow 2: Attention Layer",
-    "text": "TensorFlow 2: Attention Layer\n\nimport tensorflow as tf\n\nx = tf.random.uniform((1, 3, 4))  # (batch_size, seq_len, d_model)\n\nattention = tf.keras.layers.MultiHeadAttention(\n    num_heads=4,\n    key_dim=64\n)\n\noutput = attention(query=x, value=x, key=x)\n\noutput\n\n&lt;tf.Tensor: shape=(1, 3, 4), dtype=float32, numpy=\narray([[[ 0.2471442 ,  0.12176879,  0.31482267, -0.10664301],\n        [ 0.24723798,  0.12194601,  0.31456983, -0.10749603],\n        [ 0.24739562,  0.12218888,  0.31505007, -0.10726672]]],\n      dtype=float32)&gt;"
+    "text": "TensorFlow 2: Attention Layer\n\nimport tensorflow as tf\n\nx = tf.random.uniform((1, 3, 4))  # (batch_size, seq_len, d_model)\n\nattention = tf.keras.layers.MultiHeadAttention(\n    num_heads=4,\n    key_dim=64\n)\n\noutput = attention(query=x, value=x, key=x)\n\noutput\n\n&lt;tf.Tensor: shape=(1, 3, 4), dtype=float32, numpy=\narray([[[ 0.03800174, -0.16372707,  0.05634907, -0.13313857],\n        [ 0.03800233, -0.16371022,  0.05637344, -0.13310401],\n        [ 0.03798285, -0.16361159,  0.05643611, -0.13308649]]],\n      dtype=float32)&gt;"
   }
 ]
