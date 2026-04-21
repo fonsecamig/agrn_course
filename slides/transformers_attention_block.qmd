@@ -110,6 +110,7 @@ Each word attends to all others
 ## Example (NLP)
 
 Sentence:
+
 > "The bank will not approve the loan"
 
 Word: **bank**
